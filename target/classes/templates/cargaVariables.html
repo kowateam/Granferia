@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<div class="main-container">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div id="elegirFotos" class="container x5 column-wrapper">
+				<div class="row">
+					<div class="col-xs-12">
+
+						<div class="text-content">
+							<h1>Variables (opcional)</h1>
+
+							<h2 class="x2">
+								Los usuarios van a poder elegir entre distintas opciones del mismo producto como color,
+								tamaño o modelo.
+							</h2>
+
+							<div class="bottom-divider x3"></div>
+
+							<h2 class="x3" id="paso-1">
+								<span class="block bold">Paso 1</span>
+								Empezá creando el nombre que va a agrupar las opciones.
+							</h2>
+						</div>
+
+						<!-- Grupo y lista generada -->
+						<div class="item-variables x4" th:if="${session.cargavariable}">
+
+							<!-- Título del grupo -->
+							<h2 class="var-title bold x0" th:if="${session.variable != null}"><span th:text="${session.variable.nombre}"></span>:</h2>
+
+							<!-- Listado -->
+							<ul class="var-item x2--top hidden"></ul>
+
+							<form action="/producto/eliminarcategoria" method="post">
+								<input class="hidden" th:name="idVariable" th:if="${session.variable != null}"
+									th:value="${session.variable.id}">
+								<input class="hidden" th:name="idEmprendimiento" th:value="${emprendimiento.id}">
+								<input class="hidden" th:name="idProducto" th:value="${producto}"></input>
+
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+								<button class="btn btn-primary x3--top" id="btnBorrarCatego" type="submit">Eliminar
+									grupo</button>
+							</form>
+						</div>
+
+						<!-- Nombre del grupo -->
+						<form action="/producto/cargarsola" method="post" th:if="${session.cargavariable == null}">
+							<div class="x2" id="crear-var-title">
+
+								<div class="input-group x1">
+									<label class="form-label" for="prodVariableTitulo">Ejemplo: Talles</label>
+									<input class="form-control" th:name="prodVariableTitulo" id="prodVariableTitulo"
+										type="text">
+
+									<input class="hidden" th:name="idEmprendimiento" th:value="${emprendimiento.id}">
+									<input class="hidden" th:name="idProducto" th:value="${producto}"></input>
+									<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+								</div>
+
+								<button class="btn btn-primary x3" id="btnCrearVarTitle" type="submit" disabled>Crear
+									grupo de opciones</button>
+
+								<!-- <div class="bottom-divider x3"></div>
+
+								<div class="text--center full--width">
+									<a class="underline" id="btnCrearFoto" th:href="@{/producto/cargarfoto/} + ${producto} + '/' + ${emprendimiento.id}" target="_self">No necesito variables</a>
+								</div> -->
+							</div>
+						</form>
+
+						<!-- Item del listado -->
+						<div id="crear-var-item" th:if="${session.cargavariable}">
+
+							<h2 class="x3" id="paso-2">
+								<span class="block bold">Paso 2</span>
+								Por último carga todas las opciones disponibles para los usuarios.
+							</h2>
+
+							<div class="input-group">
+								<label class="form-label" for="prodVariableItem">Ingresar valor para
+									"<span th:if="${session.variable}"
+										th:text="${session.variable.nombre}"></span>"</label>
+								<input class="form-control" th:name="prodVariableItem" id="prodVariableItem"
+									type="text">
+							</div>
+
+							<button class="btn btn-border" id="btnCrearVarItem" type="button" disabled>Agregar al
+								listado</button>
+						</div>
+						<span id="valor-id" th:if="${session.valor != null}"th:text="${session.valor.id}" class="hidden"></span>
+						<span id="variable-id" th:if="${session.variable}" th:text="${session.variable.id}" class="hidden"></span>
+
+						<div class="bottom-divider x3"></div>
+
+						<div class="text--center">
+							<a class="underline p2 p2--top" id="btnCrearFoto"
+								th:href="@{/producto/cargarfoto/} + ${producto} + '/' + ${emprendimiento.id}"
+								>Siguiente</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/landingEdit.js"></script>
+
+
+</html>

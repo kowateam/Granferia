@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia | Crear cuenta</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+
+	<span class="loading-spinner hidden">
+		<img src="/img/gt/spinner.gif" width="300" height="300" alt="Cargando">
+	</span>
+
+	<div class="main-container">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="container x5">
+				<div class="row">
+					<div class="col-xs-12 col-lg-8 hero-container">
+						<span class="hero-image crearcuenta"></span>
+					</div>
+
+					<div class="col-xs-12 col-lg-4 x3--top">
+						<form class="x2" id="form-registro" action="/registraruser" method="post" role="form"
+							enctype="multipart/form-data">
+							<div class="step-container" id="step1">
+								<h1 class="x2-top">Crear cuenta</h1>
+
+								<div class="input-group">
+									<label class="form-label" for="regMail">Email</label>
+									<input class="form-control" id="regMail" type="email" name="mail" title="Email"
+										required>
+								</div>
+
+								<div class="input-group">
+									<img class="icon-view-show hidden" src="/img/gt/icons/view-show.svg" alt="Ver">
+									<img class="icon-view-hide" src="/img/gt/icons/view-hide.svg" alt="Ocultar">
+
+									<label class="form-label" for="regPassword">Contraseña</label>
+									<input class="form-control" type="text" name="password" id="regPassword"
+										aria-describedby="passHelp" title="Contraseña" required>
+
+									<div class="form-text black x3 hidden x1--top x2" id="passHelp">La contraseña debe contener al menos:
+										<span class="x2--top" id="passCaract">
+											<span class="status"></span> 10 caracteres
+										</span>
+
+										<span id="passMinus">
+											<span class="status"></span> 1 minúscula
+										</span>
+
+										<span id="passMayus">
+											<span class="status"></span> 1 mayúscula
+										</span>
+
+										<span id="passNumber">
+											<span class="status"></span> 1 número
+										</span>
+									</div>
+								</div>
+
+								<div class="row x5">
+									<div class="col-10 offset-1">
+										<div class="row">
+											<div class="col">
+												<img src="/img/gt/gt-facebook.svg" alt="Facebook">
+											</div>
+											<div class="col">
+												<a th:href="@{/oauth2/authorization/google}"><img
+														src="/img/gt/gt-google.svg" alt="Google"></a>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row x3">
+									<div class="col">
+										<div class="form-check accept-terms">
+											<input class="form-check-input x1--top" type="checkbox" th:name="acceptTerms" id="acceptTerms">
+
+											<label for="acceptTerms" class="small-letter light" style="width: calc(100% - 36px); margin-top:5px">Al registrarme entiendo y acepto los
+												<a target="_self" href="/terminos" class="underline" tabindex="3">términos y condiciones.</a>
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<button id="btnReg1" class="btn btn-primary btn-step x2" type="button"
+									disabled>Siguiente</button>
+
+								<a href="/ingresar" class="small-letter text--center x3">Ya tengo una cuenta, <span
+										class="underline">ingresar</span>
+								</a>
+
+							</div>
+
+							<div class="step-container hidden" id="step3">
+								<div class="text-content">
+									<h1>Nombre de usuario</h1>
+									<h2 class="x2">Este es tú nombre personal o apodo para navegar en el sitio.</h2>
+									<h2>Tranqui, lo vas a poder cambiar en un futuro.</h2>
+								</div>
+
+								<div class="input-group x4--top">
+									<label class="form-label" for="regNombre">Nombre</label>
+									<input class="form-control x1" name="regNombre" id="regNombre" maxlength="16"
+										type="text" aria-describedby="nombrelHelp" required>
+								</div>
+
+								<div class="form-text x3" id="nombrelHelp">Ejemplo: Ludmi</div>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+								<button class="btn btn-secondary btn-back x2" type="button">Volver</button>
+								<button id="btnReg3" class="btn btn-primary btn-step" type="button"
+									disabled>Siguiente</button>
+							</div>
+
+							<div class="step-container hidden" id="step4">
+								<div class="text-content">
+									<h1>Información de contacto</h1>
+									<h2 class="x2">Vamos a usar este número para validar tu identidad.</h2>
+									<h2 class="x4">También será un punto de contacto para cuando hagas algún encargo.</h2>
+								</div>
+
+								<div class="row x4 x4--top">
+									<div class="col-3">
+										<span class="input-read-only text--center">+54 9</span>
+									</div>
+	
+									<div class="col-9">
+										<div class="input-group">
+											<label class="form-label" for="celular">Número celular</label>
+											<input class="form-control x1" name="celular" id="celular" maxlength="10" type="tel"
+												onkeyup="this.value=this.value.replace(/[^\d]/,'')" aria-describedby="telHelp">
+										</div>
+		
+										<div class="form-text x3" id="telHelp">10 números sin guiones ni espacios.</div>
+									</div>
+								</div>
+
+								<button class="btn btn-secondary btn-back x2" type="button">Volver</button>
+								<button id="btnReg4" class="btn btn-primary btn-step" type="button">Siguiente</button>
+							</div>
+
+							<div class="step-container hidden" id="step5">
+								<div class="text-content">
+									<h1>Avatar</h1>
+									<h2>Elegí el avatar que más te represente y empezá a recorrer está granferia y
+										comunidad de emprendedores.</h2>
+								</div>
+
+								<div class="avatars-container">
+									<div class="avatars-slider">
+										<label for="imgav1">
+											<span class="av avatar1 selected">
+												<input type="radio" name="avatar" value="avatar-01" id="imgav1" checked
+													hidden>
+											</span>
+										</label>
+
+										<label for="imgav2">
+											<span class="av avatar2">
+												<input type="radio" name="avatar" value="avatar-02" id="imgav2" hidden>
+											</span>
+										</label>
+
+										<label for="imgav3">
+											<span class="av avatar3">
+												<input type="radio" name="avatar" value="avatar-03" id="imgav3" hidden>
+											</span>
+										</label>
+
+										<label for="imgav4">
+											<span class="av avatar4">
+												<input type="radio" name="avatar" value="avatar-04" id="imgav4" hidden>
+											</span>
+										</label>
+
+										<label for="imgav5">
+											<span class="av avatar5">
+												<input type="radio" name="avatar" value="avatar-05" id="imgav5" hidden>
+											</span>
+										</label>
+
+										<label for="imgav6">
+											<span class="av avatar6">
+												<input type="radio" name="avatar" value="avatar-06" id="imgav6" hidden>
+											</span>
+										</label>
+
+										<label for="imgav7">
+											<span class="av avatar7">
+												<input type="radio" name="avatar" value="avatar-07" id="imgav7" hidden>
+											</span>
+										</label>
+
+										<label for="imgav8">
+											<span class="av avatar8">
+												<input type="radio" name="avatar" value="avatar-08" id="imgav8" hidden>
+											</span>
+										</label>
+									</div>
+								</div>
+
+								<button class="btn btn-secondary btn-back x2" type="button">Volver</button>
+								<button id="regFinalizar" class="btn btn-primary" type="submit">Finalizar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/acc.js"></script>
+
+</html>

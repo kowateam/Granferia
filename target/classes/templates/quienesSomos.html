@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<!-- Navegación flotante -->
+	<nav class="floating-menu inner-page">
+		<div class="container">
+			<div class="row one-item">
+				<div class="col-xs-12">
+					<div class="menu-item full--width" onclick="history.back()">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar página">
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<div class="main-container">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo profile-clear" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="container banner">
+				<div class="row">
+					<div class="col-xs-12 col-md-5">
+						<div class="text-content">
+							<h1 class="x5 x5--top">¿Qué es granferia?</h1>
+							<h2 class="x2">Es la primera feria virtual para emprendedores pensada para potenciar el desarrollo económico local a través de una mirada social integral reuniendo a diferentes productores, fomentando el consumo local responsable con el objetivo de generar el menor impacto ambiental posible.</h2>
+							<h2 class="x2 hidden-xs">Nuestra meta es facilitar la llegada a productos únicos, originales y artesanales permitiendo al usuario navegar por el sitio guardando lo que más le guste y contactandose directamente con el vendedor.</h2>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6 offset-md-1">
+						<span class="helper-img quienes"></span>
+					</div>
+				</div>
+
+				<div class="row x4--top hidden-lg" style="margin-bottom: 80px">
+					<div class="col-xs-12">
+						<h2 class="x2">Nuestra meta es facilitar la llegada a productos únicos, originales y artesanales permitiendo al usuario navegar por el sitio guardando lo que más le guste y contactandose directamente con el vendedor.</h2>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div style="position: absolute; bottom: 259px; width: 100%;">
+		<div th:replace="fragments :: footer"></div>
+	</div>
+</body>
+
+<script>
+	$(function () {
+		var nombreTitular = $('#nombre-titular').html();
+		nombreTitular = nombreTitular.slice(0, -1);
+		$('#nombre-titular').html(nombreTitular);
+
+		var dnuCuit = $('#dni-cuit').html();
+		dnuCuit = dnuCuit.slice(0, -1);
+		$('#dni-cuit').html(dnuCuit);
+	});
+</script>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+
+</html>

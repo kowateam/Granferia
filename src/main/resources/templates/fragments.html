@@ -1,0 +1,1652 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<!-- Meta: <header> -->
+<th:block th:fragment="meta-info">
+	<meta name="application-name" content="Granferia">
+
+	<link rel="icon" sizes="192x192" href="/img/gt/favicon/icon.png">
+
+	<link rel="apple-touch-icon" href="/img/gt/favicon/ios-icon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/img/gt/favicon/touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/img/gt/favicon/touch-icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/img/gt/favicon/touch-icon-ipad-retina.png">
+
+	<meta name="msapplication-wide310x150logo" content="/img/gt/favicon/icon_widetile.png">
+	<meta name="msapplication-square310x310logo" content="/img/gt/favicon/icon_largetile.png">
+	<meta name="msapplication-square70x70logo" content="/img/gt/favicon/icon_smalltile.png">
+	<meta name="msapplication-square150x150logo" content="/img/gt/favicon/icon_mediumtile.png">
+	<meta name="google-site-verification" content="rUBxSrSdWXEY8245LmqjMv0F1tawEDcUhNa9_3sukUo" />
+
+	<!-- JQuery -->
+	<script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+</th:block>
+
+<!-- Componente: Navegación Flotante -->
+<th:block th:fragment="floating-menu">
+	<nav class="floating-menu">
+		<div class="container relative">
+
+			<div class="access-bar hidden">
+				<div class="item">
+					<a href="/ingresar" target="_self" title="Ingresar">Ingresar</a>
+				</div>
+
+				<div class="item">
+					<a href="/crearcuenta" target="_self" title="Crear cuenta">Crear cuenta</a>
+				</div>
+			</div>
+
+			<div class="access-bar-overlay hidden"></div>
+
+			<div class="row" id="main-menu">
+				<div class="col-xs-12">
+					<div class="menu-item menu-m">
+						<img src="/img/gt/nav/menu.svg" alt="Menu" title="Abrir menu">
+					</div>
+
+					<div class="menu-item menu-h">
+						<img src="/img/gt/nav/home.svg" alt="Home" title="Ir al home">
+					</div>
+
+					<div class="menu-item menu-s">
+						<img src="/img/gt/nav/search.svg" alt="Buscar" title="Buscar">
+					</div>
+
+					<!-- Acceder -->
+					<div class="menu-item menu-a" th:if="${session.usersession == null}">
+						<img src="/img/gt/nav/access.svg" alt="Acceder" title="Acceder">
+					</div>
+
+					<!-- Avatar -->
+					<div class="menu-item menu-p" th:if="${session.usersession != null}">
+						<span class="avatar"
+							th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + ');'"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row profile-clear hidden" id="menu-close">
+				<div class="col-xs-12">
+					<div class="menu-item m-close full--width">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar menu">
+					</div>
+				</div>
+			</div>
+
+			<div class="row profile-clear hidden" id="back-profile">
+				<div class="col-xs-12">
+					<div class="menu-item full--width">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar menu">
+					</div>
+				</div>
+			</div>
+
+			<div class="row hidden profile-clear" id="menu-profile">
+				<div class="col-xs-12">
+					<div class="menu-item m-close m-33">
+						<img src="/img/gt/icons/arrow-left.svg" height="18" alt="Volver" title="Volver">
+					</div>
+
+					<div class="menu-item profile-settings m-33">
+						<img src="/img/gt/icons/settings.svg" width="22" alt="Ajustes" title="Ajustes">
+					</div>
+
+					<div class="menu-item m-close m-logout m-33">
+						<img src="/img/gt/icons/logout.svg" width="22" alt="Volver" title="Salir">
+						<form action="/salir" method="post">
+							<input type="submit" value="" title="Salir" />
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+</th:block>
+
+<!-- Advertencia: Uso de cookies -->
+<th:block th:fragment="use-cookies">
+	<div class="cookies">
+		<h1 class="x2">Utilizamos cookies</h1>
+		<p class="x3">Usamos cookies propias para mejorar tu experiencia de navegación en nuestra web, para sugerirte
+			contenido y para analizar el tráfico de granferia.</p>
+
+		<form action="/cookies" method="post">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<button class="btn btn-primary" style="max-width: 180px" id="btnAcceptCookies"
+				type="submit">Entiendo</button>
+		</form>
+	</div>
+</th:block>
+
+<!-- Buscar -->
+<th:block th:fragment="g-buscar-filtrar">
+	<div class="search-container hidden">
+
+		<nav class="floating-menu inner-page">
+			<div class="container">
+				<div class="row one-item">
+					<div class="col-xs-12">
+						<div class="menu-item full--width close-search">
+							<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar página">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<img class="logo img-b close-search" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+						<img class="logo img-w close-search" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="container column-wrapper">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="banner x0--top">
+						<h1>Buscar</h1>
+						<p class="x4">Para filtrar los resultados podés buscar por palabra clave, provincia o localidad.</p>
+					</div>
+
+					<div class="input-group">
+						<label class="form-label" for="filtroBuscar">Palabra clave</label>
+						<input class="form-control x2" th:name="filtroBuscar" id="filtroBuscar" type="text">
+					</div>
+
+					<div class="search-advanced x3--top x4 hidden">
+						<h2 class="x3 large">Ubicación</h2>
+
+						<select class="form-select default" id="provinciaEmp" th:name="provincia">
+							<option th:each="provincia : ${provincias}" th:text="${provincia.nombre}" th:value="${provincia}"></option>
+						</select>
+
+						<select class="form-select default hidden" th:name="localidadEmp" id="localidadEmp">
+						</select>
+					</div>
+
+					<button class="btn btn-secondary close-search x2" type="button">Volver</button>
+					<button class="btn btn-primary x3" id="btnAplicarFiltros" type="button" disabled>Aplicar
+						filtros</button>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</th:block>
+
+<!-- Calificación usuario -->
+<th:block th:fragment="pregunta-consumidor">
+	<section class="modal-container hidden" id="pregunta-consumidor">
+
+		<div class="modal-content">
+
+			<!-- Cabecera -->
+			<div class="emp-header-min" id="emp-details">
+				<span class="avatar camera medium" th:if="${emprendimiento.foto == null}"></span>
+				<div class="avatar medium" th:if="${emprendimiento.foto != null}"
+					th:style="'background:url(' + @{/foto/load/} + ${emprendimiento.foto.id} + '); background-size: cover'">
+				</div>
+
+				<div class="emp-info">
+					<h2 th:text="${emprendimiento.regEmpNombre}"></h2>
+					<p
+						th:text="${emprendimiento.direccion.provincia.nombre}+', '+ ${emprendimiento.direccion.localidadEmp}">
+					</p>
+				</div>
+			</div>
+
+			<div class="step-welcome" id="step-welcome">
+				<h2 class="question x2--top">Esperamos nos puedas ayudar contestando 2 preguntas de <span class="italic" th:text="${emprendimiento.regEmpNombre}"></span></h2>
+				<h2 class="question">Tu respuestas son anónimas.</h2>
+				<h2 class="question x3">Gracias</h2>
+
+				<div class="btn-container">
+					<button class="btn close-modal" type="button">Responder después</button>
+					<button class="btn right" id="btnQuestionEmpezar" type="button">Empezar</button>
+				</div>
+			</div>
+			
+			<!-- Preguntas -->
+			<div class="question-container hidden" id="step-1">
+				<h2>1 de 2 preguntas</h2>
+				<h2 class="question">¿Qué te pareció la atención recibida?</h2>
+
+				<div class="rate-container">
+					<div class="rate-item">
+						<input type="radio" id="q1rate1" name="question1">
+  						<label for="q1rate1">1</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q1rate2" name="question1">
+  						<label for="q1rate2">2</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q1rate3" name="question1">
+  						<label for="q1rate3">3</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q1rate4" name="question1">
+  						<label for="q1rate4">4</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q1rate5" name="question1">
+  						<label for="q1rate5">5</label>
+					</div>
+				</div>
+
+				<div class="input-group hidden">
+					<label class="form-label" for="q1Razones">¿Qué salió mal?</label>
+					<input class="form-control" th:name="q1Razones" id="q1Razones" type="text">
+				</div>
+
+				<div class="btn-container">
+					<button class="btn" id="btnBackWelcome" type="button">Volver</button>
+					<button class="btn right" id="btnQuestion1" type="button" disabled>Siguiente</button>
+				</div>
+			</div>
+
+			<div class="question-container hidden" id="step-2">
+				<h2>2 de 2 preguntas</h2>
+				<h2 class="question">¿Qué calificación le das al producto / servicio?</h2>
+
+				<div class="rate-container">
+					<div class="rate-item">
+						<input type="radio" id="q2rate1" name="question2">
+  						<label for="q2rate1">1</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q2rate2" name="question2">
+  						<label for="q2rate2">2</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q2rate3" name="question2">
+  						<label for="q2rate3">3</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q2rate4" name="question2">
+  						<label for="q2rate4">4</label>
+					</div>
+
+					<div class="rate-item">
+						<input type="radio" id="q2rate5" name="question2">
+  						<label for="q2rate5">5</label>
+					</div>
+				</div>
+
+				<div class="input-group hidden">
+					<label class="form-label" for="q2Razones">¿Qué salió mal?</label>
+					<input class="form-control" th:name="q2Razones" id="q2Razones" type="text">
+				</div>
+
+				<div class="btn-container">
+					<button class="btn" id="btnBackQuestion1" type="button">Volver</button>
+					<button class="btn right" id="btnQuestion2" type="button" disabled>Finalizar</button>
+				</div>
+			</div>
+
+			<div class="hidden" id="step-thanks">
+				<h2 class="question x2--top x3">Gracias por compartir tu opinión con nosotros.</h2>
+
+				<div class="btn-container">
+					<button class="btn full--width close-modal" type="button">Cerrar</button>
+				</div>
+			</div>
+		</div>
+
+		<span class="overlay"></span>
+	</section>
+</th:block>
+
+<!-- Componente: Menu lateral -->
+<th:block th:fragment="segment-menu">
+	<aside class="segment" id="segment-menu">
+
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<img class="logo img-b" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+						<img class="logo img-w" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class="menu-items">
+						<li>
+							<a href="/quienessomos" target="_self">¿Qué es granferia?</a>
+						</li>
+
+						<li>
+							<a href="emp/elegircuenta" target="_self">Planes</a>
+						</li>
+
+						<li class="divider">
+							<a href="/privacidad" target="_self">Políticas y privacidad</a>
+						</li>
+
+						<li>
+							<a href="/terminos" target="_self">Términos y condiciones</a>
+						</li>
+
+						<li class="divider">
+							<a href="/soporte" target="_self">Soporte</a>
+						</li>
+
+						<li th:if="${session.usersession == null}">
+							<a href="/crearcuenta" target="_self">Crear cuenta</a>
+						</li>
+
+						<li th:if="${session.usersession == null}">
+							<a href="/ingresar" target="_self">Ingresar</a>
+						</li>
+
+						<li th:if="${session.usersession}" sec:authorize="isAuthenticated()">
+							<form action="/salir" method="post">
+								<input type="submit" value="Salir" /></a>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</aside>
+</th:block>
+
+<!-- Componente: Card producto (landingEdit) -->
+<th:block th:fragment="card-producto">
+
+	<article class="slide-row" th:if="${categoria.productos}">
+		<div class="content">
+
+			<!-- Card de producto o servicio -->
+			<span th:each="producto : ${emprendimiento.productos}">
+					<span th:each="foto , count : ${producto.foto}">
+						<span th:each="cat : ${categoria.productos}">
+			
+							<div class="slide-card" th:if="${count.count == 1 && producto.id == cat.id}"
+								th:style="'background:url(' + @{/foto/load/} + ${foto.id} + '); background-size: auto 100%'">
+								<p class="alt">Fotografía</p>
+			
+								<span class="show-details"></span>
+			
+								<div class="slide-details hidden">			
+									<span class="icon close">
+										<img src="/img/gt/card/close.png" alt="Cerrar">
+									</span>
+			
+									<!-- Detalles -->
+									<span th:if="${emprendimiento.foto != null}" class="emp-logo"
+										th:style="'background:url(' + @{/foto/load/} + ${emprendimiento.foto.id} + '); background-size: cover'"></span>
+									<span th:if="${emprendimiento.foto == null}" class="emp-logo default"></span>
+			
+									
+									<p class="name" th:text="${producto.nombreProductoServicio}"></p>
+
+									<span th:if="${producto.aCotizar == null}">
+										<p class="price offer" th:if="${producto.precioOferta != null}">$ <span class="ammount" th:text="${producto.precioOferta}">Precio oferta</span></p>
+										<p class="price">$<span class="ammount" th:text="${producto.precio}">Precio</span></p>
+									</span>
+
+									<span th:if="${producto.aCotizar != null}">
+										<button class="btn btn-secondary quote" type="button">A cotizar</button>
+									</span>
+			
+									<a class="btn-details" target="_self"
+										th:href="@{/producto/editarproducto/} + ${emprendimiento.id} +'/'+ ${producto.id}">Editar</a>
+								</div>
+							</div>
+			
+						</span>
+					</span>
+			</span>
+		</div>
+	</article>
+
+</th:block>
+
+<!-- Componente: Card producto (landingPublic) -->
+<th:block th:fragment="card-producto-landing-public">
+
+	<article class="slide-row" th:if="${categoria.productos}">
+		<div class="content">
+
+			<!-- Card de producto o servicio -->
+			<span th:each="producto : ${emprendimiento.productos}">
+				
+					<span th:each="foto , count : ${producto.foto}">
+						<span th:each="cat : ${categoria.productos}">
+			
+							<div class="slide-card" th:if="${count.count == 1 && producto.id == cat.id}"
+								th:style="'background:url(' + @{/foto/load/} + ${foto.id} + '); background-size: auto 100%'">
+								<p class="alt">Fotografía</p>
+			
+								<span class="show-details"></span>
+			
+								<div class="slide-details hidden">			
+									<span class="icon close">
+										<img src="/img/gt/card/close.png" alt="Cerrar">
+									</span>
+			
+									<!-- Detalles -->
+									<span th:if="${emprendimiento.foto != null}" class="emp-logo"
+										th:style="'background:url(' + @{/foto/load/} + ${emprendimiento.foto.id} + '); background-size: cover'"></span>
+									<span th:if="${emprendimiento.foto == null}" class="emp-logo default"></span>
+			
+									
+									<p class="name" th:text="${producto.nombreProductoServicio}"></p>
+
+									<span th:if="${producto.aCotizar == null}">
+										<p class="price offer" th:if="${producto.precioOferta != null}">$ <span class="ammount" th:text="${producto.precioOferta}">Precio oferta</span></p>
+										<p class="price">$<span class="ammount" th:text="${producto.precio}">Precio</span></p>
+									</span>
+
+									<span th:if="${producto.aCotizar != null}">
+										<button class="btn btn-secondary quote" type="button">A cotizar</button>
+									</span>
+			
+									<a class="btn-details" target="_self"
+										th:href="@{/producto/} + ${producto.id} +'/'+ ${emprendimiento.id}">Ver detalles</a>
+								</div>
+							</div>
+			
+						</span>
+					</span>
+				
+			</span>
+			
+		</div>
+	</article>
+
+</th:block>
+
+<!-- Componente: Emprendimiento (Homepage) -->
+<th:block th:fragment="emprendimiento-home">
+	<h1 class="x4--top">Emprendimientos (<span id="emp-results"></span>)</h1>
+
+	<p class="no-results hidden">No encontramos resultados para "<span class="typed"></span>".
+		<span class="block">
+		Podés editar tu búsqueda <span class="underline color--black menu-s">desde acá</span>
+		</span>
+	</p>
+
+	<div class="emp-container">
+		<section class="emp" th:each="empren : ${todosEmprendimientos}">
+			<!-- Cabecera -->
+			<a class="emp-head" target="_self" th:href="'/' + ${empren.regEmpDir}" title="Ver emprendimiento">
+				<span class="emp-logo" th:if="${empren.foto != null}"
+					th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+				<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+
+				<div class="emp-info">
+					<h1 th:text="${empren.regEmpNombre}">Nombre</h1>
+					<p th:text="${empren.categoria.nombre}">Categoría</p>
+					<span class="hidden" th:text="${empren.direccion.provincia.nombre}">Provincia</span>
+					<span class="hidden" th:text="${empren.direccion.localidadEmp}">Localidad</span>
+				</div>
+			</a>
+
+			<!-- Slider -->
+			<article class="slide-row">
+				<div class="content">
+
+					<!-- Cita / Frase del emprendimiento -->
+					<span>
+						<div class="slide-card main">
+							<p>"<span th:text="${empren.regEmpDescripcion}"></span>"</p>
+						</div>
+					</span>
+
+					<!-- Card de producto o servicio -->
+					<span th:each="prod , e : ${empren.productos}">
+						<span th:each="fot , i : ${prod.foto}">
+							<div class="slide-card prod" th:if="${i.index == 0 and e.index lt 3}"
+								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+								<p class="alt">Fotografía</p>
+
+								<span class="show-details"></span>
+
+								<div class="slide-details hidden">
+									<span class="icon save">
+										<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
+										<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
+										
+										<img class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
+										<img class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
+									</span>
+
+									<span class="icon close">
+										<img src="/img/gt/card/close.png" alt="Cerrar">
+									</span>
+
+									<!-- Detalles -->
+									<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+									<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+
+									<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
+
+									<span th:if="${prod.aCotizar != 'aCotizar'}">
+										<p class="price offer" th:if="${prod.oferta == 'oferta'}">$<span class="ammount" th:text="${prod.precioOferta}">Precio oferta</span></p>
+										<p class="price">$<span class="ammount" th:text="${prod.precio}">Precio</span></p>
+									</span>
+
+									<span th:if="${prod.aCotizar == 'aCotizar'}">
+										<button class="btn btn-secondary quote" type="button">A cotizar</button>
+									</span>
+
+									<a class="btn-details" target="_self"
+										th:href="@{/producto/} + ${prod.id} +'/'+ ${empren.id}">Ver detalles</a>
+								</div>
+							</div>
+						</span>
+					</span>
+
+				</div>
+			</article>
+
+			<article class="slide-row">
+				<div class="content">
+
+					<!-- Card de producto o servicio -->
+					<span th:each="prod , e : ${empren.productos}">
+						<span th:each="fot , i : ${prod.foto}">
+							<div class="slide-card" th:if="${i.index == 0 and e.index lt 8 and e.index ge 4}"
+								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+								<p class="alt">Fotografía</p>
+
+								<span class="show-details"></span>
+
+								<div class="slide-details hidden">
+									<span class="icon save">
+										<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
+										<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
+										
+										<img class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
+										<img class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
+									</span>
+
+									<span class="icon close">
+										<img src="/img/gt/card/close.png" alt="Cerrar">
+									</span>
+
+									<!-- Detalles -->
+									<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+									<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+
+									<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
+
+									<span th:if="${prod.aCotizar != 'aCotizar'}">
+										<p class="price offer" th:if="${prod.oferta == 'oferta'}">$<span class="ammount" th:text="${prod.precioOferta}">Precio oferta</span></p>
+										<p class="price">$<span class="ammount" th:text="${prod.precio}">Precio</span></p>
+									</span>
+
+									<span th:if="${prod.aCotizar == 'aCotizar'}">
+										<button class="btn btn-secondary quote" type="button">A cotizar</button>
+									</span>
+
+									<a class="btn-details" target="_self"
+										th:href="@{/producto/} + ${prod.id} +'/'+ ${empren.id}">Ver detalles</a>
+								</div>
+							</div>
+						</span>
+					</span>
+					
+				</div>
+			</article>
+		</section>
+	</div>
+</th:block>
+
+<!-- Componente: Footer -->
+<th:block th:fragment="footer">
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2">
+					<a href="/" target="_self" title="Inicio">
+						<img class="logo img-b close-search profile-clear" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+						<img class="logo img-w close-search profile-clear" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+					</a>
+				</div>
+
+				<div class="col-lg-3">
+					<ul>
+						<li>
+							<a href="/quienessomos" target="_self">¿Qué es granferia?</a>
+						</li>
+
+						<li>
+							<a href="/emp/elegircuenta" target="_self">Planes</a>
+						</li>
+
+						<li>
+							<a href="/soporte" target="_self">Soporte</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3">
+					<ul>
+						<li>
+							<a href="/privacidad" target="_self">Políticas y privacidad</a>
+						</li>
+
+						<li>
+							<a href="/terminos" target="_self">Términos y condiciones</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3">
+					<ul>
+						<li th:if="${session.usersession == null}">
+							<a href="/crearcuenta" target="_self">Crear cuenta</a>
+						</li>
+
+						<li th:if="${session.usersession == null}">
+							<a href="/ingresar" target="_self">Ingresar</a>
+						</li>
+
+						<li th:if="${session.usersession}">
+							<form action="/salir" method="post">
+								<input type="submit" value="Salir" />
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<p class="feet">
+			<span class="copyr">®</span> <span>2021 Granferia. Todos los derechos reservados.</span>
+		</p>
+	</footer>
+</th:block>
+
+<!-- Página: Perfil Usuario -->
+<th:block th:fragment="segment-profile">
+	<!-- Modales -->
+	<section class="modal-container hidden" id="select-avatar">
+		<div class="modal-content">
+			<h2 class="question text--left">Avatar</h2>
+
+			<form action="/usuario/avatar" method="post" role="form">
+				<div class="avatars-container x4 x0--top">
+					<div class="avatars-slider">
+						<label for="imgav1">
+							<span class="av avatar1 selected">
+								<input type="radio" name="avatar" value="avatar-01" id="imgav1" hidden>
+							</span>
+						</label>
+
+						<label for="imgav2">
+							<span class="av avatar2">
+								<input type="radio" name="avatar" value="avatar-02" id="imgav2" hidden>
+							</span>
+						</label>
+
+						<label for="imgav3">
+							<span class="av avatar3">
+								<input type="radio" name="avatar" value="avatar-03" id="imgav3" hidden>
+							</span>
+						</label>
+
+						<label for="imgav4">
+							<span class="av avatar4">
+								<input type="radio" name="avatar" value="avatar-04" id="imgav4" hidden>
+							</span>
+						</label>
+
+						<label for="imgav5">
+							<span class="av avatar5">
+								<input type="radio" name="avatar" value="avatar-05" id="imgav5" hidden>
+							</span>
+						</label>
+
+						<label for="imgav6">
+							<span class="av avatar6">
+								<input type="radio" name="avatar" value="avatar-06" id="imgav6" hidden>
+							</span>
+						</label>
+
+						<label for="imgav7">
+							<span class="av avatar7">
+								<input type="radio" name="avatar" value="avatar-07" id="imgav7" hidden>
+							</span>
+						</label>
+
+						<label for="imgav8">
+							<span class="av avatar8">
+								<input type="radio" name="avatar" value="avatar-08" id="imgav8" hidden>
+							</span>
+						</label>
+					</div>
+				</div>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<div class="btn-container">
+					<button class="btn close-modal" type="button">Volver</button>
+					<button class="btn right" id="avatarConfirmar" type="submit">Confirmar</button>
+				</div>
+			</form>
+
+		</div>
+
+		<span class="overlay close-modal"></span>
+	</section>
+
+	<section class="modal-container hidden" id="motivo-rechazo">
+		<div class="modal-content" th:each="emprendimiento : ${emprendimientos}">
+			<h2 class="question text--left x0--left x0--right x3">Motivo del rechazo</h2>
+			<p class="x4">A continuación, te brindamos los detalles del rechazo brindado por el equipo de
+				validaciones
+				de granferia.</p>
+
+			<p class="reason"></p>
+
+			<form th:action="@{/emp/eliminar/}+${emprendimiento.id}" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<div class="btn-container">
+					<button class="btn close-modal" type="button">Volver</button>
+					<button class="btn right" type="submit">Eliminar</button>
+				</div>
+			</form>
+		</div>
+
+		<span class="overlay close-modal"></span>
+	</section>
+
+	<!-- USER -->
+	<div class="segment" sec:authorize="hasRole('USER')" th:if="${session.usersession != null}">
+		<div class="profile-page">
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<img src="/img/gt/logo.svg"
+								alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+								class="logo profile-clear" title="granferia">
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Ajustes-->
+			<form action="/editarusuario" method="post" id="section-profileSettings"
+				class="container column-wrapper x5 hidden">
+				<div class="row">
+					<div class="col-xs-12">
+
+						<div class="text-content x2">
+							<h1 class="x4">Ajustes</h1>
+						</div>
+
+						<div class="text-content x2">
+							<h2 class="x0">Información de contacto</h2>
+						</div>
+
+						<div class="row x4 x4--top">
+							<div class="col-3">
+								<span class="input-read-only text--center">+54 9</span>
+							</div>
+
+							<div class="col-9">
+								<div th:class="'input-group '+${session.usersession.provider != null and session.usersession.celular == null || session.usersession.celular == '' ? '' : 'filled'}">
+									<label class="form-label" for="celular">Número celular</label>
+									<input class="form-control editable x1" name="celular" id="celular" th:value="${session.usersession.celular}" maxlength="10" type="tel" onkeyup="this.value=this.value.replace(/[^\d]/,'')"
+										aria-describedby="userTelHelp">
+								</div>
+	
+								<div class="form-text x2" id="userTelHelp">10 números sin guiones ni espacios.</div>
+							</div>
+						</div>
+
+						<div class="bottom-divider x1"></div>
+
+						<div class="row x2" th:if="${session.usersession.provider != null}">
+							<div class="col-12">
+								<div class="text-content x2">
+									<h2 class="x1">Estás logueado con</h2>
+									<img th:if="${session.usersession.provider != 'GOOGLE'}" src="/img/gt/gt-google.svg"
+										alt="Google">
+									<img th:if="${session.usersession.provider == 'GOOGLE'}"
+										src="/img/gt/gt-facebook.svg" alt="Facebook">
+								</div>
+							</div>
+						</div>
+
+						<div class="text-content x2">
+							<h2 class="x0">Cambiar nombre de usuario</h2>
+						</div>
+
+						<div class="input-group filled">
+							<input type="text" th:name="id" th:value="${session.usersession.id}" hidden>
+
+							<label class="form-label" for="cambiarNombre">Nombre</label>
+							<input class="form-control editable" th:value="${session.usersession.regNombre}"
+								th:name="cambiarNombre" id="cambiarNombre" maxlength="16" type="text">
+						</div>
+
+						<div class="text-content x2">
+							<h2 class="x0">Cambiar contraseña</h2>
+						</div>
+
+						<div class="input-group">
+							<img class="icon-view-show" src="/img/gt/icons/view-show.svg" alt="Ver">
+							<img class="icon-view-hide hidden" src="/img/gt/icons/view-hide.svg" alt="Ocultar">
+
+							<label class="form-label" for="changePassword">Contraseña nueva</label>
+							<input class="form-control" type="password" id="changePassword" name="password"
+								title="Contraseña">
+						</div>
+
+						<div class="form-text black x3 x1--top x2" id="passHelp">La contraseña debe contener al menos:
+							<span class="x2--top" id="passCaract">
+								<span class="status"></span> 10 caracteres
+							</span>
+
+							<span id="passMinus">
+								<span class="status"></span> 1 minúscula
+							</span>
+
+							<span id="passMayus">
+								<span class="status"></span> 1 mayúscula
+							</span>
+
+							<span id="passNumber">
+								<span class="status"></span> 1 número
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<a class="btn btn-secondary x2" href="/emp/devolverperfil" target="_self">Volver</a>
+				<button class="btn btn-primary x2" id="btnGuardarAjustes" type="submit" disabled>Aplicar
+					cambios</button>
+			</form>
+
+			<div id="section-profile" class="container column-wrapper x5">
+				<div class="row">
+					<div class="col-xs-12">
+						<span class="avatar editable"
+							th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + ');'"></span>
+						<h2>Hola <span th:text="${session.usersession.RegNombre}"></span></h2>
+
+						<div class="head-details x1">
+							<span class="text">Mis emprendimientos</span>
+						</div>
+
+						<section class="emp emp-section x3">
+							<article
+								th:class="'emp-resume '+${emprendimiento.estadoEmp != 'Autorizado' ? 'validating' : ''}"
+								th:each="emprendimiento : ${emprendimientos}" th:if="${session.usersession != null}">
+
+								<a th:href="@{/emp/landingedit/} + ${emprendimiento.id}" id="borrarProductos"
+									title="Editar emprendimiento" th:if="${emprendimiento.estadoEmp == 'Autorizado'}">
+									<div class="avatar" th:if="${emprendimiento.foto == null}"></div>
+									<img class="avatar" th:if="${emprendimiento.foto != null}"
+										th:src="@{/foto/load/} + ${emprendimiento.foto.id}">
+									<span class="hidden" th:text="${emprendimiento.id}" id="idEmprendimiento"></span>
+									<div class="info">
+										<h2 th:text="${emprendimiento.regEmpNombre}"></h2>
+
+										<p
+											th:text="${emprendimiento.direccion.provincia.nombre}+', '+ ${emprendimiento.direccion.localidadEmp}">
+										</p>
+
+										<!-- Editar -->
+										<img class="icon" src="/img/gt/icons/edit.svg" width="19" alt="Editar">
+									</div>
+								</a>
+
+								<span th:if="${emprendimiento.estadoEmp != 'Autorizado'}">
+									<div class="avatar" th:if="${emprendimiento.foto == null}"></div>
+									<img class="avatar" th:if="${emprendimiento.foto != null}"
+										th:src="@{/foto/load/} + ${emprendimiento.foto.id}">
+
+									<div class="info">
+										<h2 th:text="${emprendimiento.regEmpNombre}"></h2>
+										<p class="emp-state" th:text="${emprendimiento.estadoEmp}"></p>
+
+										<p class="motivo-rechazo hidden" th:text="${emprendimiento.reachazoText}"></p>
+
+										<!-- Ver detalles -->
+										<img class="icon pointer modal-details" src="/img/gt/icons/view-show.svg"
+											width="22" alt="Ver detalles" title="Ver detalles"
+											th:if="${emprendimiento.estadoEmp == 'Rechazado'}">
+									</div>
+								</span>
+							</article>
+
+							<article class="slide-row visual-aid hidden">
+								<div class="content">
+									<div class="slide-card main">
+										<p>Armá tu stand, y empezá a compartir tus productos.</p>
+									</div>
+
+									<div class="slide-card visual"
+										style="background-image: url(/img/gt/hero/crearcuenta.jpg)">
+										<p class="alt">Foto de taller y herramientas</p>
+									</div>
+								</div>
+							</article>
+						</section>
+
+						<a class="btn btn-primary crear-emp-first x3" href="/emp/elegircuenta">Crear emprendimiento</a>
+						<p class="emp-max-message crear-no-emp hidden">Solo se permite hasta 2 emprendimientos de manera simultánea.</p>
+
+						<div class="accordion">
+							<div class="head-details">
+								<span class="text">Guardados <span class="saved-count"></span></span>
+							</div>
+
+							<div class="row-container">
+								<div class="grid-container">
+									<div class="grid-row">
+										<span th:if="${productosGuardadosComp}" th:each="productosGuardado , i : ${productosGuardadosComp}">
+											<span  th:each="foto , i  : ${productosGuardado.foto}">
+												<div class="grid-column" th:if="${i.index == 0}" th:style="'background:url(' + @{/foto/load/} + ${foto.id} + '); background-size: cover'" >
+							
+													<span class="slide-card icon save">
+														<p class="idSaveProducto hidden" th:text="${productosGuardado.id}"></p>
+														<p class="idSaveUsuario hidden" th:text="${session.usersession.id}"></p>
+		
+														<img class="saveProducto" src="/img/gt/card/saved.svg" id="removeProducto" alt="Guardado">
+													</span>
+
+													<span th:each="empren : ${todosEmprendimientos}">
+														<span class="avatar camera medium" th:if="${empren.foto}"th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+														<a target="_self" th:href="@{/producto/} + ${productosGuardado.id} +'/'+ ${empren.id}">Ver detalles</a>
+													</span>
+													
+													<span class="overlay"></span>
+												</div>
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion">
+							<div class="head-details">
+								<span class="text">Pedidos realizados <span class="asked-count"></span></span>
+							</div>
+
+							<div class="row-container">
+								<div class="asked-item">
+
+									<!-- Cabecera -->
+									<div class="row head x2">
+										<div class="col-8">
+											<a class="large underline" href="/" target="_self">Wild</a>
+										</div>
+
+										<div class="col-4 text--right">
+											<p>Pedido enviado</p>
+										</div>
+									</div>
+
+									<!-- Detalles del pedido -->
+									<div class="row x2">
+										<div class="col-8">
+											<p>Remera blanca, Star Wars</p>
+											<p class="detail">Talle S</p>
+											<p class="detail">2 Unidades</p>
+										</div>
+
+										<div class="col-4 text--right">
+											<p class="asked-date">02-08-21</p>
+										</div>
+									</div>
+
+									<div class="row x2">
+										<div class="col-12">
+											<p>Nota</p>
+											<p class="detail">Lo paso a retirar yo</p>
+										</div>
+									</div>
+
+									<!-- Resumen -->
+									<div class="row price">
+										<div class="col-8">
+											<p>Precio a pagar</p>
+										</div>
+
+										<div class="col-4 text--right">
+											<p class="large">S 3.600</p>
+										</div>
+									</div>
+								</div>
+
+								<a class="btn btn-secondary x2 x2--top" href="/pedido/pedidosrealizados" target="_self">Ver
+									todos</a>
+							</div>
+						</div>
+
+						<a class="btn btn-primary crear-emp x3 x3--top hidden" href="/emp/elegircuenta">Crear un nuevo
+							emprendimiento</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ADMIN -->
+	<div class="segment" sec:authorize="hasRole('SUPERADMIN')" th:if="${session.usersession != null}">
+		<div class="profile-page">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<img src="/img/gt/logo.svg"
+								alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+								class="logo profile-clear" title="granferia">
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Ajustes -->
+			<div id="section-profileSettings" class="container column-wrapper x5 hidden">
+				<form action="/editarusuario" method="post">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="text-content">
+								<h1>Ajustes</h1>
+								<h2 class="x2">Podés cambiar el nombre para mostrar</h2>
+							</div>
+
+								<div class="input-group filled x4--top x3">
+									<input type="text" th:name="id" th:value="${session.usersession.id}" hidden>
+
+									<label class="form-label" for="cambiarNombre">Nombre</label>
+									<input class="form-control" th:name="cambiarNombre" id="cambiarNombre" maxlength="16"
+										th:value="${session.usersession.regNombre}" type="text">
+								</div>
+						</div>
+					</div>
+
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					<a class="btn btn-secondary x2" href="/emp/devolverperfil" target="_self">Volver</a>
+					<button class="btn btn-primary x2" type="submit">Aplicar cambios</button>
+				</form>
+			</div>
+
+			<div id="section-profile" class="container column-wrapper x5">
+				<div class="row">
+					<div class="col-xs-12">
+						<span class="avatar editable"
+							th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + ');'"></span>
+						<h2>Hola <span th:text="${session.usersession.RegNombre}"></span></h2>
+
+						<div class="row emp-stats">
+							<div class="col-xs-12">
+								<h2 class="x2">Números de granferia</h2>
+
+								<div class="stats-container">
+									<!-- <div class="stat" id="stat-vistas">
+										<div class="stat-number" th:text="${cantidadVistaGeneral.cantidadVistas}">0</div>
+										<div class="stat-title">Vistas al home</div>
+									</div> -->
+
+									<div class="stat" id="stat-visitantes">
+										<div class="stat-number" th:text="${cantidadEmprendimientos}" th:title="${cantidadEmprendimientos}">0</div>
+										<div class="stat-title">Emprendimientos</div>
+									</div>
+
+									<div class="stat" id="stat-calificacion">
+										<div class="stat-number" th:text="${cantidadUsuarios}" th:title="${cantidadUsuarios}">0</div>
+										<div class="stat-title">Cuentas</div>
+									</div>
+								</div>
+
+								<p class="stat-description hidden">
+									Estas es la cantidad de vistas que tiene el landing del emprendimiento.
+								</p>
+							</div>
+						</div>
+
+						<div class="head-details x1">
+							<span class="text">Autorizaciones pendientes <span class="auth-count"></span></span>
+						</div>
+
+						<section class="emp pending x0" th:each="emprendimiento : ${emprendimientos}"
+							th:if="${emprendimiento.estadoEmp == 'Procesando stand'}">
+							<article class="emp-resume validating">
+								<div class="avatar"></div>
+								<div class="info">
+									<h2 class="color--black" th:text="${emprendimiento.regEmpNombre}"></h2>
+
+									<p
+										th:text="${emprendimiento.direccion.provincia.nombre} + ', ' + ${emprendimiento.direccion.localidadEmp}">
+									</p>
+									<a th:href="@{/emp/confirmaremp/}+${emprendimiento.id}">
+										<img class="icon" src="/img/gt/icons/view-show.svg" width="22"
+											alt="Ver detalles" title="Ver detalles">
+									</a>
+								</div>
+							</article>
+						</section>
+
+						<div class="accordion x3">
+							<div class="head-details">
+								<span class="text">Historial <span class="hist-count"></span></span>
+							</div>
+							<div class="row-container">
+
+								<!--Aca van los emprendimientos historicos-->
+								<div class="x2 x2--top">
+									<section class="emp historic x0" th:each="historial : ${historial}">
+										<article class="emp-resume">
+											<div class="avatar"></div>
+											<div class="info">
+												<h2 class="color--black" th:text="${historial.nombreEmprendimiento}">
+												</h2>
+
+												<span th:if="${historial.alta}"
+													th:text="'Autorizado por ' + ${historial.quienRechazo}"></span>
+												<p th:if="${historial.alta}" th:text="${historial.alta}"></p>
+
+												<span th:if="${historial.baja}"
+													th:text="'Rechazado por ' + ${historial.quienRechazo}"></span>
+												<p th:if="${historial.baja}" th:text="${historial.baja}"></p>
+											</div>
+										</article>
+									</section>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+<!-- Página: Nueva categoría y producto (firstime) -->
+<th:block th:fragment="segment-nuevaCarga">
+	<div class="hidden" id="nuevaCarga">
+		<!-- Producto -->
+		<div class="container x5">
+			<div class="row">
+				<div class="col-xs-12 col-lg-8 hero-container">
+					<span class="hero-image cargarnuevo"></span>
+				</div>
+
+				<div class="col-xs-12 col-lg-4 x3--top">
+					<div class="text-content">
+						<h1 class="x2--top">Cargar nuevo</h1>
+						<h2 class="x4">Te compartimos como va a ser el proceso de carga.</h2>
+						<h2 class="x2">1. Cargar información, precio y medios de pago</h2>
+						<h2 class="x2">2. Definir variables (opcional)</h2>
+						<h2 class="x2">3. Cargar fotos</h2>
+						<h2 class="x4" th:if="${emprendimiento.membresia != 'GRATIS'}">4. Elegir categorías para el
+							producto </h2>
+					</div>
+
+					<a class="btn btn-secondary x2" th:href="@{/emp/landingedit/} + ${emprendimiento.id}"
+						target="_self">Cancelar</a>
+					<button class="btn btn-primary" id="btnCrearProducto" type="button">Empezar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+<!-- Página: Cargar producto -->
+<th:block th:fragment="segment-nuevoProducto">
+	<div class="hidden" id="nuevoProducto">
+
+		<!-- Detalles del producto -->
+		<form action="/producto/subirproducto" method="POST" id="subirItem">
+			<div class="container x5 column-wrapper">
+				<div class="row">
+					<div class="col-xs-12">
+
+						<input type="hidden" th:name="idEmprendimiento" th:value="${emprendimiento.id}">
+
+						<div class="text-content">
+							<h1>¿Qué querés publicar?</h1>
+						</div>
+
+						<div class="option-group bottom-divider x3" id="optionProdServ">
+							<div class="option-selector x1">
+								<label class="option" for="itemproducto">
+									<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10"
+										alt="check">
+									Producto
+									<input type="radio" th:name="productoServicio" th:value="Producto" id="itemproducto"
+										hidden>
+								</label>
+
+								<label class="option bl" for="itemservicio">
+									<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10"
+										alt="check">
+									Servicio
+									<input type="radio" th:name="productoServicio" th:value="Servicio" id="itemservicio"
+										hidden>
+								</label>
+							</div>
+						</div>
+
+						<div class="option-group bottom-divider x3 hidden" id="optionFisDigi">
+
+							<h2 class="x0 x4--top">Tipo de <span id="type"></span></h2>
+
+							<div class="option-selector x1 x2--top">
+								<label class="option" for="itemfisico">
+									<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10"
+										alt="check">
+									Físico
+									<input type="radio" th:name="digitalAnalogo" th:value="Fisico" id="itemfisico"
+										hidden>
+								</label>
+
+								<label class="option bl" for="itemdigital">
+									<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10"
+										alt="check">
+									Digital
+									<input type="radio" th:name="digitalAnalogo" th:value="Digital" id="itemdigital"
+										hidden>
+								</label>
+							</div>
+						</div>
+
+						<div class="text-content">
+							<h1>Nombre y descripción</h1>
+							<h2 class="x2">Un buen nombre mejora los resultados de búsqueda y les brinda claridad a los
+								usuarios.</h2>
+						</div>
+
+						<div class="input-group x4--top">
+							<label class="form-label" for="nombreProducto">Nombre</label>
+							<input class="form-control x2" th:name="nombreProducto" id="nombreProducto" type="text">
+						</div>
+
+						<div class="input-group bottom-divider x3">
+							<label class="form-label" for="descProducto">Descripción</label>
+							<input class="form-control" th:name="descProducto" id="descProducto" type="text">
+						</div>
+
+						<div class="text-content">
+							<h1>Precio</h1>
+							<h2 class="x4">Establecé el valor de este item. Podés elegir si es una oferta, o si el
+								precio es a cotizar.</h2>
+						</div>
+
+						<div class="price-options x4">
+							<div class="form-check x2">
+								<input class="form-check-input" th:name="esOferta" value="oferta" type="checkbox"
+									id="esOferta">
+								<label class="form-check-label" for="esOferta">Es una oferta</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="aCotizar" th:name="aCotizar"
+									id="aCotizar">
+								<label class="form-check-label" for="aCotizar">A cotizar (Ideal para productos/servicios
+									a medida)</label>
+							</div>
+						</div>
+
+						<div class="input-group hidden" id="precio-oferta">
+							<label class="form-label" for="precioOferta">Precio original</label>
+							<input class="form-control x2" th:name="precioOferta" id="precioOferta" type="number"
+								onkeyup="this.value=this.value.replace(/[^\d]/,'')">
+						</div>
+
+						<div class="input-group">
+							<label class="form-label" for="precioProducto">Precio</label>
+							<input class="form-control x2" th:name="precioProducto" id="precioProducto" type="number"
+								aria-describedby="priceHelp" onkeyup="this.value=this.value.replace(/[^\d]/,'')">
+						</div>
+
+						<p class="hidden x2 x0--top" id="preview-precio"></p>
+						<span class="hidden" id="preview-oferta"></span>
+
+						<div class="form-text x3" id="priceHelp">Escribí el precio sin comas ni ceros, ejemplo: 1200
+						</div>
+
+						<div class="bottom-divider x3"></div>
+
+						<div class="text-content">
+							<h1>Stock</h1>
+							<h2 class="x2">Elegí el tipo de stock que más te acomode y la cantidad disponible.</h2>
+						</div>
+
+						<div class="row x4--top bottom-divider x3">
+							<div class="col-xs-12">
+
+								<div class="row">
+									<div class="col-3">
+										<span class="input-read-only text--center">Stock</span>
+									</div>
+
+									<div class="col-9">
+										<select class="form-select default" th:name="stock" id="stock-type">
+											<option selected>Tipo de stock</option>
+											<option th:value="disponible">Disponible (Hasta 30 u.)</option>
+											<option th:value="aPedido">A pedido (Hasta 30 u.)</option>
+											<option th:value="sinStock">Sin stock</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="row" id="product-units">
+									<div class="col-3 col-12">
+										<div class="input-group hidden" id="campoUnidades">
+											<label class="form-label" for="unidProducto">Unidades</label>
+											<input class="form-control x2" th:name="unidProducto" id="unidProducto"
+												type="number">
+										</div>
+									</div>
+
+									<div class="col-9 hidden">
+										<select class="form-select default" th:name="stockTime" id="stock-time">
+											<option selected>Tiempo</option>
+											<option th:value="7diasDespues">7 días después</option>
+											<option th:value="hasta14">Hasta 14 días</option>
+											<option th:value="masDe15Dias">Más de 15 días</option>
+											<option th:value="hasta30Dias">Hasta 30 días</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="text-content">
+							<h1>Medios de pago que recibe</h1>
+							<h2 class="x2">Seleccioná como van a poder pagar tus clientes.</h2>
+						</div>
+
+						<div id="medios-de-pago">
+							<div class="form-check x2">
+								<input class="form-check-input" th:name="efectivo" th:value="recibeefectivo"
+									type="checkbox" id="recibeEfectivo">
+								<label class="form-check-label" for="recibeEfectivo">Efectivo</label>
+							</div>
+
+							<div class="form-check x2">
+								<input class="form-check-input" th:name="tarjeta" th:value="recibetarjetas"
+									type="checkbox" id="recibeTarjetas">
+								<label class="form-check-label" for="recibeTarjetas">Débito / Crédito</label>
+							</div>
+
+							<div class="form-check x2">
+								<input class="form-check-input" th:name="mercadopago" th:value="recibemercado"
+									type="checkbox" id="recibeMercado">
+								<label class="form-check-label" for="recibeMercado">MercadoPago</label>
+							</div>
+						</div>
+
+						<div class="bottom-divider x3"></div>
+
+						<div class="form-text black x3 x2" id="product-load">Información requerida para continuar con la
+							carga:
+							<span class="x2--top" id="prodType">
+								<span class="status"></span> Tipología
+							</span>
+
+							<span id="prodTitle">
+								<span class="status"></span> Título y descripción
+							</span>
+
+							<span id="prodPrice">
+								<span class="status"></span> Precio
+							</span>
+
+							<span id="prodStock">
+								<span class="status"></span> Stock
+							</span>
+
+							<span id="prodPayment">
+								<span class="status"></span> Medios de pago
+							</span>
+						</div>
+
+						<input type="hidden" th:name="id" th:value="${emprendimiento.id}">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+						<a th:href="@{/emp/landingedit/} + ${emprendimiento.id}"
+							class="btn btn-secondary back-landing-edit x2" target="_self">Cancelar</a>
+						<button class="btn btn-primary x3" id="btnCargarItem" type="submit" disabled>Siguiente</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</th:block>
+
+<!-- Página: Editar apariencia -->
+<th:block th:fragment="segment-empApariencia">
+
+	<div class="hidden" id="emp-apariencia">
+		<div class="container column-wrapper x5">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="text-content">
+						<h1>Apariencia</h1>
+						<h2 class="x3" th:if="${emprendimiento.membresia == 'PREMIUM'}">Elegí la forma en que se verá el encabezado de tu stand y
+							la paleta de colores.</h2>
+					</div>
+
+					<form action="/emp/cargarpreferencias" method="post">
+						
+						<!-- Elegir layout -->
+						<div class="layouts" th:if="${emprendimiento.membresia == 'PREMIUM'}">
+							<div class="layout-item l1">
+								<div class="form-check">
+									<div th:class="'form-option '+${emprendimiento.empLayout == 'layout1' ? 'checked' : ''}"></div>
+									<input class="hidden" type="radio" name="empLayout" id="layout1" value="layout1" th:checked="${emprendimiento.empLayout == 'layout1'}">
+									<label class="form-check-label" for="layout1">Layout 1</label>
+								</div>
+	
+								<div class="avatar camera big"></div>
+								<div class="name" th:text="${emprendimiento.regEmpNombre}">Nombre</div>
+								<span class="info"></span>
+							</div>
+	
+							<div class="layout-item l2">
+								<div class="form-check">
+									<div th:class="'form-option '+${emprendimiento.empLayout == 'layout2' ? 'checked' : ''}"></div>
+									<input class="hidden" type="radio" name="empLayout" id="layout2" value="layout2" th:checked="${emprendimiento.empLayout == 'layout2'}">
+									<label class="form-check-label" for="layout2">Layout 2</label>
+								</div>
+	
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="avatar camera big"></div>
+									</div>
+								</div>
+	
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="name" th:text="${emprendimiento.regEmpNombre}">Nombre</div>
+										<span class="info"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Elegir paleta -->
+						<div class="text-content x5--top x4">
+							<h1>Paleta de colores</h1>
+							<h2 class="x3">Seleccioná los distintos colores para previsualizar la paleta para tu stand.
+							</h2>
+						</div>
+
+						<div class="avatars-container theme-selector x3">
+
+							<!-- Paleta GRATIS-->
+							<div class="avatars-slider" th:if="${emprendimiento.membresia == 'GRATIS'}">
+								<!-- Light -->
+								<label for="colorDefault" class="theme-light" id="bgcolor-default">
+									<span class="av selected">
+										<input type="radio" name="empTheme" value="bgcolor-default" id="colorDefault"
+											checked hidden>
+									</span>
+								</label>
+
+								<label for="colorLGreen" class="theme-light" id="bgcolor-lgreen">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lgreen" id="colorLGreen"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorLPurple" class="theme-light" id="bgcolor-lpurple">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lpurple" id="colorLPurple"
+											hidden>
+									</span>
+								</label>
+
+								<!-- Dark -->
+
+								<label for="colorDGray" class="theme-dark" id="bgcolor-dgray">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dgray" id="colorDGray"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorDRed" class="theme-dark" id="bgcolor-dred">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dred" id="colorDRed"
+											hidden>
+									</span>
+								</label>
+							</div>
+
+							<!-- Paleta PREMIUM-->
+							<div class="avatars-slider" th:if="${emprendimiento.membresia == 'PREMIUM'}">
+
+								<!-- Light -->
+								<label for="colorDefault" class="theme-light" id="bgcolor-default">
+									<span class="av selected">
+										<input type="radio" name="empTheme" value="bgcolor-default" id="colorDefault"
+											checked hidden>
+									</span>
+								</label>
+
+								<label for="colorLGreen" class="theme-light" id="bgcolor-lgreen">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lgreen" id="colorLGreen"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorLPurple" class="theme-light" id="bgcolor-lpurple">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lpurple" id="colorLPurple"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorLBlue" class="theme-light" id="bgcolor-lblue">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lblue" id="colorLBlue"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorLGray" class="theme-light" id="bgcolor-lgray">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lgray" id="colorLGray"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorLOrange" class="theme-light" id="bgcolor-lorange">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-lorange" id="colorLOrange"
+											hidden>
+									</span>
+								</label>
+
+								<!-- Dark -->
+
+								<label for="colorDGreen" class="theme-dark" id="bgcolor-dgreen">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dgreen" id="colorDGreen"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorDPurple" class="theme-dark" id="bgcolor-dpurple">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dpurple" id="colorDPurple"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorDBlue" class="theme-dark" id="bgcolor-dblue">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dblue" id="colorDBlue"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorDGray" class="theme-dark" id="bgcolor-dgray">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dgray" id="colorDGray"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorDOrange" class="theme-dark" id="bgcolor-dorange">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dorange" id="colorDOrange"
+											hidden>
+									</span>
+								</label>
+
+								<label for="colorDRed" class="theme-dark" id="bgcolor-dred">
+									<span class="av">
+										<input type="radio" name="empTheme" value="bgcolor-dred" id="colorDRed"
+											hidden>
+									</span>
+								</label>
+							</div>
+						</div>
+
+
+						<input type="hidden" name="idEmprendimiento" th:value="${emprendimiento.id}" />
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						<button class="btn btn-primary x2" type="submit">Aplicar cambios</button>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+</html>

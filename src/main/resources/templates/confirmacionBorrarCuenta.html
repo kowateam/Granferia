@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<meta name="description" content="Comunidad emprendedora, granferia te brinda la posibilidad de crear tu stand y compartir tu emprendimiento. También vas a poder buscar, guardar y comprar productos o servicios.">
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<!-- Modal: Estados de los pedidos -->
+	<section class="modal-container hidden" id="estados-pedidos">
+		<div class="modal-content">
+			<h2 class="question text--left x0--left x0--right x2">Estados</h2>
+			<p class="x2">
+				<span class="block bold">Pendiente</span>
+				A la espera de que el emprendimiento tome tu orden.
+			</p>
+
+			<p class="x2">
+				<span class="block bold">Aceptado</span>
+				Orden aceptada por el emprendimiento.
+			</p>
+
+			<p class="x2">
+				<span class="block bold">Rechazado</span>
+				El emprendimiento rechazó tu orden.
+			</p>
+
+			<p class="x3">
+				<span class="block bold">Cancelado</span>
+				Vos o el emprendimiento cancelaron la orden.
+			</p>
+
+			<div class="btn-container">
+				<button class="btn close-modal full--width" type="button">Volver</button>
+			</div>
+		</div>
+
+		<span class="overlay close-modal"></span>
+	</section>
+
+	<!-- Pedidos (Usuario) -->
+	<div class="main-container emp-product-page x5">
+		<div class="segment">
+			<div class="emp-header-min">
+				<span th:if="${emprendimiento.foto != null}" class="emp-logo"
+					th:style="'background:url(' + @{/foto/load/} + ${emprendimiento.foto.id} + '); background-size: cover'"></span>
+				
+					<div class="emp-info">
+					<h2 th:text="${emprendimiento.regEmpNombre}"></h2>
+					<p
+						th:text="${emprendimiento.direccion.provincia.nombre}+', '+ ${emprendimiento.direccion.localidadEmp}">
+					</p>
+				</div>
+			</div>
+
+			<div class="container column-wrapper x3">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="text-content">
+							<h1>Leer con atención</h1>
+
+							<h2 class="x4">Te vamos a compartir el contacto del emprendimiento <i>a tu email</i> en las próximas horas.</h2>
+
+							<a class="btn btn-secondary x2" href="/pedido/pedidosrealizados" target="_self">Ir a mis pedidos</a>
+							<a class="btn btn-primary" href="/emp/devolverperfil" target="_self">Volver al perfil</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+
+</html>

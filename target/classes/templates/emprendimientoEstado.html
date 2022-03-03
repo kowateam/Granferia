@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<div class="main-container x5">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="container x2">
+				<div class="row">
+					<div class="col-xs-12 col-lg-8 hero-container">
+						<span class="hero-image crearcuenta"></span>
+					</div>
+				
+					<div class="col-xs-12 col-lg-4">
+					 	<h1 class="x2-top" th:if="${error != null}" th:text="${error}"></h1>
+					 	<h1 class="x2-top" th:if="${exito != null}" th:text="${exito}"></h1>
+
+						 <h2 class="x2">Una vez seas parte de granferia vas a poder cargar productos y persozalizar tu stand.</h2>
+						 <h2 class="x4">Vamos a habilitar la dirección web de tu stand a la brevedad. Te vamos a notificar al email.</h2>
+
+						<a class="btn btn-secondary x2" href="/inicio" target="_self">Ir al home</a>
+						<a class="btn btn-primary" href="/emp/devolverperfil" target="_self">Volver al perfil</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+
+</html>

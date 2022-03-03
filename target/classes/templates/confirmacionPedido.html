@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Confirmación</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<!-- Pedidos (Usuario) -->
+	<div class="main-container emp-product-page x5">
+		<div class="segment">
+			<div class="emp-header-min">
+				<span th:if="${emprendimiento.foto != null}" class="emp-logo" th:style="'background:url(' + @{/foto/load/} + ${emprendimiento.foto.id} + '); background-size: cover'"></span>
+				<span th:if="${emprendimiento.foto == null}" class="emp-logo default"></span>
+					<div class="emp-info">
+					<h2 th:text="${emprendimiento.regEmpNombre}"></h2>
+					<p
+						th:text="${emprendimiento.direccion.provincia.nombre}+', '+ ${emprendimiento.direccion.localidadEmp}">
+					</p>
+				</div>
+			</div>
+
+			<div class="container column-wrapper x3">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="text-content success x3">
+							<h1>¡Tu pedido se envió con éxito!</h1>
+							<h2 class="x2">Te vamos a compartir el contacto del emprendimiento a la brevedad.</h2>
+						</div>
+
+						<div class="text-content">
+							<h2 class="x2">
+								<span class="block bold">Importante</span>
+								No compartas información personal o de tus tarjetas por mensaje o por email. Granferia NUNCA te va solicitar esta información.
+							</h2>
+
+							<div class="bottom-divider x4"></div>
+
+							<h2 th:text="${nombre}"></h2>
+							<h2 class="x3"><span id="prod-cantidad" th:text="${cantidad}">1</span> <span class="units">unidad</span></h2>
+
+							<h2 class="bold">Vas a pagar</h2>
+							<h2 class="x4">$<span class="price-confirmation"></span></h2>
+							<span class="hidden" id="confirmation-total-draft" th:text="${pedido.total}"></span>
+
+							<a class="btn btn-secondary x2" href="/pedido/pedidosrealizados" target="_self">Ir a mis pedidos</a>
+							<a class="btn btn-primary" href="/emp/devolverperfil" target="_self">Volver al perfil</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/landingProducto.js"></script>
+
+</html>

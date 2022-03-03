@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<div class="main-container x5">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo profile-clear" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="container x2">
+				<div class="row">
+					<div class="col-xs-12 col-lg-8 hero-container">
+						<span class="hero-image finalregistro"></span>
+					</div>
+				
+					<div class="col-xs-12 col-lg-4 x3--top">
+						<!-- Registro | Éxito -->
+						<div th:if="${exitoreg == null && activo !=null}">
+							<h1 class="x2--top">Te enviamos un email</h1>
+
+							<h2 class="x2">Incluimos un link para validar tu cuenta, va a estar activo por los próximos 15 minutos.</h2>
+							<h2 class="x2">Email enviado a <i th:text="${usuario.mail}"></i>, recordá revisar tu carpeta de spam.</h2>
+							<h2 class="x4">Ya podés cerrar esta pestaña.</h2>
+
+							<a href="/" target="_self" class="btn btn-secondary x2">Ir al home</a>
+							<a href="/ingresar"	 class="btn btn-primary">Ingresar</a>
+						</div>
+
+						<!-- Registro | Error -->
+						<div th:if="${error != null || activo ==null && errorpago == null}">
+							<h1 class="x2--top">Ay no :(</h1>
+
+							<h2 class="x4"><span th:text="${error}"></span>, te pedimos que lo intentes de nuevo.</h2>
+
+							<a href="/crearcuenta" target="_self" class="btn btn-secondary x2">Crear cuenta</a>
+							<a href="/" target="_self" class="btn btn-primary">Ir al home</a>
+						</div>
+
+						<!-- Pago | Error -->
+						<div th:if="${errorpago != null}">
+							<h1 class="x2--top">Ay no :(</h1>
+
+							<h2 class="x4">No pudimos procesar tu pago, te pedimos que lo intentes de nuevo.</h2>
+
+							<a href="/emp/devolverperfil" target="_self" class="btn btn-secondary x2">Ir al perfil</a>
+							<a href="/emp/elegircuenta" target="_self" class="btn btn-primary">Intentar de nuevo</a>
+						</div>
+
+						<!-- Registro: Validación | Éxito -->
+						<div th:if="${exitoreg != null}">
+							<h1 class="x2--top">Felicitaciones</h1>
+
+							<h2 class="x2">Te damos la bienvenida.</h2>
+							<h2 class="x2">Vas a poder descubrir y guardar lo que más te gusta, también cargar tu propio emprendimiento en granferia.</h2>
+							<h2 class="x4">¡Que lo disfrutes!</h2>
+
+							<a href="/" target="_self" class="btn btn-secondary x2">Ir al home</a>
+							<a href="/ingresar"	 class="btn btn-primary">Ingresar</a>
+						</div>
+
+						<!-- Registro: Validación | Error -->
+						<div th:if="${errorToken != null}">
+							<h1 class="x2--top">Ay no :(</h1>
+
+							<h2 class="x2" th:text="${errorToken}">
+								Tuvimos un problema al validar tu email, te pedimos que lo intentes de nuevo.
+							</h2>
+
+							<a href="/crearcuenta" target="_self" class="btn btn-secondary x2">Crear cuenta</a>
+							<a href="/" target="_self" class="btn btn-primary">Ir al home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+
+</html>

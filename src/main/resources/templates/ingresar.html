@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia | Ingresar</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+	<script>
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '138173101865029',
+				xfbml: true,
+				version: 'v12.0'
+			});
+			FB.AppEvents.logPageView();
+		};
+
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) { return; }
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+</head>
+
+<body>
+
+	<span class="loading-spinner hidden">
+		<img src="/img/gt/spinner.gif" width="300" height="300" alt="Cargando">
+	</span>
+
+	</div>
+
+	<div class="main-container">
+
+		<!-- Ingresar / Recuperar contraseña -->
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="container x5">
+				<div class="row">
+					<div class="col-xs-12 col-lg-8 hero-container">
+						<span class="hero-image ingresar"></span>
+					</div>
+				
+					<div class="col-xs-12 col-lg-4 x3--top">
+						<!-- Iniciar sesión -->
+						<div id="segment-ingresar">
+							<h1>Ingresar</h1>
+
+							<form class="x2" id="form-ingresar" action="/logincheck" method="post">
+								<div class="input-group">
+									<label class="form-label" for="logMail">Email</label>
+									<input class="form-control" type="email" id="logMail" name="mail" title="Email"
+										required>
+								</div>
+
+								<div class="input-group">
+									<img class="icon-view-show" src="/img/gt/icons/view-show.svg" alt="Ver">
+									<img class="icon-view-hide hidden" src="/img/gt/icons/view-hide.svg" alt="Ocultar">
+
+									<label class="form-label" for="logPassword">Contraseña</label>
+									<input class="form-control" type="password" id="logPassword" name="password"
+										title="Contraseña" required>
+								</div>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+								<div class="input-message success" th:if="${exito != null}" th:text="${exito}">
+								</div>
+
+								<div class="input-message error" th:if="${error != null}" th:text="${error}">
+									El mail o la contraseña con invalidos
+								</div>
+
+								<div class="row x5">
+									<div class="col-10 offset-1">
+										<div class="row">
+											<div class="col">
+												<a th:href="@{/oauth2/authorization/facebook}"><img
+														src="/img/gt/gt-facebook.svg" alt="Facebook"></a>
+											</div>
+
+											<div class="col">
+												<a th:href="@{/oauth2/authorization/google}"><img
+														src="/img/gt/gt-google.svg" alt="Google"></a>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<button id="btnIngresar" class="btn btn-primary x2" type="submit" disabled>Iniciar
+									sesión</button>
+
+
+								<div class="row x4">
+									<div class="col">
+										<p class="small-letter light text--center" id="cta-recuperar"><span
+												class="underline" tabindex="3">Recuperar contraseña</span></p>
+									</div>
+								</div>
+
+								<a href="/crearcuenta" class="small-letter text--center">Quiero ser parte, <span
+										class="underline cta-registrar">crear
+										cuenta</span></a>
+							</form>
+						</div>
+
+						<!-- Recuperar contraseña -->
+						<div class="hidden" id="segment-recuperar">
+							<h1 class="x2--top">Recuperar contraseña</h1>
+
+							<h2 class="x4">Te vamos a mandar un mail para que puedas restablecer tu contraseña.
+							</h2>
+
+							<form class="x2" id="form-recuperar" action="/recuperarpassword" method="POST">
+								<div class="input-group">
+									<label class="form-label" for="recMail">Email</label>
+									<input class="form-control" type="email" id="recMail" th:value="${mail}" name="mail"
+										title="Email" required>
+								</div>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+								<button id="btnRecuperar" class="btn btn-primary x4" type="submit" disabled>Enviar
+									email</button>
+
+								<div class="row">
+									<div class="col">
+										<p class="small-letter light text--center" id="cta-ingresar"><span
+												class="underline" tabindex="3">Volver a ingresar</span></p>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/acc.js"></script>
+
+
+</html>

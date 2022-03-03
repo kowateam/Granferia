@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+
+	<div class="main-container">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class="container x5">
+				<div class="row">
+					<div class="col-xs-12 col-lg-8 hero-container">
+						<span class="hero-image finalregistro"></span>
+					</div>
+
+					<div class="col-xs-12 col-lg-4">
+
+						<h1 class="x2-top">¡Todo listo!</h1>
+
+						<h2 class="x4">Ya podés cambiar tu contraseña.</h2>
+
+						<form action="/nuevapass" method="POST">
+							<div class="input-group">
+								<img class="icon-view-show" src="/img/gt/icons/view-show.svg" alt="Ver">
+								<img class="icon-view-hide hidden" src="/img/gt/icons/view-hide.svg" alt="Ocultar">
+				
+								<label class="form-label" for="recPassword">Contraseña nueva</label>
+								<input type="text" name="mail" th:value="${usuario.mail}" hidden>
+								<input class="form-control x4" id="recPassword" type="password" name="password" th:value="${password}" title="Contraseña nueva" required>
+							</div>
+
+							<button id="btnRestablecer" class="btn btn-primary x2" type="submit" disabled>Restablecer</button>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/acc.js"></script>
+
+</html>

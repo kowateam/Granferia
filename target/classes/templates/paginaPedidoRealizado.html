@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<span class="loading-spinner">
+		<img src="/img/gt/spinner.gif" width="300" height="300" alt="Cargando">
+	</span>
+
+	<!-- Navegación flotante -->
+	<nav class="floating-menu inner-page">
+		<div class="container">
+			<div class="row one-item">
+				<div class="col-xs-12">
+					<a class="menu-item full--width" href="/emp/devolverperfil" target="_self">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar página">
+					</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="main-container emp-product-page x5">
+		<div class="segment">
+			<!-- Pedidos (Usuario) -->
+			<div id="pedidos-usuario">
+				<div class="emp-header-min">
+					<a href="/emp/devolverperfil" target="_self" title="Volver al perfil">
+						<span class="emp-logo"
+							th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + ');'"></span>
+						<div class="emp-info">
+							<h2 th:text="${session.usersession.RegNombre}"></h2>
+							<p th:text="${session.usersession.mail}"></p>
+						</div>
+					</a>
+				</div>
+
+				<div class="container column-wrapper">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="text-content x3">
+								<h1 class="x1">Pedidos realizados</h1>
+								<h2 class="x2">Las ordenes que realices van a aparecer listadas en la sección <span
+										class="bold italic">Enviados</span>.</h2>
+								<h2 class="x4">Aquellas que ya se encuentren "En proceso" o que sean "Canceladas", las
+									vas a
+									poder ver en la sección <span class="bold italic">Historial</span>.</h2>
+							</div>
+
+							<!-- Enviados -->
+							<div class="accordion open">
+								<div class="head-details">
+									<span class="text">Pendientes <span class="asked-count"></span></span>
+								</div>
+
+								<div class="row-container">
+									<div th:if="${ped.estado == 'pedidoEnviado'}"
+										th:class="'asked-item '+${ped.estado == 'rechazarEmp' ? 'rejected' : ''}"
+										th:each="ped, i : ${pedido}">
+
+										<!-- Modal: Me arrepentí del pedido -->
+										<section class="modal-container hidden" id="pedidos-me-arrepenti">
+											<div class="modal-content">
+												<h2 class="question text--left x0--left x0--right x3">Contanos que pasó
+												</h2>
+
+												<div class="form-check x2">
+													<input class="form-check-input" type="checkbox"
+														id="pUsuarioArrepenti">
+													<label class="form-check-label" for="pUsuarioArrepenti">Me arrepentí
+														del
+														pedido</label>
+												</div>
+
+												<div class="form-check x2">
+													<input class="form-check-input" type="checkbox"
+														id="pUsuarioRecepcion">
+													<label class="form-check-label" for="pUsuarioRecepcion">XXXXXXXX</label>
+												</div>
+
+												<div class="form-check x2">
+													<input class="form-check-input" type="checkbox"
+														id="pUsuarioNoContacto">
+													<label class="form-check-label" for="pUsuarioNoContacto">XXXXXXXX</label>
+												</div>
+
+												<p class="x3">Si tenés dudas, o necesitas ayuda no dudes en escribirnos
+													a <a class="underline inline--block"
+														href="mailto:administracion@granferia.online">administracion@granferia.online</a>
+												</p>
+
+												<div class="btn-container">
+													<button class="btn close-modal" type="button">Volver</button>
+													<button class="btn close-modal right" type="button"
+														id="">Enviar</button>
+												</div>
+											</div>
+
+											<span class="overlay close-modal"></span>
+										</section>
+
+										<!-- Cabecera -->
+										<div class="row head x2">
+											<div class="col-8">
+												<p class="large" th:text="${ped.emprendimiento.regEmpNombre}">Nombre</p>
+											</div>
+
+											<div class="col-4 text--right">
+												<p>Pedido Enviado</p>
+											</div>
+										</div>
+
+										<!-- Detalles del pedido -->
+										<div class="row x2">
+											<div class="col-8" th:each="prod,count : ${ped.productos}">
+												<p th:text="${prod.nombre}"></p>
+												<p class="detail"
+													th:if="${prod.variablePedido != null && prod.itemPedido != null}"
+													th:text="${prod.variablePedido}+ ' ' + ${prod.itemPedido}"></p>
+												<p class="detail"><span th:text="${prod.cantidad}"></span> <span
+														class="units">unidad</span></p>
+											</div>
+
+											<div class="col-4 text--right">
+												<p class="asked-date" th:text="${ped.alta}">Fecha y hora</p>
+											</div>
+										</div>
+
+										<div class="row x2" th:if="${ped.nota != ''}">
+											<div class="col-12">
+												<p>Nota</p>
+												<p class="detail" th:text="${ped.nota}">Nota</p>
+											</div>
+										</div>
+
+										<!-- Resumen -->
+										<div class="row price x2">
+											<div class="col-8">
+												<p>Precio a pagar</p>
+											</div>
+
+											<div class="col-4 text--right">
+												<p class="large">$<span class="confirmation-total"></span></p>
+												<span class="confirmation-total-draft hidden"
+													th:text="${ped.total}"></span>
+											</div>
+										</div>
+
+										<button class="btn btn-border btn-me-arrepenti">Me arrepentí del pedido</button>
+
+										<div class="bottom-divider x1"></div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Historial de pedidos -->
+							<div class="accordion">
+								<div class="head-details">
+									<span class="text">Historial <span class="historic-count"></span></span>
+								</div>
+
+								<div class="row-container">
+									<div th:if="${ped.estado != 'pedidoEnviado'}" th:class="'historic-item '+${ped.estado == 'rechazarEmp' ? 'rejected' : ''}" th:each="ped, i : ${pedido}">
+
+										<!-- Modal: Información de contacto -->
+										<section class="modal-container hidden" id="contacto-modal">
+											<div class="modal-content">
+												<h2 class="question text--left x0--left x0--right x3">Información de
+													contacto</h2>
+
+												<div class="input-group x2">
+													<p class="label-read">Nombre de usuario</p>
+													<p class="input-read" th:text="${ped.user.RegNombre}">Nombre</p>
+												</div>
+
+												<div class="input-group x2">
+													<p class="label-read">Email</p>
+													<p class="input-read" th:text="${ped.user.mail}">
+														jaime.bernales@kowa.com
+													</p>
+												</div>
+
+												<div class="input-group x2">
+													<p class="label-read">Teléfono</p>
+													<p class="input-read" th:text="${ped.user.celular}">+54 2613 372 993
+													</p>
+												</div>
+
+												<div class="btn-container">
+													<button class="btn close-modal full--width"
+														type="button">Volver</button>
+												</div>
+											</div>
+
+											<span class="overlay close-modal"></span>
+										</section>
+
+										<!-- Modal: Hubo un problema -->
+										<section class="modal-container hidden" id="pedidos-problema-usuario">
+											<div class="modal-content">
+												<h2 class="question text--left x0--left x0--right x3">Contanos que pasó
+												</h2>
+
+												<div class="form-check x2">
+													<input class="form-check-input" type="checkbox"
+														id="pUsuarioArrepenti">
+													<label class="form-check-label" for="pUsuarioArrepenti">XXXXXX</label>
+												</div>
+
+												<div class="form-check x2">
+													<input class="form-check-input" type="checkbox"
+														id="pUsuarioRecepcion">
+													<label class="form-check-label" for="pUsuarioRecepcion">No recibí el
+														producto / servicio</label>
+												</div>
+
+												<div class="form-check x2">
+													<input class="form-check-input" type="checkbox"
+														id="pUsuarioNoContacto">
+													<label class="form-check-label" for="pUsuarioNoContacto">No pude
+														contactar con el emprendimiento</label>
+												</div>
+
+												<p class="x3">Si tenés dudas, o necesitas ayuda no dudes en escribirnos
+													a <a class="underline inline--block"
+														href="mailto:administracion@granferia.online">administracion@granferia.online</a>
+												</p>
+
+												<div class="btn-container">
+													<button class="btn close-modal" type="button">Volver</button>
+													<button class="btn close-modal right" type="button"
+														id="">Enviar</button>
+												</div>
+											</div>
+
+											<span class="overlay close-modal"></span>
+										</section>
+
+										<!-- Cabecera -->
+										<div class="row head x2">
+											<div class="col-8">
+												<p class="large underline contact-info" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.regEmpNombre}"> Nombre</p>
+												<p class="large" th:if="${ped.estado == 'rechazarEmp'}" th:text="${ped.user.RegNombre}">Nombre</p>
+											</div>
+
+											<div class="col-4 text--right">
+												<p th:if="${ped.estado == 'aceptarEmp'}">En Proceso</p>
+												<p th:if="${ped.estado == 'rechazarEmp'}">Rechazado</p>
+											</div>
+										</div>
+
+										<!-- Detalles del pedido -->
+										<div class="row x2">
+											<div class="col-8" th:each="prod,count : ${ped.productos}">
+												<p th:text="${prod.nombre}"></p>
+												<p class="detail"
+													th:if="${prod.variablePedido != null && prod.itemPedido != null}"
+													th:text="${prod.variablePedido}+ ' ' + ${prod.itemPedido}"></p>
+												<p class="detail"><span th:text="${prod.cantidad}"></span> <span
+														class="units">unidad</span></p>
+											</div>
+
+											<div class="col-4 text--right">
+												<p class="asked-date" th:text="${ped.alta}">Fecha y hora</p>
+											</div>
+										</div>
+
+										<div class="row x2" th:if="${ped.nota != ''}">
+											<div class="col-12">
+												<p>Nota</p>
+												<p class="detail" th:text="${ped.nota}">Nota</p>
+											</div>
+										</div>
+
+										<!-- Resumen -->
+										<div class="row price x2">
+											<div class="col-8">
+												<p>Precio a pagar</p>
+											</div>
+
+											<div class="col-4 text--right">
+												<p class="large">$<span class="confirmation-total"></span></p>
+												<span class="confirmation-total-draft hidden"
+													th:text="${ped.total}"></span>
+											</div>
+										</div>
+
+										<button class="btn btn-border btn-usuario-problema">Hubo un problema</button>
+
+										<div class="bottom-divider x1"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div th:replace="fragments :: footer"></div>
+
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/pedidos.js"></script>
+
+<script>
+	$(function () {
+		$('.loading-spinner').delay(700).fadeOut(300);
+	});
+</script>
+
+</html>

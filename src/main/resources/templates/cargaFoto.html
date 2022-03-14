@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+
+	<!-- Modales -->
+	<section class="modal-container hidden" id="cargar-nuevo-modal">
+		<div class="modal-content">
+			<h2 class="question text--left x0--left x0--right x3">Nueva categoría</h2>
+
+			<div class="input-group x3--top x0" id="nombreCategoria">
+				<label class="form-label" for="nuevaCategoria">Nombre de la categoría</label>
+				<input class="form-control x4" th:name="nuevaCategoria" id="nuevaCategoria" type="text" required>
+			</div>
+
+			<div class="btn-container">
+				<button class="btn close-modal" type="button">Volver</button>
+				<button class="btn close-modal right" id="btnCrearCategoriaModal" type="button" disabled>Crear</button>
+				<button class="btn close-modal right hidden" id="btnCargarPModal" type="button" disabled>Crear</button>
+			</div>
+
+		</div>
+
+		<span class="overlay close-modal"></span>
+	</section>
+
+	<div class="main-container">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Cargar fotos -->
+			<div id="elegirFotos"
+				th:class="'container x5 column-wrapper '+${session.volverCargaVariable == 'volver' ? 'hidden' : ''}">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="text-content">
+							<h1 class="x3">Fotos (Hasta
+								<span th:if="${emprendimiento.membresia == 'GRATIS'}">2</span>
+								<span th:if="${emprendimiento.membresia == 'PREMIUM'}">6</span> fotos)
+							</h1>
+
+							<h2 class="x4">Recordá que es importante que la foto se vea bien iluminada y con colores
+								reales, además de ser atractiva.</h2>
+						</div>
+
+						<!-- Fotos del item -->
+						<div class="row x3">
+							<div class="col-xs-12">
+								<div class="upload-photos">
+									<form action="/foto/subirfotoproducto" enctype="multipart/form-data" method="POST">
+										<div class="photos">
+											<div class="photo" th:each="foto : ${fotos}"
+												th:style="'background:url(' + @{/foto/load/} + ${foto.id} + '); background-size: cover'">
+												<span class="hidden" id="fotoid" th:text="${foto.id}"></span>
+												<span class="delete-file">Eliminar</span>
+											</div>
+
+											<label class="upload"
+												th:if="${emprendimiento.membresia == 'GRATIS' && fotos.size() le 1}"
+												for="uploadFotoProductos"></label>
+											<label class="upload"
+												th:if="${emprendimiento.membresia == 'PREMIUM' && fotos.size() le 5}"
+												for="uploadFotoProductos"></label>
+										</div>
+
+										<input type="hidden" id="idEmprendimiento" th:name="IdEmprendimiento"
+											th:value="${emprendimiento.id}">
+										<input type="hidden" th:name="idproducto" id="idproducto"
+											th:value="${producto}">
+
+										<input type="file" th:name="archivo" th:value="logo" id="uploadFotoProductos"
+											hidden>
+
+										<input type="hidden" th:name="${_csrf.parameterName}"
+											th:value="${_csrf.token}" />
+
+										<button class="hidden" id="subirFoto" type="submit"></button>
+									</form>
+
+								</div>
+							</div>
+						</div>
+
+						<!-- PREMIUM -->
+						<button class="btn btn-primary" type="button"
+							th:if="${emprendimiento.membresia == 'PREMIUM' && fotos.size() == 0}"
+							disabled>Siguiente</button>
+						<button id="btnCategorias" class="btn btn-primary" type="button"
+							th:if="${emprendimiento.membresia == 'PREMIUM' && fotos.size() >= 1}">Siguiente</button>
+
+						<!-- GRATIS -->
+						<button class="btn btn-primary" th:if="${emprendimiento.membresia == 'GRATIS' && fotos.size() == 0}" disabled>Publicar</button>
+						<a class="btn btn-primary" th:if="${emprendimiento.membresia == 'GRATIS' && fotos.size() >= 1}" target="_self" th:href="@{/emp/landingedit/} + ${emprendimiento.id}">Publicar</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Agregar categorias -->
+			<div id="elegirCategorias" th:class="' '+${session.volverCargaVariable == 'volver' ? '' : 'hidden'}">
+				<div class="container x5 column-wrapper">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="text-content">
+								<h1>¿En qué categoría se encuentra?</h1>
+								<h2 class="x4">Elegí una categoría en donde ubicar este item.</h2>
+							</div>
+
+							<form action="/emp/categoriaproducto" method="post">
+								<ul class="categories-list">
+									<li th:each="categoriaproducto,i : ${categoriaproductos}">
+										<div class="form-check x2">
+											<div class="form-option x1--right"></div>
+											<input class="hidden" type="radio" th:value="${categoriaproducto.id}"  th:id="'elegirCatego' + ${i.index}" th:name="idCategoriapepe">
+											<label class="form-check-label" th:for="'elegirCatego' + ${i.index}" th:text="${categoriaproducto.nombre}">Nombre de la categoría</label>
+										</div>
+									</li>
+								</ul>
+
+								<input type="hidden" th:name="IdEmprendimiento" th:value="${emprendimiento.id}">
+								<input type="hidden" th:name="idProductosubircatego" th:value="${producto}">
+
+								<p class="underline x4" id="btnNuevaCategoria">Nueva categoría</p>
+
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+								<button class="btn btn-secondary x2" id="btnBackFotos" type="button">Volver</button>
+								<button class="btn btn-primary" type="submit" id="btnPublicarPremium" disabled>Publicar</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/landingEdit.js"></script>
+<script type="text/javascript" src="/js/categorias.js"></script>
+
+
+</html>

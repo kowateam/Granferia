@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<!-- Menu -->
+	<nav class="floating-menu inner-page">
+		<div class="container">
+			<div class="row one-item">
+				<div class="col-xs-12">
+					<a class="menu-item full--width" th:href="@{/emp/landingedit/} + ${emprendimiento.id}"
+						target="_self">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar página">
+					</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Modales: Eliminar emprendimiento -->
+	<section class="modal-container hidden" id="eliminar-emprendimiento">
+		<form class="modal-content" th:action="@{/emp/eliminar/}+${emprendimiento.id}" method="POST">
+			<h2 class="question text--left x0--left x0--right x3">Advertencia</h2>
+
+			<span th:if="${emprendimiento.membresia == 'PREMIUM'}">
+				<p class="x3">Estás por eliminar <span th:text="${emprendimiento.regEmpNombre}"></span>. Se va a perder tu plan Premium.</p>
+				<p class="x3">Para continuar selecciona la casilla y confirma la acción.</p>
+			</span>
+
+			<p class="x3" th:if="${emprendimiento.membresia == 'GRATIS'}">
+				Estás por eliminar <span th:text="${emprendimiento.regEmpNombre}"></span>. Para continuar
+				selecciona la casilla y confirma la acción.
+			</p>
+
+			<div class="form-check x2">
+				<input class="form-check-input" type="checkbox" id="eliminarEmprendimiento">
+				<label class="form-check-label" for="eliminarEmprendimiento">Eliminar emprendimiento</label>
+			</div>
+
+			<p class="x3">Se van a eliminar todos los productos. Los pedidos pendientes serán rechazados.</p>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<div class="btn-container">
+				<button class="btn close-modal" type="button">Volver</button>
+				<button class="btn right" id="btnConfirmarEliminar" type="submit" disabled>Confirmar</button>
+			</div>
+		</form>
+
+		<span class="overlay close-modal"></span>
+	</section>
+
+	<!-- Modales: Cambiar de Premium a Gratis -->
+	<section class="modal-container hidden" id="cambiar-plan">
+		
+		<div class="modal-content">
+			<h2 class="question text--left x0--left x0--right x3">Advertencia</h2>
+			<p class="x3">Estás por cancelar tu plan "Premium". ¿Querés continuar?</p>
+
+			<div class="btn-container">
+				<button class="btn close-modal" type="button">Volver</button>
+				<!--Esta Funcion elimina las categorias y pone los productos en una sola-->
+				<form th:action="@{/producto/bajarcategorias/}+${emprendimiento.id}" method="post">
+					<button class="btn right" type="submit">Si, cancelar</button>
+				</form> 
+			</div>
+		</div>
+
+		<span class="overlay close-modal"></span>
+	</section>
+
+	<div class="main-container">
+		<div class="segment">
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo" title="granferia">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="container column-wrapper x5">
+				<div class="row">
+					<div class="col-xs-12">
+						<div id="landingConfig">
+							<div class="text-content">
+								<h1>Editar stand</h1>
+								<h2 class="x4">Podés cambiar ubicación, la descripción y a que se dedica
+									el emprendimiento.</h2>
+							</div>
+
+							<div class="input-group x3">
+								<p class="label-read">Nombre</p>
+								<p class="input-read" th:text="${emprendimiento.regEmpNombre}"></p>
+							</div>
+
+
+							<form class="x3" action="/emp/editar" method="POST">
+								<input type="hidden" th:name="id" th:value="${emprendimiento.id}">
+
+								<div class="input-group filled">
+									<label class="form-label" for="regEmpDescripcion">Breve descripción o cita</label>
+									<input class="form-control x3" th:value="${emprendimiento.regEmpDescripcion}"
+										th:name="regEmpDescripcion" id="regEmpDescripcion" maxlength="50" type="text"
+										required>
+								</div>
+
+								<div class="option-group">
+									
+									<div class="option-selector x0--top">
+										<label th:class="'option '+${emprendimiento.empActividad == 'productos' ? 'selected' : ''}" for="optProductos">
+											<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10" alt="check">
+											Productos
+											<input type="radio" th:name="empActividad" value="productos" id="optProductos" hidden>
+										</label>
+
+										<label th:class="'option bl '+${emprendimiento.empActividad == 'servicios' ? 'selected' : ''}" for="optServicios">
+											<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10" alt="check">
+											Servicios
+											<input type="radio" th:name="empActividad" value="servicios" id="optServicios" hidden>
+										</label>
+
+										<label
+											th:class="'option full '+${emprendimiento.empActividad == 'optAmbos' ? 'selected' : ''}"
+											for="optAmbos">
+											<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15"
+												height="10" alt="check">
+											Ambos
+											<input type="radio" th:name="empActividad" value="optAmbos" id="optAmbos"
+												hidden>
+										</label>
+									</div>
+								</div>
+
+								<div class="input-group x3">
+									<p class="label-read">Categoría</p>
+									<p class="input-read" th:text="${emprendimiento.categoria.nombre}"></p>
+									<span class="hidden" id="categoria-seleccionada"
+										th:text="${emprendimiento.categoria}"></span>
+								</div>
+
+								<span class="hidden" id="subcategoria-seleccionada" th:text="${subcategoria}"></span>
+
+								<select class="form-select x2" th:name="subCategoria" id="subCategoriaEmp">
+									<option>Sub categoría (opcional)</option>
+								</select>
+
+								<div class="bottom-divider x4"></div>
+
+								<div class="text-content">
+									<h1>Envios a domicilio</h1>
+									<h2 class="x4">Esta información la ven los usuarios en tus productos.
+									</h2>
+								</div>
+
+								<div class="option-group x5">
+									<div class="option-selector x0--top">
+										<label th:class="'option '+${emprendimiento.empActividad == 'productos' ? 'selected' : ''}" for="enviosSi">
+											<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10" alt="check">
+											Si
+											<input type="radio" th:name="empActividad" value="productos" id="enviosSi" hidden>
+										</label>
+
+										<label th:class="'option bl '+${emprendimiento.empActividad == 'servicios' ? 'selected' : ''}" for="enviosNo">
+											<img class="icon-check" src="/img/gt/icons/check-white.svg" width="15" height="10" alt="check">
+											No
+											<input type="radio" th:name="empActividad" value="servicios" id="enviosNo" hidden>
+										</label>
+									</div>
+								</div>
+
+								<div class="text-content">
+									<h1>Dirección y visibilidad</h1>
+									<h2 class="x4">Editá la ubicación del emprendimieno y su visibilidad al público.
+									</h2>
+								</div>
+
+								<div class="input-group x3">
+									<p class="label-read">Ubicación</p>
+									<p class="input-read"
+										th:text="${emprendimiento.direccion.provincia.nombre}+', '+ ${emprendimiento.direccion.localidadEmp}">
+									</p>
+								</div>
+
+								<div class="input-group x3">
+									<p class="label-read">Visibilidad</p>
+									<p class="input-read" th:text="${emprendimiento.direccion.direccionVisibilidad}">
+									</p>
+								</div>
+
+								<button class="btn btn-secondary x2" type="button" id="btnEditDireccion">Editar
+									datos</button>
+
+								<div class="bottom-divider x3"></div>
+
+								<div class="text-content">
+									<h1>Contacto</h1>
+									<h2 class="x3">Información de contacto para que los compradores te puedan ubicar una vez aceptes el encargo.</h2>
+								</div>
+
+								<div class="input-group filled">
+									<label class="form-label" for="empTel">Número celular</label>
+									<input class="form-control x1" th:value="${emprendimiento.empTel}" th:name="empTel"
+										id="empTel" maxlength="10" type="tel"
+										onkeyup="this.value=this.value.replace(/[^\d]/,'')"
+										aria-describedby="empTelHelp" required>
+								</div>
+
+								<div class="form-text x2" id="empTelHelp">10 números sin guiones ni espacios.</div>
+
+								<div class="form-check x3">
+									<input class="form-check-input" th:name="esWhatsapp" th:checked="${emprendimiento.esWhatsapp != null}" type="checkbox" id="telWapp">
+									<label class="form-check-label" for="telWapp">Es Whatsapp</label>
+								</div>
+
+								<!-- <div class="networks" th:if="${emprendimiento.membresia == 'PREMIUM'}">
+									<div th:class="'input-group '+${emprendimiento.instagram != null ? 'filled' : ''}">
+										<label class="form-label" for="linkInstagram">Link de instagram</label>
+										<input class="form-control x3" th:value="${emprendimiento.instagram}"
+											th:name="instagram" id="linkInstagram" maxlength="50" type="text">
+									</div>
+	
+									<div th:class="'input-group '+${emprendimiento.facebook != null ? 'filled' : ''}">
+										<label class="form-label" for="linkFacebook">Link de facebook</label>
+										<input class="form-control x3" th:value="${emprendimiento.facebook}"
+											th:name="facebook" id="linkFacebook" maxlength="50" type="text">
+									</div>
+	
+									<div th:class="'input-group '+${emprendimiento.website != null ? 'filled' : ''}">
+										<label class="form-label" for="linkWebsite">Website propia</label>
+										<input class="form-control x2" th:value="${emprendimiento.website}"
+											th:name="website" id="linkWebsite" type="text">
+									</div>
+								</div> -->
+
+								<div class="bottom-divider x4"></div>
+
+								<div class="text-content">
+									<h1>Zona de peligro</h1>
+									<h2 class="x3">Las acciones a continuación no tienen retorno.</h2>
+								</div>
+
+								<div class="text-content change-plan x2 x3--top" th:if="${emprendimiento.membresia == 'PREMIUM'}">
+									<h1>Cancelar plan</h1>
+									<h2 class="x3">Se van a perder todos los productos y categorías creadas. Los pedidos
+										pendientes van a ser rechazados.</h2>
+									
+									<button class="btn btn-primary" id="btnCancelarPlan" type="button">Cancelar premium</button>
+									<span class="more-info">Al darle click a "Cancelar premium" tu plan pasará a ser "Gratis" en tu próximo vencimiento.</span>
+								</div>
+								
+								<div class="text-content delete-emp x4 x3--top">
+									<h1>Eliminar emprendimiento</h1>
+									<h2 class="x3">Se van a perder todos los productos y categorías creadas. Los pedidos
+										pendientes van a ser rechazados.</h2>
+
+									<button class="btn btn-primary" id="btnEliminarEmp" type="button">Eliminar
+										emprendimiento</button>
+								</div>
+
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+								<a th:href="@{/emp/landingedit/} + ${emprendimiento.id}" class="btn btn-secondary x2"
+									target="_self">Volver</a>
+								<button class="btn btn-primary" type="submit">Aplicar cambios</button>
+							</form>
+						</div>
+
+						<div class="hidden" id="editDireccion">
+							<div class="text-content">
+								<h1>Dirección</h1>
+								<h2>Contanos en donde estás, y elegí la visibilidad de tu ubicación.</h2>
+							</div>
+
+							<form th:action="@{/emp/modificardireccion/} + ${emprendimiento.id}" method="post">
+
+								<div class="address-container x4--top">
+									<select th:name="dirPrivacidad" class="form-select x2" id="dirPrivacidad">
+										<option selected value="Privada">Visibilidad privada</option>
+										<option value="Pública">Visibilidad pública</option>
+									</select>
+
+									<div class="form-text black x4" id="dirPrivadaHelp">Solo localidad y provincia van a
+										ser
+										visibles para los usuarios.</div>
+									<div class="form-text black x4 hidden" id="dirPublicaHelp">Tu ubicación, calle y
+										numeración
+										van a ser visibles para los usuarios.</div>
+
+									<div class="input-group filled">
+										<label class="form-label" for="dirCalle">Calle</label>
+										<input class="form-control" th:name="dirCalle"
+											th:value="${emprendimiento.direccion.dirCalle}" id="dirCalle" type="text"
+											required>
+									</div>
+
+									<div class="address-items">
+										<div class="input-group num filled">
+											<label class="form-label" for="dirNum">Numeración</label>
+											<label class="form-label medium" for="dirNum">Num.</label>
+											<input class="form-control" th:name="dirNum"
+												th:value="${emprendimiento.direccion.dirNum}" id="dirNum" type="number"
+												required>
+										</div>
+
+										<div
+											th:class="'input-group piso '+${emprendimiento.direccion.dirPiso == '' ? '' : 'filled'}">
+											<label class="form-label" for="dirPiso">Piso</label>
+											<input class="form-control" th:name="dirPiso"
+												th:value="${emprendimiento.direccion.dirPiso}" id="dirPiso"
+												type="number">
+										</div>
+
+										<div
+											th:class="'input-group depto '+${emprendimiento.direccion.dirDepto == '' ? '' : 'filled'}">
+											<label class="form-label" for="dirDepto">Depto.</label>
+											<input class="form-control" th:name="dirDepto"
+												th:value="${emprendimiento.direccion.dirDepto}" id="dirDepto"
+												type="text">
+										</div>
+									</div>
+
+									<span class="hidden" id="provincia-seleccionada"
+										th:text="${emprendimiento.direccion.provincia.nombre}"></span>
+									<span class="hidden" id="localidad-seleccionada"
+										th:text="${emprendimiento.direccion.localidadEmp}"></span>
+
+									<select class="form-select" id="provinciaEmp" th:name="provincia">
+										<option th:each="provincia : ${provincias}" th:text="${provincia.nombre}"
+											th:value="${provincia}"></option>
+									</select>
+
+									<select class="form-select" th:name="localidadEmp" id="localidadEmp">
+									</select>
+
+									<div class="input-group filled">
+										<label class="form-label" for="codPostal">Código postal</label>
+										<input class="form-control" th:name="codPostal"
+											th:value="${emprendimiento.direccion.codPostal}" id="codPostal" type="text"
+											required>
+									</div>
+								</div>
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+								<a th:href="@{/emp/landingconfig/} + ${emprendimiento.id}"
+									class="btn btn-secondary btn-back x2--top x2" target="_self">Volver</a>
+								<button class="btn btn-primary btn-step x3" type="submit">Aplicar cambios</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/landingConfig.js"></script>
+
+</html>

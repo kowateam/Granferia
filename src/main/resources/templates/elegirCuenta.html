@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>granferia</title>
+
+	<meta name="description" content="Comunidad emprendedora, granferia te brinda la posibilidad de crear tu stand y compartir tu emprendimiento. También vas a poder buscar, guardar y comprar productos o servicios.">
+
+	<!-- Styles -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+
+	<!-- Icons + App name -->
+	<div th:replace="fragments :: meta-info"></div>
+</head>
+
+<body>
+	<!-- Menu -->
+	<nav class="floating-menu inner-page">
+		<div class="container">
+			<div class="row one-item">
+				<div class="col-xs-12">
+					<div class="menu-item full--width" onclick="history.back()">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar página">
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="main-container">
+		<div class="segment">
+
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/" target="_self">
+								<img src="/img/gt/logo.svg" tabindex="1"
+									alt="Te damos la bienvenida a granferia, la plataforma de emprendedores"
+									class="logo">
+							</a>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="membership-selector">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="text-content">
+								<h1>Nuestros planes</h1>
+								<h2 class="x3">Podes acceder a distintos beneficios dentro de granferia,
+									abonando el plan que elijas para tu emprendimiento.</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="packs-container" >
+					<div class="packs">
+						<div class="pack free" th:if="${unogratis != true}" >
+							<h2>Gratis</h2>
+
+							<span class="pack-price cero">
+								<span class="symbol">$</span>
+								<span class="price">0</span>
+								<span class="month">/ mes</span>
+							</span>
+
+							<p>Contarás con los servicios gratiutos del sitio y podrás recibir hasta 5 pedidos renovables mes a mes.</p>
+							<button class="btn btn-open-details btn-highlight" type="button" id="btnDetallesGratis">Ver detalles</button>
+						</div>
+
+						<div class="pack premium-1">
+							<h2>Premium <span th:if="${cantidadEmprendimientos le 120}">(Bonificado)</span></h2>
+							<span class="pack-price">
+								<span class="symbol">$</span>
+								<span class="price">449</span>
+								<span class="month">/ mes</span>
+							</span>
+
+							<p>						
+								Ideal para establecer tu emprendimiento en una plataforma digital. Podrás aceptar
+								pedidos ilimitados y personalizar tu stand.</p>
+							<button class="btn btn-open-details btn-secondary" type="button" id="btnPremium">Ver detalles</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="membership-details emp-product-page hidden">
+				<div class="container x5">
+					<div class="row">
+						<div class="col-xs-12">
+
+							<!-- Detalles Gratis -->
+							<div class="text-content x3" id="detalles-gratis">
+								<h1>Gratis</h1>
+								<h2 class="x4">Te compartimos las caracteristicas de la membresia <i>Gratis</i>:</h2>
+
+								<ul class="payments-method bottom-divider x5">
+									<li><span class="icon"></span> Hasta 4 productos</li>
+									<li><span class="icon"></span> 2 fotos por producto</li>
+									<li><span class="icon"></span> 4 colores de fondo para tu stand</li>
+									<li><span class="icon"></span> 5 pedidos por mes</li>
+								</ul>
+
+								<div class="container column-wrapper">
+									<div class="row">
+										<div class="col-xs-12">
+											<button class="btn btn-secondary btn-close-details x2">Volver</button>
+											<a class="btn btn-primary" href="/emp/crearemp" target="_self">Crear emprendimiento gratis</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Detalles Premium -->
+							<div class="text-content x3 hidden" id="detalles-premium">
+								<h1 th:if="${cantidadEmprendimientos gt 120}">Premium</h1>
+								<h1 th:if="${cantidadEmprendimientos le 120}">Premium (Bonificado)</h1>
+								<h2 class="x4">Te compartimos las caracteristicas de la membresia <i>Premium</i> <span th:if="${cantidadEmprendimientos le 120}">Gratis por 3 meses</span>:</h2>
+
+								<ul class="payments-method bottom-divider x3">
+									<li><span class="icon"></span> 2 layouts para personalizar el stand</li>
+									<li><span class="icon"></span> 12 colores de fondo para tu stand</li>
+									<li><span class="icon"></span> Productos ilimitados</li>
+									<li><span class="icon"></span> Hasta 6 fotos por producto</li>
+									<li><span class="icon"></span> Pedidos ilimitados</li>
+								</ul>
+
+								<ul class="payments-method x5">
+									<li><span class="icon"></span> Estadísticas de tu emprendimiento</li>
+									<li><span class="icon"></span> Descuentos especiales</li>
+								</ul>
+
+								<div class="container column-wrapper">
+									<div class="row">
+										<div class="col-xs-12">
+											<button class="btn btn-secondary btn-close-details x2">Volver</button>
+											<!--<form action="/crearEmp/tipo" method="post">
+											<button type="submit" class="btn btn-primary" th:if="${cantidadEmprendimientos le 120}" >Gratis por 3 meses</button>
+											</form>-->
+											<a class="btn btn-primary"  href="/mp/premium" target="_self">Comprar</a>
+											<!--<a class="btn btn-primary" th:if="${cantidadEmprendimientos gt 120}" href="/mp/premium" target="_self">Comprar</a>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+</body>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+
+</html>

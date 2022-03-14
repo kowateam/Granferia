@@ -1,0 +1,999 @@
+// Light
+$light-green-1: #E4FBF3;
+$light-green-2: #C9F3E5;
+
+$light-purple-1: #EDEEF5;
+$light-purple-2: #D5D7E8;
+
+$light-blue-1: #E6EEFB;
+$light-blue-2: #C0D1EA;
+
+$light-gray-1: #F6F6F6;
+$light-gray-2: #E1E1E1;
+
+$light-orange-1: #F5F0ED;
+$light-orange-2: #E0CFC4;
+
+// Dark
+
+$dark-green-1: #389D6D;
+$dark-green-2: #288458;
+
+$dark-purple-1: #4E59BD;
+$dark-purple-2: #3F499C;
+
+$dark-blue-1: #2C6BC9;
+$dark-blue-2: #225DB7;
+
+$dark-gray-1: #191919;
+$dark-gray-2: #000000;
+
+$dark-orange-1: #F5AD40;
+$dark-orange-2: #DC9832;
+
+$dark-red-1: #991010;
+$dark-red-2: #700E0E;
+
+/* Selector (fragments - Apariencia)
+==============================
+*/
+
+.theme-selector {
+    .avatars-slider {
+        label {
+
+            &#bgcolor-default .av {background-color: #FFFFFF}
+
+            // Light
+
+            &#bgcolor-lgreen .av {
+                background-color: $light-green-1;
+                border: 6px solid $light-green-2;
+            }
+
+            &#bgcolor-dgreen .av {
+                background-color: $dark-green-1;
+                border: 6px solid $dark-green-2;
+            }
+
+            &#bgcolor-lpurple .av {
+                background-color: $light-purple-1;
+                border: 6px solid $light-purple-2;
+            }
+
+            &#bgcolor-lblue .av {
+                background-color: $light-blue-1;
+                border: 6px solid $light-blue-2;
+            }
+
+            &#bgcolor-lgray .av {
+                background-color: $light-gray-1;
+                border: 6px solid $light-gray-2;
+            }
+
+            &#bgcolor-lorange .av {
+                background-color: $light-orange-1;
+                border: 6px solid $light-orange-2;
+            }
+
+            // Dark
+
+            &#bgcolor-dpurple .av {
+                background-color: $dark-purple-1;
+                border: 6px solid $dark-purple-2;
+            }
+
+            &#bgcolor-dblue .av {
+                background-color: $dark-blue-1;
+                border: 6px solid $dark-blue-2;
+            }
+
+            &#bgcolor-dgray .av {
+                background-color: $dark-gray-1;
+                border: 6px solid $dark-gray-2;
+            }
+
+            &#bgcolor-dorange .av {
+                background-color: $dark-orange-1;
+                border: 6px solid $dark-orange-2;
+            }
+
+            &#bgcolor-dred .av {
+                background-color: $dark-red-1;
+                border: 6px solid $dark-red-2;
+            }
+
+            .av {
+                &.selected {
+                    border: 6px solid #000000 !important;
+                }
+            }
+        }
+    }
+}
+
+/* Themes
+==============================
+*/
+
+.bgcolor-lgreen {
+    $primary-color: $light-green-1;
+    $secondary-color: $light-green-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+}
+
+.bgcolor-lpurple {
+    $primary-color: $light-purple-1;
+    $secondary-color: $light-purple-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            border-top: 0;
+            margin-right: 200px;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+}
+
+.bgcolor-lblue {
+    $primary-color: $light-blue-1;
+    $secondary-color: $light-blue-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            border-top: 0;
+            margin-right: 200px;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+}
+
+.bgcolor-lgray {
+    $primary-color: $light-gray-1;
+    $secondary-color: $light-gray-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            border-top: 0;
+            margin-right: 200px;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+}
+
+.bgcolor-lorange {
+    $primary-color: $light-orange-1;
+    $secondary-color: $light-orange-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            border-top: 0;
+            margin-right: 200px;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+}
+
+.bgcolor-lgreen, 
+.bgcolor-lpurple,
+.bgcolor-lblue,
+.bgcolor-lgray,
+.bgcolor-lorange {
+    &.landing-public-page,
+    &.product-public-page {
+        header {
+            background-color: transparent;
+        }
+
+        @media only screen and (min-width: 992px) {
+            nav.floating-menu {
+                background-color: transparent;
+            }
+        }
+    }
+    
+    &.product-public-page {
+        .input-group {
+            .form-control {
+                background-color: transparent;
+            }
+        }
+
+        .form-select {
+            background-color: transparent;
+        }
+    }
+}
+
+// DARK
+
+.bgcolor-dgreen,
+.bgcolor-dpurple,
+.bgcolor-dblue,
+.bgcolor-dgray,
+.bgcolor-dorange,
+.bgcolor-dorange,
+.bgcolor-dred {
+    --basecolor: #FFFFFF;
+
+    .img-w {display: inline-block}
+    .img-b {display: none}
+
+    footer {
+        ul {
+            li {
+                a, input {
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+
+    nav.floating-menu {
+        box-shadow: 0 0 0 transparent;
+    }
+
+    .layout-item {
+        .name {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .info {
+            background-color: rgba(255,255,255, 0.06);
+        }
+
+        .avatar {
+            background-color: rgba(255,255,255,0.04);
+        }
+    }
+
+    .form-check {
+        .form-check-input {
+            border-color: var(--basecolor);
+        }
+    }
+    
+    .payments-method {
+        li {
+            .icon {
+                &.cash {
+                    background-image: url(/img/gt/icons/pay-cash-w.svg);
+                }
+
+                &.cards {
+                    background-image: url(/img/gt/icons/pay-cards-w.svg);
+                }
+
+                &.mp {
+                    background-image: url(/img/gt/icons/pay-mp-w.svg);
+                }
+            }
+        }
+    }
+}
+
+.bgcolor-dgreen {
+    $primary-color: $dark-green-1;
+    $secondary-color: $dark-green-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+
+    &.product-public-page {
+        .loading-spinner {
+            background-color: $secondary-color;
+        }
+
+        .form-select {
+            background-color: $primary-color;
+        }
+    } 
+}
+
+.bgcolor-dpurple {
+    $primary-color: $dark-purple-1;
+    $secondary-color: $dark-purple-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+
+    &.product-public-page {
+        .loading-spinner {
+            background-color: $secondary-color;
+        }
+
+        .form-select {
+            background-color: $primary-color;
+        }
+    } 
+}
+
+.bgcolor-dblue {
+    $primary-color: $dark-blue-1;
+    $secondary-color: $dark-blue-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+
+    &.product-public-page {
+        .loading-spinner {
+            background-color: $secondary-color;
+        }
+
+        .form-select {
+            background-color: $primary-color;
+        }
+    } 
+}
+
+.bgcolor-dgray {
+    $primary-color: $dark-gray-1;
+    $secondary-color: $dark-gray-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+
+    &.product-public-page {
+        .loading-spinner {
+            background-color: $secondary-color;
+        }
+
+        .form-select {
+            background-color: $primary-color;
+        }
+    } 
+}
+
+.bgcolor-dorange {
+    $primary-color: $dark-orange-1;
+    $secondary-color: $dark-orange-2;
+
+    background-color: $primary-color;
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+
+    &.product-public-page {
+        .loading-spinner {
+            background-color: $secondary-color;
+        }
+
+        .form-select {
+            background-color: $primary-color;
+        }
+    }
+}
+
+.bgcolor-dred {
+    $primary-color: $dark-red-1;
+    $secondary-color: $dark-red-2;
+
+    background-color: $primary-color;
+
+    &.modal-container {
+        .modal-content {
+            background-color: $primary-color;
+            color: var(--basecolor);
+
+            .btn {
+                color: var(--basecolor);
+
+                &:disabled {
+                    color:rgba(255, 255, 255, 0.5)
+                }
+            }
+
+            .emp-header-min {
+                .emp-info {
+                    p {
+                        color: rgba(255,255,255, 0.8);
+                    }
+                }
+            }
+        }
+    }
+
+    nav.floating-menu {
+        background-color:  $secondary-color;
+        border-top: 0;
+        box-shadow: 0 0 0 rgba(255,255,255, 0);
+
+        .access-bar {
+            background-color: $primary-color;
+
+            .item {
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    header {
+        background-color:  $primary-color;
+    }
+
+    footer {
+        border-color: $secondary-color;
+    }
+
+    .menu-items {
+        li {
+            a, input {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            &.divider {
+                border-color: $secondary-color;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 992px) {
+        header {
+            background-color:  $secondary-color;
+        }
+
+        nav.floating-menu {
+            margin-right: 200px;
+            background-color: transparent;
+
+            .logged {
+                margin-left: 90px;
+            }
+        }
+    }
+
+    &.product-public-page {
+        .loading-spinner {
+            background-color: $secondary-color;
+        }
+
+        .form-select {
+            background-color: $primary-color;
+        }
+    } 
+}
+
+.bgcolor-dgreen,
+.bgcolor-dpurple,
+.bgcolor-dblue,
+.bgcolor-dgray,
+.bgcolor-dorange,
+.bgcolor-dorange,
+.bgcolor-dred {
+    &.landing-public-page {
+        header {
+            background-color: transparent;
+
+            .emp-header-min {
+                .emp-info {
+                    p {
+                        color: rgba(255,255,255, 0.8);
+                    }
+                }
+            }
+        }
+    }
+
+    &.product-public-page {
+        .emp-header-min {
+            .emp-info {
+                p {
+                    color: rgba(255,255,255, 0.8);
+                }
+            }
+        }
+
+        .input-group {
+            .form-control {
+                background-color: transparent;
+                color: var(--basecolor);
+            }
+
+            .form-label {
+                color: rgba(255,255,255, 0.5);
+            }
+        }
+
+        .form-select {
+            color: var(--basecolor);
+            background-color: transparent;
+            background-image: url(/img/gt/icons/arrow-down-w.svg);
+
+            option {
+                color: #000000;
+            }
+        }
+    }
+
+    .modal-container {
+        color: #000000;
+    }
+}

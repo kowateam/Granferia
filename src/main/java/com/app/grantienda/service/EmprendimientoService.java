@@ -95,7 +95,7 @@ public class EmprendimientoService {
 		if(status == null) {
 			emp.setMembresia("GRATIS");
 		}else 
-		if(status.equals("approved")) {
+		if(status != null && status.equals("approved")) {
 			
 			emp.setMembresia("PREMIUM");
 			
@@ -119,7 +119,7 @@ public class EmprendimientoService {
 		emp.setDireccion(dir);
 
 		er.save(emp);
-		if(status.equals("approved")) {
+		if(status != null && status.equals("approved")) {
 			timerPremium(emp.getId());
 			timerSemanaAntes(emp.getId());
 		}

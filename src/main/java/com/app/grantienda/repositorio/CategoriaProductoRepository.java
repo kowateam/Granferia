@@ -28,8 +28,12 @@ public interface CategoriaProductoRepository extends JpaRepository<CategoriaProd
 	@Query(value="DELETE  FROM categoria_producto  where categoria_producto.emprendimiento_id = :id ",nativeQuery = true)
 	public void borrarRelacionesEmprendimiento(@Param("id")String id);
 	
+	
 	@Modifying
-	@Query(value="DELETE  FROM producto_categorias  where producto_categorias.categorias_id = :id ",nativeQuery = true)
+	@Query(value="delete from categoria_producto_productos where categoria_producto_id = :id ",nativeQuery = true)
+	public void borrarRelacionesCategoriaProductoProducto(@Param("id")String id);
+	@Modifying
+	@Query(value="DELETE  FROM producto where producto.categoria_id = :id ",nativeQuery = true)
 	public void borrarRelacionesProducto(@Param("id")String id);
 
 	@Query(value ="SELECT * FROM granferia.categoria_producto where  primero = true and granferia.categoria_producto.emprendimiento_id like :idEmprendimiento ", nativeQuery = true)

@@ -311,10 +311,12 @@ public class PortalController {
 	@GetMapping("/{direccionweb}")
 	public String direccionWeb(@PathVariable String direccionweb,ModelMap modelo) {
 		Emprendimiento emp = es.buscarEmprendimientoPorDireccionWeb(direccionweb);			
-			cvs.guardarVistasEmprendimiento(emp.getId());
-			modelo.addAttribute("emprendimiento",emp);
-			List<CategoriaProducto> catego= cv.buscarCategorias(emp.getId());
-			modelo.addAttribute("categorias",catego);
+			if(emp != null) {
+				cvs.guardarVistasEmprendimiento(emp.getId());
+				modelo.addAttribute("emprendimiento",emp);
+				List<CategoriaProducto> catego= cv.buscarCategorias(emp.getId());
+				modelo.addAttribute("categorias",catego);
+			}
 
 		
 		return "landingPublic.html";

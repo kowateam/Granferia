@@ -28,6 +28,8 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 		CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 		String mail = oAuth2User.getEmail();
 		String nombre = oAuth2User.getName();
+		System.out.println("el usuario autenticado por google " +mail);
+		System.out.println("el usuario autenticado por google " +nombre);
 		User usuario = us.buscarPorMail(mail);	
 		if(usuario == null) {
 			try {

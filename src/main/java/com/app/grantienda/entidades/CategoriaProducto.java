@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -22,9 +23,11 @@ public class CategoriaProducto {
 	private String nombre;
 	private Boolean primero;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "categoria",fetch = FetchType.EAGER,orphanRemoval = true)
 	private List<Producto> productos;
-	@ManyToOne
+
+    @ManyToOne()
+    @JoinColumn(name = "emprendimiento_id")
 	private Emprendimiento emprendimiento;
 	
 	public Emprendimiento getEmprendimiento() {

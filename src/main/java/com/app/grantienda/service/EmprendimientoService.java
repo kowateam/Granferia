@@ -238,19 +238,20 @@ public class EmprendimientoService {
 	public void eliminarEmp(String id) {
 
 		Optional<Emprendimiento> empp = er.findById(id);
-		ps.borrarEmprendimiento(id);
-		cps.borrarCategoriasRelacionesEmprendimiento(id);
-		pes.borrarEmprendimientoEnPedido(id,"El emprendimiento fue eliminado");
-		pgs.borrarPedidosEmprendimiento(id);
-
-		Emprendimiento emp ;
-		if (empp.isPresent()) {
-			emp= empp.get();
+		Emprendimiento emp = null;
+		//cps.borrarCategoriasRelacionesEmprendimiento(id);
+		if(empp.isPresent()) {
+			emp=empp.get();
+		}
+		if(emp != null) {
+			
+			er.delete(emp);
+			pes.borrarEmprendimientoEnPedido(id,"El emprendimiento fue eliminado");
+			//pgs.borrarPedidosEmprendimiento(id);
 
 		} else {
 			throw new Error("No se encontro el Emprendimiento.");
 		}
-		er.delete(emp);
 	}
 
 	public List<Emprendimiento> buscarEmprendimientosPorIdUsuario(String id) {

@@ -55,23 +55,26 @@ public class Emprendimiento {
 	
 	private Integer contadorPedidos;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.REMOVE,orphanRemoval = true)
 	private CantidadVistas cantidadVistasEmp;
 
-	@OneToOne(cascade=CascadeType.REMOVE)
+	@OneToOne(cascade=CascadeType.REMOVE,orphanRemoval = true)
 	private Foto foto;
 	
-	@OneToMany(cascade=CascadeType.REMOVE)
+	@OneToMany(cascade=CascadeType.REMOVE,orphanRemoval = true)
 	private List<Producto> productos = new ArrayList<>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date alta;
 	
-	@OneToOne(cascade = {CascadeType.REMOVE})
+	@OneToOne(cascade = {CascadeType.REMOVE}, orphanRemoval = true)
 	private Direccion direccion;
 	
 	@ManyToOne
 	private User user;
+	
+	@OneToMany(mappedBy = "emprendimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CategoriaProducto> categorias;
 
 	public String getMembresia() {
 		return membresia;

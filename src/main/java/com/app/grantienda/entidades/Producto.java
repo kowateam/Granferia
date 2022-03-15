@@ -8,7 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -44,7 +46,9 @@ public class Producto {
 	
 	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Foto>foto=new ArrayList<>();
-	@OneToOne
+	
+	@ManyToOne()
+	 @JoinColumn(name = "categoria_id")
 	private CategoriaProducto categoria;
 	
 

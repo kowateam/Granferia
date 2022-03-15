@@ -124,15 +124,15 @@ public class CategoriaProductoService {
 	}
 	@Transactional
 	public void borrarCategoriasRelacionesEmprendimiento(String id) {
-		CategoriaProducto cp = null;
+		
 		 List<CategoriaProducto>categorias=buscarCategorias(id);
-		 for (CategoriaProducto categoriaProducto : categorias) {
-			 cp= categoriaProducto;
-			 borrarRelacionesEmprendimiento(cp.getId());
-			 
-			 cpr.delete(cp);
-		}
 		 
+		 for (CategoriaProducto categoriaProducto : categorias) {
+			System.out.println("el id de la categoria " +categoriaProducto.getId());
+			 cpr.borrarRelacionesProducto(categoriaProducto.getId());
+			 cpr.delete(categoriaProducto);
+		}
+		 borrarRelacionesEmprendimiento(id);
 	}
 	
 	@Transactional
@@ -144,7 +144,7 @@ public class CategoriaProductoService {
 	@Transactional
 	public void borrarRelacionesEmprendimiento(String id) {
 		cpr.borrarRelacionesEmprendimiento(id);
-		cpr.borrarRelacionesProducto(id);
+		
 	}
 	
 	@Transactional

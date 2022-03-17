@@ -415,7 +415,7 @@ public class EmprendimientoService {
 		nueva.setProductos(productos);
 		cps.guardar(nueva);
 		for (Producto producto : emp.getProductos()) {
-			producto.setCategoria(nueva);
+			producto.setCategoria_producto(nueva);
 			ps.guardarProducto(producto);
 			productos.add(producto);
 		}

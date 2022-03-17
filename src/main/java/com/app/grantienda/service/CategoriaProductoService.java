@@ -55,37 +55,20 @@ public class CategoriaProductoService {
 	@Transactional
 	public void subirProductoAcategoria(String idProducto,String idCategoria) {
 		
-		System.out.println("el id del producto " + idProducto);
 		Producto producto = ps.buscarProducto(idProducto);
-		System.out.println(producto.getNombreProductoServicio()+" "+producto.getCategoria().getNombre());
-		System.out.println("el producto con el id " +producto.getNombreProductoServicio());
-		
-		System.out.println("el nombre de la categoria que tiene el producto: "+producto.getCategoria().getNombre());
-		CategoriaProducto cpcambiar= cpr.buscarCategoriaDelProducto(idProducto);
-		System.out.println("el nombre de la categoria del producto " + cpcambiar.getNombre());
-		
-		for (Producto i : cpcambiar.getProductos()) {
-			System.out.println("los productos de la categoria "+i.getNombreProductoServicio() );
-		}
+		CategoriaProducto cpcambiar= producto.getCategoria_producto();
 		CategoriaProducto categoriaproducto=null;
 		List<Producto>prod=cpcambiar.getProductos();
 		prod.remove(producto);
 		cpcambiar.setProductos(prod);
 		cpr.save(cpcambiar);
-		System.out.println("los productos"+prod);
 		Optional<CategoriaProducto> cp = cpr.findById(idCategoria);
 		if(cp.isPresent()) {
 			categoriaproducto=cp.get();		
-			System.out.println("la categoria q puede ser null " +categoriaproducto.getNombre());
-		}
-		
-		producto.setCategoria(categoriaproducto);
+		}	
+		producto.setCategoria_producto(categoriaproducto);
 		ps.guardarProductoyFlush(producto);
-		System.out.println(producto.getCategoria().getNombre());
 		List<Producto>productos1=categoriaproducto.getProductos();
-		for (Producto producto2 : productos1) {
-			System.out.println("el producto es :" +producto2.getNombreProductoServicio() + "la categoria es:"+producto2.getCategoria().getNombre());
-		}
 		productos1.add(producto);
 		categoriaproducto.setProductos(productos1);
 		cpr.save(categoriaproducto);
@@ -153,7 +136,7 @@ public class CategoriaProductoService {
 		Producto prod = ps.buscarProducto(idProducto);
 		CategoriaProducto cp = cpr.buscarPrincipal(idEmprendimiento);
 		cp.setEmprendimiento(emp);
-		prod.setCategoria(cp);
+		prod.setCategoria_producto(cp);
 		List<Producto>productos=cp.getProductos();
 		productos.add(prod);
 		cp.setProductos(productos);
@@ -175,7 +158,7 @@ public class CategoriaProductoService {
 		
 		cpr.save(cp);
 		for (Producto producto2 : productos) {
-			producto2.setCategoria(cp);
+			producto2.setCategoria_producto(cp);
 			productos2.add(producto2);
 		}
 		cp.setProductos(productos2);

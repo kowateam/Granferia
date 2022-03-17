@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name="categoria_producto")
 public class CategoriaProducto {
 	
 	@Id
@@ -23,7 +25,7 @@ public class CategoriaProducto {
 	private String nombre;
 	private Boolean primero;
 	
-	@OneToMany(mappedBy = "categoria",fetch = FetchType.EAGER,orphanRemoval = true)
+	@OneToMany(mappedBy = "categoria_producto",fetch = FetchType.EAGER,orphanRemoval = true)
 	private List<Producto> productos;
 
     @ManyToOne()

@@ -25,6 +25,7 @@ import com.app.grantienda.entidades.CantidadVistas;
 import com.app.grantienda.entidades.CategoriaProducto;
 import com.app.grantienda.entidades.Emprendimiento;
 import com.app.grantienda.entidades.Historial;
+import com.app.grantienda.entidades.Pedido;
 import com.app.grantienda.entidades.Producto;
 import com.app.grantienda.entidades.ProductoGuardado;
 import com.app.grantienda.entidades.User;
@@ -34,6 +35,7 @@ import com.app.grantienda.service.CategoriaProductoService;
 import com.app.grantienda.service.CookiesService;
 import com.app.grantienda.service.EmprendimientoService;
 import com.app.grantienda.service.HistorialService;
+import com.app.grantienda.service.PedidoService;
 import com.app.grantienda.service.ProductoGuardadoService;
 import com.app.grantienda.service.ProductoService;
 import com.app.grantienda.service.UsuarioService;
@@ -54,6 +56,8 @@ public class PortalController {
 	private ProductoService ps;
 	@Autowired
 	private CantidadVistasService cvs;
+	@Autowired
+	private PedidoService pds;
 	@Autowired
 	private EmprendimientoService es;
 	@Autowired
@@ -139,6 +143,8 @@ public class PortalController {
 			
 			modelo.addAttribute("productosGuardadosComp",productosGuardadosCompletos);
 		}
+		Pedido pedido = pds.buscarUltimoPedido(usuario.getId());	
+		modelo.addAttribute("ultimopedido",pedido);
 		modelo.addAttribute("todosEmprendimientos",todosEmprendimientos);
 		modelo.addAttribute("provincias",Provincias.values());
 		return "index.html";

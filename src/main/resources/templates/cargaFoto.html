@@ -137,7 +137,7 @@
 									<li th:each="categoriaproducto,i : ${categoriaproductos}">
 										<div class="form-check x2">
 											<div class="form-option x1--right"></div>
-											<input class="hidden" type="radio" th:value="${categoriaproducto.id}"  th:id="'elegirCatego' + ${i.index}" th:name="idCategoriapepe">
+											<input class="" type="radio" th:value="${categoriaproducto.id}"  th:id="'elegirCatego' + ${i.index}" th:name="idCategoriapepe" >
 											<label class="form-check-label" th:for="'elegirCatego' + ${i.index}" th:text="${categoriaproducto.nombre}">Nombre de la categoría</label>
 										</div>
 									</li>

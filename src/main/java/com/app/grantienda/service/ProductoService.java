@@ -63,6 +63,10 @@ public class ProductoService {
 				}
 			}
 		}
+		List<Producto>productos2=cp1.getProductos();
+		productos2.add(producto);
+		cp1.setProductos(productos2);
+		cps.guardar(cp1);
 		cps.subirCategoriaGeneral(idEmprendimiento, cp1.getId(),producto.getId());
 		return producto;
 		

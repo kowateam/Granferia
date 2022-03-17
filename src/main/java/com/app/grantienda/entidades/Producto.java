@@ -48,8 +48,8 @@ public class Producto {
 	private List<Foto>foto=new ArrayList<>();
 	
 	@ManyToOne()
-	 @JoinColumn(name = "categoria_id")
-	private CategoriaProducto categoria;
+	@JoinColumn(name = "categoria_producto_id")
+	private CategoriaProducto categoria_producto;
 	
 
 	public List<Variable> getVariables() {
@@ -157,11 +157,11 @@ public class Producto {
 		this.precioOferta = precioOferta;
 	}
 
-	public CategoriaProducto getCategoria() {
-		return categoria;
+	public CategoriaProducto getCategoria_producto() {
+		return categoria_producto;
 	}
-	public void setCategoria(CategoriaProducto categoria) {
-		this.categoria = categoria;
+	public void setCategoria_producto(CategoriaProducto categoria_producto) {
+		this.categoria_producto = categoria_producto;
 	}
 	public List<User> getUsuarios() {
 		return usuarios;

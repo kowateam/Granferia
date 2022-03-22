@@ -25,7 +25,7 @@ public class CategoriaProducto {
 	private String nombre;
 	private Boolean primero;
 	
-	@OneToMany(mappedBy = "categoria_producto",fetch = FetchType.EAGER,orphanRemoval = true)
+	@OneToMany(mappedBy = "categoria_producto",fetch = FetchType.EAGER)
 	private List<Producto> productos;
 
     @ManyToOne()

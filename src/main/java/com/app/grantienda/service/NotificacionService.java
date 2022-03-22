@@ -32,7 +32,7 @@ public class NotificacionService {
 
     private void init() {
   
-        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.host", "smtp.granferia.online");
         properties.put("mail.smtp.port", 587); // 25 o 587
         properties.put("mail.smtp.mail.sender", mailFrom);
         properties.put("mail.smtp.user", mailFrom);

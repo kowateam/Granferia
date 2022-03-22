@@ -131,6 +131,12 @@ public class Emprendimiento {
 	public void setEmpTel(String empTel) {
 		this.empTel = empTel;
 	}
+	public List<CategoriaProducto> getCategorias() {
+		return categorias;
+	}
+	public void setCategorias(List<CategoriaProducto> categorias) {
+		this.categorias = categorias;
+	}
 	public Categorias getCategoria() {
 		return categoria;
 	}

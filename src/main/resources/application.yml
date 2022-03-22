@@ -21,14 +21,14 @@ spring:
             - public_profile
     
   mail:
-     host: smtp.gmail.com
+#     host: smtp.gmail.com
+#     port: 587
+#     username: granferiapem@gmail.com
+#     password: Granferia_2021
+     host: mail.granferia.online
      port: 587
-     username: granferiapem@gmail.com
-     password: Granferia_2021
-#    host: mail.granferia.online
-#    port: 587
-#    username: administracion@granferia.online
-#    password: Granferia_2021
+     username: granferia.pem@granferia.online
+     password: Granferia_2022
      properties:
         mail:
             smtp:              

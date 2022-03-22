@@ -68,11 +68,11 @@ public class MercadoPagoController {
 		System.out.println("el cliente id "+p);
 		System.out.println("el cliente secret "+fg);
 		
-		preference.setBackUrls(new BackUrls().setFailure("http://localhost:8080/mp/failure")
-				.setPending("http://localhost:8080/mp/pending").setSuccess("http://localhost:8080/mp/success"));
+		preference.setBackUrls(new BackUrls().setFailure("http://granferia.online/mp/failure")
+				.setPending("http://granferia.online/mp/pending").setSuccess("http://granferia.online/mp/success"));
 
 		Item item = new Item();
-		item.setTitle("Premium").setQuantity(1).setUnitPrice((float) 399.00);
+		item.setTitle("Premium").setQuantity(1).setUnitPrice((float) 10.00);
 		preference.appendItem(item);
 		Preference result = preference.save();
 		return "redirect:" + result.getInitPoint();

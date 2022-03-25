@@ -527,13 +527,13 @@
 
 								<span class="show-details"></span>
 
-								<div class="slide-details hidden">
-									<span class="icon save">
+								<div class="slide-details hidden ">
+									<span  class="icon save">
 										<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
 										<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
 										
-										<img class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
-										<img class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
+										<img  class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
+										<img  class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
 									</span>
 
 									<span class="icon close">
@@ -990,16 +990,16 @@
 							</div>
 						</div>
 
-						<div class="accordion">
+						<div class="accordion" >
 							<div class="head-details">
 								<span class="text">Pedidos realizados <span class="asked-count"></span></span>
 							</div>
 
 							<div class="row-container">
-								<div class="asked-item">
+								<div class="asked-item"  >
 
-									<!-- Cabecera -->
-									<div class="row head x2">
+							<!--				 Cabecera-->
+								 	<div class="row head x2">
 										<div class="col-8">
 											<a class="large underline" href="/" target="_self">Wild</a>
 										</div>
@@ -1009,10 +1009,10 @@
 										</div>
 									</div>
 
-									<!-- Detalles del pedido -->
-									<div class="row x2">
-										<div class="col-8">
-											<p>Remera blanca, Star Wars</p>
+									<!-- Detalles del pedido-->
+									<div class="row x2"  >
+										<div class="col-8" >
+											<p >Remera blanca, Star Wars</p>
 											<p class="detail">Talle S</p>
 											<p class="detail">2 Unidades</p>
 										</div>
@@ -1020,14 +1020,14 @@
 										<div class="col-4 text--right">
 											<p class="asked-date">02-08-21</p>
 										</div>
-									</div>
+									</div> 
 
 									<div class="row x2">
 										<div class="col-12">
 											<p>Nota</p>
 											<p class="detail">Lo paso a retirar yo</p>
 										</div>
-									</div>
+									</div> 
 
 									<!-- Resumen -->
 									<div class="row price">
@@ -1038,14 +1038,17 @@
 										<div class="col-4 text--right">
 											<p class="large">S 3.600</p>
 										</div>
+									
 									</div>
-								</div>
-
+						
+								
+								
 								<a class="btn btn-secondary x2 x2--top" href="/pedido/pedidosrealizados" target="_self">Ver
 									todos</a>
 							</div>
 						</div>
-
+					</div>
+					
 						<a class="btn btn-primary crear-emp x3 x3--top hidden" href="/emp/elegircuenta">Crear un nuevo
 							emprendimiento</a>
 					</div>

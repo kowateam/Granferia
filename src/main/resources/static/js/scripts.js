@@ -697,12 +697,13 @@ $('.slide-details .price').each(function () {
 	$(this).find('.ammount').html(text);
 });
 
+//guardarProducto
 $('.saveProducto').click(function () {
 	var idusuario = $(this).closest('.slide-card').find('.idSaveUsuario').text();
 	var idproducto = $(this).closest('.slide-card').find('.idSaveProducto').text();
-
 	console.log('idusuario:     '+idusuario);
 	console.log('idproducto:   '+idproducto);
+
 
 	$.ajax({
 		method: "GET",
@@ -713,7 +714,27 @@ $('.saveProducto').click(function () {
 
 });
 
+
+
+
+
 // Eliminar emprendimiento modal
 $('#btnEliminarEmp').click(function () {
     $('#eliminar-emprendimiento').removeClass('hidden');
 })
+
+
+let idSaveProducto=document.querySelectorAll(".idSaveProducto");
+let saveProducto=document.querySelectorAll(".saveProducto");
+
+console.log(idSaveProducto)
+console.log(saveProducto)
+
+ for(let i=0; i<idSaveProducto.length;i++){
+	for(let j=i+1; j<idSaveProducto.length;j++)
+	if(idSaveProducto[i].textContent==idSaveProducto[j].textContent){
+			saveProducto[i*2].classList.toggle("hidden");
+			saveProducto[i*2+1].classList.toggle("hidden");
+	}
+}
+

@@ -7,6 +7,7 @@ $('.btn-usuario-problema').click(function(){
 });
 
 $('.btn-me-arrepenti').click(function(){
+	
 	$('#pedidos-me-arrepenti').removeClass('hidden');
 });
 

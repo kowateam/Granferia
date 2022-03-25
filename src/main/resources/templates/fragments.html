@@ -990,7 +990,7 @@
 							</div>
 						</div>
 
-						<div class="accordion" >
+						<div class="accordion" th:if="${ultimopedido !=null}">
 							<div class="head-details">
 								<span class="text">Pedidos realizados <span class="asked-count"></span></span>
 							</div>
@@ -1001,31 +1001,31 @@
 							<!--				 Cabecera-->
 								 	<div class="row head x2">
 										<div class="col-8">
-											<a class="large underline" href="/" target="_self">Wild</a>
+											<a class="large underline" th:if="${ultimopedido !=null}"th:text="${ultimopedido.emprendimiento.nombreRazonSocial}"href="/" target="_self">Wild</a>
 										</div>
 
 										<div class="col-4 text--right">
-											<p>Pedido enviado</p>
+											<p th:text="${ultimopedido.estado}">Pedido enviado</p>
 										</div>
 									</div>
 
-									<!-- Detalles del pedido-->
-									<div class="row x2"  >
-										<div class="col-8" >
-											<p >Remera blanca, Star Wars</p>
-											<p class="detail">Talle S</p>
-											<p class="detail">2 Unidades</p>
+									<!-- Detalles del pedido -->
+									<div class="row x2">
+										<div class="col-8" th:each="prod : ${ultimopedido.productos}">
+											<p th:text="${prod.nombre}"></p>
+											<p th:text="${prod.variablePedido}"class="detail"> Talle S</p><span th:text="${prod.itemPedido}"></span>
+											<p class="detail"><span th:text="${prod.cantidad}"></span> 2 Unidades</p>
 										</div>
 
 										<div class="col-4 text--right">
-											<p class="asked-date">02-08-21</p>
+											<p th:text="${ultimopedido.alta}"class="asked-date">02-08-21</p>
 										</div>
 									</div> 
 
 									<div class="row x2">
 										<div class="col-12">
 											<p>Nota</p>
-											<p class="detail">Lo paso a retirar yo</p>
+											<p th:text="${ultimopedido.nota}" class="detail">Lo paso a retirar yo</p>
 										</div>
 									</div> 
 
@@ -1036,7 +1036,7 @@
 										</div>
 
 										<div class="col-4 text--right">
-											<p class="large">S 3.600</p>
+											<p class="large">$ <span th:text="${ultimopedido.Total}"></span></p>
 										</div>
 									
 									</div>

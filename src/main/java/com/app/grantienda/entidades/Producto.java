@@ -8,7 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -44,8 +46,10 @@ public class Producto {
 	
 	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Foto>foto=new ArrayList<>();
-	@OneToOne
-	private CategoriaProducto categoria;
+	
+	@ManyToOne()
+	@JoinColumn(name = "categoria_producto_id")
+	private CategoriaProducto categoria_producto;
 	
 
 	public List<Variable> getVariables() {
@@ -153,11 +157,11 @@ public class Producto {
 		this.precioOferta = precioOferta;
 	}
 
-	public CategoriaProducto getCategoria() {
-		return categoria;
+	public CategoriaProducto getCategoria_producto() {
+		return categoria_producto;
 	}
-	public void setCategoria(CategoriaProducto categoria) {
-		this.categoria = categoria;
+	public void setCategoria_producto(CategoriaProducto categoria_producto) {
+		this.categoria_producto = categoria_producto;
 	}
 	public List<User> getUsuarios() {
 		return usuarios;

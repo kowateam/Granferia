@@ -301,6 +301,10 @@ public class PedidoService {
 		}
 		
 	}
+	public Pedido buscarUltimoPedido(String id) {
+		Pedido producto =pr.buscarPorUserUltimoPedido(id);
+		return producto;
+	}
 	
 	
 }

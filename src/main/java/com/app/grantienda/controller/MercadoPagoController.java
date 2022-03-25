@@ -59,20 +59,20 @@ public class MercadoPagoController {
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/premium")
 	public String createAndRedirect() throws MPException {
-		MercadoPago.SDK.setAccessToken("APP_USR-7797993896470538-091018-7885688da13d2156c5467a46612696b7-210314886");
-		MercadoPago.SDK.setClientId("7797993896470538");
-		MercadoPago.SDK.setClientSecret("q6qOS6rt09v6KvQCoxGq0mMrjhkpR8Ax");
+		MercadoPago.SDK.setAccessToken("APP_USR-3753076059821733-120218-376b3fe325e33af60cfecdadc82e78b6-133412580");
+		MercadoPago.SDK.setClientId("3753076059821733");
+		MercadoPago.SDK.setClientSecret("zy9FmJ1qSBoNntEssFCketoKuQtWnAES");
 		Preference preference = new Preference();
 		String p= MercadoPago.SDK.getClientId();
 		String fg= MercadoPago.SDK.getClientSecret();
 		System.out.println("el cliente id "+p);
 		System.out.println("el cliente secret "+fg);
 		
-		preference.setBackUrls(new BackUrls().setFailure("http://localhost:8080/mp/failure")
-				.setPending("http://localhost:8080/mp/pending").setSuccess("http://localhost:8080/mp/success"));
+		preference.setBackUrls(new BackUrls().setFailure("http://granferia.online/mp/failure")
+				.setPending("http://granferia.online/mp/pending").setSuccess("http://granferia.online/mp/success"));
 
 		Item item = new Item();
-		item.setTitle("Premium").setQuantity(1).setUnitPrice((float) 399.00);
+		item.setTitle("Premium").setQuantity(1).setUnitPrice((float) 10.00);
 		preference.appendItem(item);
 		Preference result = preference.save();
 		return "redirect:" + result.getInitPoint();

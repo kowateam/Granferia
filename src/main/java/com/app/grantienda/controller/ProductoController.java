@@ -159,7 +159,7 @@ public class ProductoController {
 		
 		es.bajarCategoria(id);
 		
-		return"redirect:/emp/landingconfig/"+id;
+		return"redirect:/emp/landingedit/"+id;
 	}
 
 }

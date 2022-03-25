@@ -4,7 +4,7 @@ public enum Categorias {
 	Categoria("Categoría"),
 	arteydiseno("Arte y diseño"),
 	bebesyninos("Bebés y niños"),
-	alimentosybebidas("Alimentos y Bebidas"),
+	alimentoybebidas("Alimentos y Bebidas"),
 	hogar("Hogar"),
 	belleza("Belleza"),
 	moda("Moda");

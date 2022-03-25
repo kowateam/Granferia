@@ -31,12 +31,14 @@ public class NotificacionService {
     private Session session;
 
     private void init() {
-
+  
         properties.put("mail.smtp.host", "mail.granferia.online");
+        properties.put("mail.smtp.starttls.enable", "false");
         properties.put("mail.smtp.port", 587); // 25 o 587
         properties.put("mail.smtp.mail.sender", mailFrom);
         properties.put("mail.smtp.user", mailFrom);
         properties.put("mail.smtp.auth", "true");
+
         
         session = Session.getInstance(properties, new javax.mail.Authenticator() {
             @Override

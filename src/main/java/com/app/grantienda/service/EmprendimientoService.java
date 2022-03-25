@@ -238,19 +238,20 @@ public class EmprendimientoService {
 	public void eliminarEmp(String id) {
 
 		Optional<Emprendimiento> empp = er.findById(id);
-		ps.borrarEmprendimiento(id);
-		cps.borrarCategoriasRelacionesEmprendimiento(id);
-		pes.borrarEmprendimientoEnPedido(id,"El emprendimiento fue eliminado");
-		pgs.borrarPedidosEmprendimiento(id);
-
-		Emprendimiento emp ;
-		if (empp.isPresent()) {
-			emp= empp.get();
+		Emprendimiento emp = null;
+		//cps.borrarCategoriasRelacionesEmprendimiento(id);
+		if(empp.isPresent()) {
+			emp=empp.get();
+		}
+		if(emp != null) {
+			
+			er.delete(emp);
+			pes.borrarEmprendimientoEnPedido(id,"El emprendimiento fue eliminado");
+			//pgs.borrarPedidosEmprendimiento(id);
 
 		} else {
 			throw new Error("No se encontro el Emprendimiento.");
 		}
-		er.delete(emp);
 	}
 
 	public List<Emprendimiento> buscarEmprendimientosPorIdUsuario(String id) {
@@ -403,10 +404,10 @@ public class EmprendimientoService {
 		Emprendimiento emp = buscarEmprendimiento(id);
 		emp.setMembresia("GRATIS");
 		emp.setEmpTheme(null);
-		guardarEmprendimiento(emp);
 		System.out.print("entramos a bajar categoria");
 		List<Producto>productos= new ArrayList<>();
-		List<CategoriaProducto> cate = cps.buscarCategorias(id);
+		List<CategoriaProducto> cate = emp.getCategorias();
+		/*List<CategoriaProducto> cate2 = new ArrayList<>();*/
 		CategoriaProducto nueva = new CategoriaProducto() ;
 		nueva.setEmprendimiento(emp);
 		nueva.setNombre("Todos");
@@ -414,33 +415,22 @@ public class EmprendimientoService {
 		nueva.setProductos(productos);
 		cps.guardar(nueva);
 		for (Producto producto : emp.getProductos()) {
-			producto.setCategoria(nueva);
+			producto.setCategoria_producto(nueva);
 			ps.guardarProducto(producto);
 			productos.add(producto);
 		}
-		for (CategoriaProducto categoriaProducto : cate) {
-			System.out.println(categoriaProducto.getNombre());
-			System.out.println(categoriaProducto.getPrimero());
-			
-			
-		}
+		System.out.println("lalalala");
+		cate.clear();
+		cate.add(nueva);
+		emp.setCategorias(cate);
+		guardarEmprendimiento(emp);
+		
+		
 		System.out.println("pasamos las categorias");
 		for (CategoriaProducto categoriaProducto : cate) {
 			cps.borrarCategoriaSola(categoriaProducto.getId());
 			System.out.println(categoriaProducto.getNombre());
 		}
-		/*List<Producto>productos= new ArrayList<>();
-				productos = emp.getProductos();
-		for (Producto producto : productos) {
-			System.out.println(producto.getNombreProductoServicio());
-			System.out.println(producto.getCategoria().getNombre());
-			
-			
-		}/*
-		emp.setProductos(productos);
-		cps.BorrarCategorias(id);
-		cps.crearNuevaYCargarLosProductos(emp.getId());
-		//guardarEmprendimiento(emp);*/
 	}
 
 	public void guardarPreferencias(String idEmprendimiento, String empLayout, String empTheme) {

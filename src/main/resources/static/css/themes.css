@@ -1,0 +1,920 @@
+/* Selector (fragments - Apariencia)
+==============================
+*/
+.theme-selector .avatars-slider label#bgcolor-default .av {
+  background-color: #FFFFFF;
+}
+
+.theme-selector .avatars-slider label#bgcolor-lgreen .av {
+  background-color: #E4FBF3;
+  border: 6px solid #C9F3E5;
+}
+
+.theme-selector .avatars-slider label#bgcolor-dgreen .av {
+  background-color: #389D6D;
+  border: 6px solid #288458;
+}
+
+.theme-selector .avatars-slider label#bgcolor-lpurple .av {
+  background-color: #EDEEF5;
+  border: 6px solid #D5D7E8;
+}
+
+.theme-selector .avatars-slider label#bgcolor-lblue .av {
+  background-color: #E6EEFB;
+  border: 6px solid #C0D1EA;
+}
+
+.theme-selector .avatars-slider label#bgcolor-lgray .av {
+  background-color: #F6F6F6;
+  border: 6px solid #E1E1E1;
+}
+
+.theme-selector .avatars-slider label#bgcolor-lorange .av {
+  background-color: #F5F0ED;
+  border: 6px solid #E0CFC4;
+}
+
+.theme-selector .avatars-slider label#bgcolor-dpurple .av {
+  background-color: #4E59BD;
+  border: 6px solid #3F499C;
+}
+
+.theme-selector .avatars-slider label#bgcolor-dblue .av {
+  background-color: #2C6BC9;
+  border: 6px solid #225DB7;
+}
+
+.theme-selector .avatars-slider label#bgcolor-dgray .av {
+  background-color: #191919;
+  border: 6px solid #000000;
+}
+
+.theme-selector .avatars-slider label#bgcolor-dorange .av {
+  background-color: #F5AD40;
+  border: 6px solid #DC9832;
+}
+
+.theme-selector .avatars-slider label#bgcolor-dred .av {
+  background-color: #991010;
+  border: 6px solid #700E0E;
+}
+
+.theme-selector .avatars-slider label .av.selected {
+  border: 6px solid #000000 !important;
+}
+
+/* Themes
+==============================
+*/
+.bgcolor-lgreen {
+  background-color: #E4FBF3;
+}
+
+.bgcolor-lgreen nav.floating-menu {
+  background-color: #C9F3E5;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-lgreen nav.floating-menu .access-bar {
+  background-color: #E4FBF3;
+}
+
+.bgcolor-lgreen nav.floating-menu .access-bar .item:hover {
+  background-color: #C9F3E5;
+}
+
+.bgcolor-lgreen header {
+  background-color: #E4FBF3;
+}
+
+.bgcolor-lgreen footer {
+  border-color: #C9F3E5;
+}
+
+.bgcolor-lgreen .menu-items li a, .bgcolor-lgreen .menu-items li input {
+  background-color: transparent;
+}
+
+.bgcolor-lgreen .menu-items li.divider {
+  border-color: #C9F3E5;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-lgreen header {
+    background-color: #C9F3E5;
+  }
+  .bgcolor-lgreen nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-lgreen nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-lpurple {
+  background-color: #EDEEF5;
+}
+
+.bgcolor-lpurple nav.floating-menu {
+  background-color: #D5D7E8;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-lpurple nav.floating-menu .access-bar {
+  background-color: #EDEEF5;
+}
+
+.bgcolor-lpurple nav.floating-menu .access-bar .item:hover {
+  background-color: #D5D7E8;
+}
+
+.bgcolor-lpurple header {
+  background-color: #EDEEF5;
+}
+
+.bgcolor-lpurple footer {
+  border-color: #D5D7E8;
+}
+
+.bgcolor-lpurple .menu-items li a, .bgcolor-lpurple .menu-items li input {
+  background-color: transparent;
+}
+
+.bgcolor-lpurple .menu-items li.divider {
+  border-color: #D5D7E8;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-lpurple header {
+    background-color: #D5D7E8;
+  }
+  .bgcolor-lpurple nav.floating-menu {
+    border-top: 0;
+    margin-right: 200px;
+  }
+  .bgcolor-lpurple nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-lblue {
+  background-color: #E6EEFB;
+}
+
+.bgcolor-lblue nav.floating-menu {
+  background-color: #C0D1EA;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-lblue nav.floating-menu .access-bar {
+  background-color: #E6EEFB;
+}
+
+.bgcolor-lblue nav.floating-menu .access-bar .item:hover {
+  background-color: #C0D1EA;
+}
+
+.bgcolor-lblue header {
+  background-color: #E6EEFB;
+}
+
+.bgcolor-lblue footer {
+  border-color: #C0D1EA;
+}
+
+.bgcolor-lblue .menu-items li a, .bgcolor-lblue .menu-items li input {
+  background-color: transparent;
+}
+
+.bgcolor-lblue .menu-items li.divider {
+  border-color: #C0D1EA;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-lblue header {
+    background-color: #C0D1EA;
+  }
+  .bgcolor-lblue nav.floating-menu {
+    border-top: 0;
+    margin-right: 200px;
+  }
+  .bgcolor-lblue nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-lgray {
+  background-color: #F6F6F6;
+}
+
+.bgcolor-lgray nav.floating-menu {
+  background-color: #E1E1E1;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-lgray nav.floating-menu .access-bar {
+  background-color: #F6F6F6;
+}
+
+.bgcolor-lgray nav.floating-menu .access-bar .item:hover {
+  background-color: #E1E1E1;
+}
+
+.bgcolor-lgray header {
+  background-color: #F6F6F6;
+}
+
+.bgcolor-lgray footer {
+  border-color: #E1E1E1;
+}
+
+.bgcolor-lgray .menu-items li a, .bgcolor-lgray .menu-items li input {
+  background-color: transparent;
+}
+
+.bgcolor-lgray .menu-items li.divider {
+  border-color: #E1E1E1;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-lgray header {
+    background-color: #E1E1E1;
+  }
+  .bgcolor-lgray nav.floating-menu {
+    border-top: 0;
+    margin-right: 200px;
+  }
+  .bgcolor-lgray nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-lorange {
+  background-color: #F5F0ED;
+}
+
+.bgcolor-lorange nav.floating-menu {
+  background-color: #E0CFC4;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-lorange nav.floating-menu .access-bar {
+  background-color: #F5F0ED;
+}
+
+.bgcolor-lorange nav.floating-menu .access-bar .item:hover {
+  background-color: #E0CFC4;
+}
+
+.bgcolor-lorange header {
+  background-color: #F5F0ED;
+}
+
+.bgcolor-lorange footer {
+  border-color: #E0CFC4;
+}
+
+.bgcolor-lorange .menu-items li a, .bgcolor-lorange .menu-items li input {
+  background-color: transparent;
+}
+
+.bgcolor-lorange .menu-items li.divider {
+  border-color: #E0CFC4;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-lorange header {
+    background-color: #E0CFC4;
+  }
+  .bgcolor-lorange nav.floating-menu {
+    border-top: 0;
+    margin-right: 200px;
+  }
+  .bgcolor-lorange nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-lgreen.landing-public-page header, .bgcolor-lgreen.product-public-page header,
+.bgcolor-lpurple.landing-public-page header,
+.bgcolor-lpurple.product-public-page header,
+.bgcolor-lblue.landing-public-page header,
+.bgcolor-lblue.product-public-page header,
+.bgcolor-lgray.landing-public-page header,
+.bgcolor-lgray.product-public-page header,
+.bgcolor-lorange.landing-public-page header,
+.bgcolor-lorange.product-public-page header {
+  background-color: transparent;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-lgreen.landing-public-page nav.floating-menu, .bgcolor-lgreen.product-public-page nav.floating-menu,
+  .bgcolor-lpurple.landing-public-page nav.floating-menu,
+  .bgcolor-lpurple.product-public-page nav.floating-menu,
+  .bgcolor-lblue.landing-public-page nav.floating-menu,
+  .bgcolor-lblue.product-public-page nav.floating-menu,
+  .bgcolor-lgray.landing-public-page nav.floating-menu,
+  .bgcolor-lgray.product-public-page nav.floating-menu,
+  .bgcolor-lorange.landing-public-page nav.floating-menu,
+  .bgcolor-lorange.product-public-page nav.floating-menu {
+    background-color: transparent;
+  }
+}
+
+.bgcolor-lgreen.product-public-page .input-group .form-control,
+.bgcolor-lpurple.product-public-page .input-group .form-control,
+.bgcolor-lblue.product-public-page .input-group .form-control,
+.bgcolor-lgray.product-public-page .input-group .form-control,
+.bgcolor-lorange.product-public-page .input-group .form-control {
+  background-color: transparent;
+}
+
+.bgcolor-lgreen.product-public-page .form-select,
+.bgcolor-lpurple.product-public-page .form-select,
+.bgcolor-lblue.product-public-page .form-select,
+.bgcolor-lgray.product-public-page .form-select,
+.bgcolor-lorange.product-public-page .form-select {
+  background-color: transparent;
+}
+
+.bgcolor-dgreen,
+.bgcolor-dpurple,
+.bgcolor-dblue,
+.bgcolor-dgray,
+.bgcolor-dorange,
+.bgcolor-dorange,
+.bgcolor-dred {
+  --basecolor: #FFFFFF;
+}
+
+.bgcolor-dgreen .img-w,
+.bgcolor-dpurple .img-w,
+.bgcolor-dblue .img-w,
+.bgcolor-dgray .img-w,
+.bgcolor-dorange .img-w,
+.bgcolor-dorange .img-w,
+.bgcolor-dred .img-w {
+  display: inline-block;
+}
+
+.bgcolor-dgreen .img-b,
+.bgcolor-dpurple .img-b,
+.bgcolor-dblue .img-b,
+.bgcolor-dgray .img-b,
+.bgcolor-dorange .img-b,
+.bgcolor-dorange .img-b,
+.bgcolor-dred .img-b {
+  display: none;
+}
+
+.bgcolor-dgreen footer ul li a, .bgcolor-dgreen footer ul li input,
+.bgcolor-dpurple footer ul li a,
+.bgcolor-dpurple footer ul li input,
+.bgcolor-dblue footer ul li a,
+.bgcolor-dblue footer ul li input,
+.bgcolor-dgray footer ul li a,
+.bgcolor-dgray footer ul li input,
+.bgcolor-dorange footer ul li a,
+.bgcolor-dorange footer ul li input,
+.bgcolor-dorange footer ul li a,
+.bgcolor-dorange footer ul li input,
+.bgcolor-dred footer ul li a,
+.bgcolor-dred footer ul li input {
+  color: #FFFFFF;
+}
+
+.bgcolor-dgreen nav.floating-menu,
+.bgcolor-dpurple nav.floating-menu,
+.bgcolor-dblue nav.floating-menu,
+.bgcolor-dgray nav.floating-menu,
+.bgcolor-dorange nav.floating-menu,
+.bgcolor-dorange nav.floating-menu,
+.bgcolor-dred nav.floating-menu {
+  -webkit-box-shadow: 0 0 0 transparent;
+          box-shadow: 0 0 0 transparent;
+}
+
+.bgcolor-dgreen .layout-item .name,
+.bgcolor-dpurple .layout-item .name,
+.bgcolor-dblue .layout-item .name,
+.bgcolor-dgray .layout-item .name,
+.bgcolor-dorange .layout-item .name,
+.bgcolor-dorange .layout-item .name,
+.bgcolor-dred .layout-item .name {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bgcolor-dgreen .layout-item .info,
+.bgcolor-dpurple .layout-item .info,
+.bgcolor-dblue .layout-item .info,
+.bgcolor-dgray .layout-item .info,
+.bgcolor-dorange .layout-item .info,
+.bgcolor-dorange .layout-item .info,
+.bgcolor-dred .layout-item .info {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.bgcolor-dgreen .layout-item .avatar,
+.bgcolor-dpurple .layout-item .avatar,
+.bgcolor-dblue .layout-item .avatar,
+.bgcolor-dgray .layout-item .avatar,
+.bgcolor-dorange .layout-item .avatar,
+.bgcolor-dorange .layout-item .avatar,
+.bgcolor-dred .layout-item .avatar {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.bgcolor-dgreen .form-check .form-check-input,
+.bgcolor-dpurple .form-check .form-check-input,
+.bgcolor-dblue .form-check .form-check-input,
+.bgcolor-dgray .form-check .form-check-input,
+.bgcolor-dorange .form-check .form-check-input,
+.bgcolor-dorange .form-check .form-check-input,
+.bgcolor-dred .form-check .form-check-input {
+  border-color: var(--basecolor);
+}
+
+.bgcolor-dgreen .payments-method li .icon.cash,
+.bgcolor-dpurple .payments-method li .icon.cash,
+.bgcolor-dblue .payments-method li .icon.cash,
+.bgcolor-dgray .payments-method li .icon.cash,
+.bgcolor-dorange .payments-method li .icon.cash,
+.bgcolor-dorange .payments-method li .icon.cash,
+.bgcolor-dred .payments-method li .icon.cash {
+  background-image: url(/img/gt/icons/pay-cash-w.svg);
+}
+
+.bgcolor-dgreen .payments-method li .icon.cards,
+.bgcolor-dpurple .payments-method li .icon.cards,
+.bgcolor-dblue .payments-method li .icon.cards,
+.bgcolor-dgray .payments-method li .icon.cards,
+.bgcolor-dorange .payments-method li .icon.cards,
+.bgcolor-dorange .payments-method li .icon.cards,
+.bgcolor-dred .payments-method li .icon.cards {
+  background-image: url(/img/gt/icons/pay-cards-w.svg);
+}
+
+.bgcolor-dgreen .payments-method li .icon.mp,
+.bgcolor-dpurple .payments-method li .icon.mp,
+.bgcolor-dblue .payments-method li .icon.mp,
+.bgcolor-dgray .payments-method li .icon.mp,
+.bgcolor-dorange .payments-method li .icon.mp,
+.bgcolor-dorange .payments-method li .icon.mp,
+.bgcolor-dred .payments-method li .icon.mp {
+  background-image: url(/img/gt/icons/pay-mp-w.svg);
+}
+
+.bgcolor-dgreen {
+  background-color: #389D6D;
+}
+
+.bgcolor-dgreen nav.floating-menu {
+  background-color: #288458;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-dgreen nav.floating-menu .access-bar {
+  background-color: #389D6D;
+}
+
+.bgcolor-dgreen nav.floating-menu .access-bar .item:hover {
+  background-color: #288458;
+}
+
+.bgcolor-dgreen header {
+  background-color: #389D6D;
+}
+
+.bgcolor-dgreen footer {
+  border-color: #288458;
+}
+
+.bgcolor-dgreen .menu-items li a, .bgcolor-dgreen .menu-items li input {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dgreen .menu-items li.divider {
+  border-color: #288458;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-dgreen header {
+    background-color: #288458;
+  }
+  .bgcolor-dgreen nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-dgreen nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-dgreen.product-public-page .loading-spinner {
+  background-color: #288458;
+}
+
+.bgcolor-dgreen.product-public-page .form-select {
+  background-color: #389D6D;
+}
+
+.bgcolor-dpurple {
+  background-color: #4E59BD;
+}
+
+.bgcolor-dpurple nav.floating-menu {
+  background-color: #3F499C;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-dpurple nav.floating-menu .access-bar {
+  background-color: #4E59BD;
+}
+
+.bgcolor-dpurple nav.floating-menu .access-bar .item:hover {
+  background-color: #3F499C;
+}
+
+.bgcolor-dpurple header {
+  background-color: #4E59BD;
+}
+
+.bgcolor-dpurple footer {
+  border-color: #3F499C;
+}
+
+.bgcolor-dpurple .menu-items li a, .bgcolor-dpurple .menu-items li input {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dpurple .menu-items li.divider {
+  border-color: #3F499C;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-dpurple header {
+    background-color: #3F499C;
+  }
+  .bgcolor-dpurple nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-dpurple nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-dpurple.product-public-page .loading-spinner {
+  background-color: #3F499C;
+}
+
+.bgcolor-dpurple.product-public-page .form-select {
+  background-color: #4E59BD;
+}
+
+.bgcolor-dblue {
+  background-color: #2C6BC9;
+}
+
+.bgcolor-dblue nav.floating-menu {
+  background-color: #225DB7;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-dblue nav.floating-menu .access-bar {
+  background-color: #2C6BC9;
+}
+
+.bgcolor-dblue nav.floating-menu .access-bar .item:hover {
+  background-color: #225DB7;
+}
+
+.bgcolor-dblue header {
+  background-color: #2C6BC9;
+}
+
+.bgcolor-dblue footer {
+  border-color: #225DB7;
+}
+
+.bgcolor-dblue .menu-items li a, .bgcolor-dblue .menu-items li input {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dblue .menu-items li.divider {
+  border-color: #225DB7;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-dblue header {
+    background-color: #225DB7;
+  }
+  .bgcolor-dblue nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-dblue nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-dblue.product-public-page .loading-spinner {
+  background-color: #225DB7;
+}
+
+.bgcolor-dblue.product-public-page .form-select {
+  background-color: #2C6BC9;
+}
+
+.bgcolor-dgray {
+  background-color: #191919;
+}
+
+.bgcolor-dgray nav.floating-menu {
+  background-color: #000000;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-dgray nav.floating-menu .access-bar {
+  background-color: #191919;
+}
+
+.bgcolor-dgray nav.floating-menu .access-bar .item:hover {
+  background-color: #000000;
+}
+
+.bgcolor-dgray header {
+  background-color: #191919;
+}
+
+.bgcolor-dgray footer {
+  border-color: #000000;
+}
+
+.bgcolor-dgray .menu-items li a, .bgcolor-dgray .menu-items li input {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dgray .menu-items li.divider {
+  border-color: #000000;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-dgray header {
+    background-color: #000000;
+  }
+  .bgcolor-dgray nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-dgray nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-dgray.product-public-page .loading-spinner {
+  background-color: #000000;
+}
+
+.bgcolor-dgray.product-public-page .form-select {
+  background-color: #191919;
+}
+
+.bgcolor-dorange {
+  background-color: #F5AD40;
+}
+
+.bgcolor-dorange nav.floating-menu {
+  background-color: #DC9832;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-dorange nav.floating-menu .access-bar {
+  background-color: #F5AD40;
+}
+
+.bgcolor-dorange nav.floating-menu .access-bar .item:hover {
+  background-color: #DC9832;
+}
+
+.bgcolor-dorange header {
+  background-color: #F5AD40;
+}
+
+.bgcolor-dorange footer {
+  border-color: #DC9832;
+}
+
+.bgcolor-dorange .menu-items li a, .bgcolor-dorange .menu-items li input {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dorange .menu-items li.divider {
+  border-color: #DC9832;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-dorange header {
+    background-color: #DC9832;
+  }
+  .bgcolor-dorange nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-dorange nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-dorange.product-public-page .loading-spinner {
+  background-color: #DC9832;
+}
+
+.bgcolor-dorange.product-public-page .form-select {
+  background-color: #F5AD40;
+}
+
+.bgcolor-dred {
+  background-color: #991010;
+}
+
+.bgcolor-dred.modal-container .modal-content {
+  background-color: #991010;
+  color: var(--basecolor);
+}
+
+.bgcolor-dred.modal-container .modal-content .btn {
+  color: var(--basecolor);
+}
+
+.bgcolor-dred.modal-container .modal-content .btn:disabled {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bgcolor-dred.modal-container .modal-content .emp-header-min .emp-info p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bgcolor-dred nav.floating-menu {
+  background-color: #700E0E;
+  border-top: 0;
+  -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+          box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.bgcolor-dred nav.floating-menu .access-bar {
+  background-color: #991010;
+}
+
+.bgcolor-dred nav.floating-menu .access-bar .item:hover {
+  background-color: #700E0E;
+}
+
+.bgcolor-dred header {
+  background-color: #991010;
+}
+
+.bgcolor-dred footer {
+  border-color: #700E0E;
+}
+
+.bgcolor-dred .menu-items li a, .bgcolor-dred .menu-items li input {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dred .menu-items li.divider {
+  border-color: #700E0E;
+}
+
+@media only screen and (min-width: 992px) {
+  .bgcolor-dred header {
+    background-color: #700E0E;
+  }
+  .bgcolor-dred nav.floating-menu {
+    margin-right: 200px;
+    background-color: transparent;
+  }
+  .bgcolor-dred nav.floating-menu .logged {
+    margin-left: 90px;
+  }
+}
+
+.bgcolor-dred.product-public-page .loading-spinner {
+  background-color: #700E0E;
+}
+
+.bgcolor-dred.product-public-page .form-select {
+  background-color: #991010;
+}
+
+.bgcolor-dgreen.landing-public-page header,
+.bgcolor-dpurple.landing-public-page header,
+.bgcolor-dblue.landing-public-page header,
+.bgcolor-dgray.landing-public-page header,
+.bgcolor-dorange.landing-public-page header,
+.bgcolor-dorange.landing-public-page header,
+.bgcolor-dred.landing-public-page header {
+  background-color: transparent;
+}
+
+.bgcolor-dgreen.landing-public-page header .emp-header-min .emp-info p,
+.bgcolor-dpurple.landing-public-page header .emp-header-min .emp-info p,
+.bgcolor-dblue.landing-public-page header .emp-header-min .emp-info p,
+.bgcolor-dgray.landing-public-page header .emp-header-min .emp-info p,
+.bgcolor-dorange.landing-public-page header .emp-header-min .emp-info p,
+.bgcolor-dorange.landing-public-page header .emp-header-min .emp-info p,
+.bgcolor-dred.landing-public-page header .emp-header-min .emp-info p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bgcolor-dgreen.product-public-page .emp-header-min .emp-info p,
+.bgcolor-dpurple.product-public-page .emp-header-min .emp-info p,
+.bgcolor-dblue.product-public-page .emp-header-min .emp-info p,
+.bgcolor-dgray.product-public-page .emp-header-min .emp-info p,
+.bgcolor-dorange.product-public-page .emp-header-min .emp-info p,
+.bgcolor-dorange.product-public-page .emp-header-min .emp-info p,
+.bgcolor-dred.product-public-page .emp-header-min .emp-info p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bgcolor-dgreen.product-public-page .input-group .form-control,
+.bgcolor-dpurple.product-public-page .input-group .form-control,
+.bgcolor-dblue.product-public-page .input-group .form-control,
+.bgcolor-dgray.product-public-page .input-group .form-control,
+.bgcolor-dorange.product-public-page .input-group .form-control,
+.bgcolor-dorange.product-public-page .input-group .form-control,
+.bgcolor-dred.product-public-page .input-group .form-control {
+  background-color: transparent;
+  color: var(--basecolor);
+}
+
+.bgcolor-dgreen.product-public-page .input-group .form-label,
+.bgcolor-dpurple.product-public-page .input-group .form-label,
+.bgcolor-dblue.product-public-page .input-group .form-label,
+.bgcolor-dgray.product-public-page .input-group .form-label,
+.bgcolor-dorange.product-public-page .input-group .form-label,
+.bgcolor-dorange.product-public-page .input-group .form-label,
+.bgcolor-dred.product-public-page .input-group .form-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bgcolor-dgreen.product-public-page .form-select,
+.bgcolor-dpurple.product-public-page .form-select,
+.bgcolor-dblue.product-public-page .form-select,
+.bgcolor-dgray.product-public-page .form-select,
+.bgcolor-dorange.product-public-page .form-select,
+.bgcolor-dorange.product-public-page .form-select,
+.bgcolor-dred.product-public-page .form-select {
+  color: var(--basecolor);
+  background-color: transparent;
+  background-image: url(/img/gt/icons/arrow-down-w.svg);
+}
+
+.bgcolor-dgreen.product-public-page .form-select option,
+.bgcolor-dpurple.product-public-page .form-select option,
+.bgcolor-dblue.product-public-page .form-select option,
+.bgcolor-dgray.product-public-page .form-select option,
+.bgcolor-dorange.product-public-page .form-select option,
+.bgcolor-dorange.product-public-page .form-select option,
+.bgcolor-dred.product-public-page .form-select option {
+  color: #000000;
+}
+
+.bgcolor-dgreen .modal-container,
+.bgcolor-dpurple .modal-container,
+.bgcolor-dblue .modal-container,
+.bgcolor-dgray .modal-container,
+.bgcolor-dorange .modal-container,
+.bgcolor-dorange .modal-container,
+.bgcolor-dred .modal-container {
+  color: #000000;
+}
+/*# sourceMappingURL=themes.css.map */

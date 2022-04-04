@@ -10,6 +10,7 @@
 
 	<!-- Styles -->
 	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+	<link href="/css/stylesNew.css" rel="stylesheet" type="text/css">
 
 	<!-- Icons + App name -->
 	<div th:replace="fragments :: meta-info"></div>
@@ -127,6 +128,7 @@
 										<div class="row x2">
 											<div class="col-8" th:each="prod,count : ${ped.productos}">
 												<p th:text="${prod.nombre}"></p>
+						
 												<p class="detail"
 													th:if="${prod.variablePedido != null && prod.itemPedido != null}"
 													th:text="${prod.variablePedido}+ ' ' + ${prod.itemPedido}"></p>
@@ -253,6 +255,10 @@
 										<div class="row head x2">
 											<div class="col-8">
 												<p class="large underline contact-info" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.regEmpNombre}"> Nombre</p>
+												<p class="provinciaEmprendimiento hidden" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.direccion.provincia.nombre}"> Nombre</p>
+												<p class="localidadEmprendimiento hidden" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.direccion.localidadEmp}"> Nombre</p>
+												<p class="idFotoEmprendimiento hidden" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.foto.id}"> Nombre</p>
+												
 												<p class="large" th:if="${ped.estado == 'rechazarEmp'}" th:text="${ped.user.RegNombre}">Nombre</p>
 											</div>
 
@@ -266,6 +272,7 @@
 										<div class="row x2">
 											<div class="col-8" th:each="prod,count : ${ped.productos}">
 												<p th:text="${prod.nombre}"></p>
+												<p th:text="${prod.id}" class="tomarIdPedidos hidden"></p>
 												<p class="detail"
 													th:if="${prod.variablePedido != null && prod.itemPedido != null}"
 													th:text="${prod.variablePedido}+ ' ' + ${prod.itemPedido}"></p>
@@ -297,9 +304,9 @@
 													th:text="${ped.total}"></span>
 											</div>
 										</div>
-
+										<button class="btn btn-border btn-usuario-entregado">Pedido entregado</button>
 										<button class="btn btn-border btn-usuario-problema">Hubo un problema</button>
-
+										
 										<div class="bottom-divider x1"></div>
 									</div>
 								</div>
@@ -312,6 +319,166 @@
 	</div>
 </div>
 
+<section class="modal-container hidden" id="pregunta-consumidor">
+
+	<div class="modal-content">
+
+		<!-- Cabecera -->
+		<div class="emp-header-min" id="emp-details">
+	
+			<img src="" class="avatar medium" alt="foto emprendimiento">
+			
+
+			<div class="emp-info">
+				<h2 ></h2>
+				<p>
+				</p>
+			</div>
+		</div>
+
+		<div class="step-welcome" id="step-welcome">
+			<h2 class="question x2--top">Esperamos nos puedas ayudar contestando 3 preguntas de <span class="italic"></span></h2>
+			<h2 class="question">Tu respuestas son anónimas.</h2>
+			<h2 class="question x3">Gracias</h2>
+
+			<div class="btn-container">
+				<button class="btn close-modal" type="button">Responder después</button>
+				<button class="btn right" id="btnQuestionEmpezar" type="button">Empezar</button>
+			</div>
+		</div>
+		
+		<!-- Preguntas -->
+		<form class="question-container hidden" id="step-1">
+			<h2>1 de 3 preguntas</h2>
+			<h2 class="question">¿Qué te pareció la atención en tu compra?</h2>
+
+			<div class="rate-container">
+				<div class="rate-item">
+					<input type="radio" id="q1rate1" name="question1">
+  						<label for="q1rate1">1</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q1rate2" name="question1">
+  						<label for="q1rate2">2</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q1rate3" name="question1">
+  						<label for="q1rate3">3</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q1rate4" name="question1">
+  						<label for="q1rate4">4</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q1rate5" name="question1">
+  						<label for="q1rate5">5</label>
+				</div>
+			</div>
+
+			
+
+			<div class="btn-container">
+				<button class="btn" id="btnBackWelcome" type="button">Volver</button>
+				<button class="btn right" id="btnQuestion1" type="submit" disabled>Siguiente</button>
+			</div>
+		</form>
+		<form class="question-container hidden" id="step-2">
+			<h2>2 de 3 preguntas</h2>
+			<h2 class="question">¿Qué calificación le das al producto / servicio?</h2>
+
+			<div class="rate-container">
+				<div class="rate-item">
+					<input type="radio" id="q2rate1" name="question2">
+  						<label for="q2rate1">1</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q2rate2" name="question2">
+  						<label for="q2rate2">2</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q2rate3" name="question2">
+  						<label for="q2rate3">3</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q2rate4" name="question2">
+  						<label for="q2rate4">4</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q2rate5" name="question2">
+  						<label for="q2rate5">5</label>
+				</div>
+			</div>
+
+		
+
+			<div class="btn-container">
+				<button class="btn" id="btnBackQuestion1" type="button">Volver</button>
+				<button class="btn right" id="btnQuestion2" type="submit" disabled>Siguiente</button>
+			</div>
+		</form>
+		<form class="question-container hidden" id="step-3">
+			<h2>3 de 3 preguntas</h2>
+			<h2 class="question">¿El emprendedor respetó los tiempos establecidos?</h2>
+
+			<div class="rate-container">
+				<div class="rate-item">
+					<input type="radio" id="q3rate1" name="question2">
+  						<label for="q3rate1">1</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q3rate2" name="question2">
+  						<label for="q3rate2">2</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q3rate3" name="question2">
+  						<label for="q3rate3">3</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q3rate4" name="question2">
+  						<label for="q3rate4">4</label>
+				</div>
+
+				<div class="rate-item">
+					<input type="radio" id="q3rate5" name="question2">
+  						<label for="q3rate5">5</label>
+				</div>
+			</div>
+
+			
+
+			<div class="btn-container">
+				<button class="btn" id="btnBackQuestion2" type="button">Volver</button>
+				<button class="btn right" id="btnQuestion3" type="submit" disabled>Siguiente</button>
+			</div>
+		</form>
+
+		<form class="hidden" id="step-thanks">
+			<h2 class="question x2--top x3">¿Te gustaria dejar un comentario sobre este emprendimiento?</h2>
+			<div class="input-group">
+				<input class="form-control" th:name="comentarios" id="comentarios" type="text" placeholder="¿Que te gusto?">
+			</div>
+			<div class="btn-container">
+				<button class="btn close-modal" type="button">Cerrar</button>
+			
+				<button class="btn right close-modal" id="btnQuestion3" type="submit" >Enviar</button>
+			</div>
+			
+		</form>
+	</div>
+
+	<span class="overlay"></span>
+</section>
 
 	<div th:replace="fragments :: footer"></div>
 

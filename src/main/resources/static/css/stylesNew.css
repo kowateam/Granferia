@@ -1,0 +1,33 @@
+#pregunta-consumidor{
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    
+}
+#pregunta-consumidor .modal-content{
+    background-color: #389D6D;
+    color: white;
+}
+#pregunta-consumidor .modal-content .btn{
+    color: white;
+}
+#pregunta-consumidor .input-group .form-control{
+    border-radius: 10px;
+    background-color:rgba(0,0,0,0.0) ;
+    border: solid 1px rgba(255,255,255,0.6);
+    color: white;
+}
+#pregunta-consumidor .input-group .form-control::placeholder {
+
+    color: rgba(255,255,255,0.6);
+   
+}
+.btn-usuario-problema{
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+}
+.btn-usuario-entregado{
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+}

@@ -376,6 +376,8 @@ $('.close-modal').click(function () {
 		'overflow-y': 'auto',
 		'overflow-x': 'hidden'
 	});
+	$('#step-thanks').addClass('hidden');
+	$('#step-welcome').removeClass('hidden');
 });
 
 // Abrir motivo de rechazo en el modal
@@ -593,7 +595,7 @@ $('#step-1 .rate-item input').click(function () {
 	// Mostrar pregunta 1
 	if ($(this).prop('id') == 'q1rate1') {
 		$('#q1rate1').closest('.question-container').find('.input-group').removeClass('hidden');
-		$('#btnQuestion1').prop('disabled', true);
+
 	} else {
 		$('#q1rate1').closest('.question-container').find('.input-group').addClass('hidden');
 		$('#q1rate1').closest('.question-container').find('.input-group').removeClass('filled');
@@ -615,21 +617,24 @@ $('#step-1 .rate-item input').click(function () {
 	}
 });
 
-// Validar la razón de la pregunta 1
+/* // Validar la razón de la pregunta 1
 $('#q1Razones').keyup(function () {
-	if ($(this).val().length >= 10) {
+	if ($(this).val().length >= 4) {
 		$('#btnQuestion1').prop('disabled', false);
 	} else {
 		$('#btnQuestion1').prop('disabled', true);
 	}
-});
+}); */
 
 $('#btnQuestion1, #btnBackQuestion1').click(function () {
 	$('#step-1, #step-2').toggleClass('hidden');
 });
+$('#btnQuestion2, #btnBackQuestion2').click(function () {
+	$('#step-2, #step-3').toggleClass('hidden');
+});
 
-$('#btnQuestion2').click(function () {
-	$('#step-2, #step-thanks').toggleClass('hidden');
+$('#btnQuestion3').click(function () {
+	$('#step-3, #step-thanks').toggleClass('hidden');
 });
 
 // Evaluar emprendimiento (2)
@@ -640,7 +645,7 @@ $('#step-2 .rate-item input').click(function () {
 
 	if ($(this).prop('id') == 'q2rate1') {
 		$('#q2rate1').closest('.question-container').find('.input-group').removeClass('hidden');
-		$('#btnQuestion2').prop('disabled', true);
+		
 	} else {
 		$('#q2rate1').closest('.question-container').find('.input-group').addClass('hidden');
 		$('#q2rate1').closest('.question-container').find('.input-group').removeClass('filled');
@@ -661,15 +666,37 @@ $('#step-2 .rate-item input').click(function () {
 		$('#q2rate1, #q2rate2, #q2rate3, #q2rate4, #q2rate5').closest('.rate-item').find('label').addClass('active');
 	}
 });
+// Evaluar emprendimiento (3)
+$('#step-3 .rate-item input').click(function () {
+	$('#step-3 .rate-item label').removeClass('active');
+	$(this).closest('.rate-item').find('label').addClass('active');
+	$('#btnQuestion3').prop('disabled', false);
 
-// Validar la razón de la pregunta 2
-$('#q2Razones').keyup(function () {
-	if ($(this).val().length >= 10) {
-		$('#btnQuestion2').prop('disabled', false);
+	if ($(this).prop('id') == 'q3rate1') {
+		$('#q3rate1').closest('.question-container').find('.input-group').removeClass('hidden');
+	
 	} else {
-		$('#btnQuestion2').prop('disabled', true);
+		$('#q3rate1').closest('.question-container').find('.input-group').addClass('hidden');
+		$('#q3rate1').closest('.question-container').find('.input-group').removeClass('filled');
+		$('#btnQuestion3').prop('disabled', false);
+		$('#q3Razones').val('');
+	}
+
+	if ($(this).prop('id') == 'q3rate2') {
+		$('#q3rate1, #q3rate2').closest('.rate-item').find('label').addClass('active');
+	}
+	if ($(this).prop('id') == 'q3rate3') {
+		$('#q3rate1, #q3rate2, #q3rate3').closest('.rate-item').find('label').addClass('active');
+	}
+	if ($(this).prop('id') == 'q3rate4') {
+		$('#q3rate1, #q3rate2, #q3rate3, #q3rate4').closest('.rate-item').find('label').addClass('active');
+	}
+	if ($(this).prop('id') == 'q3rate5') {
+		$('#q3rate1, #q3rate2, #q3rate3, #q3rate4, #q3rate5').closest('.rate-item').find('label').addClass('active');
 	}
 });
+
+
 
 // Borrar productos sin fotos
 $('#borrarProductos').click(function () {
@@ -724,12 +751,9 @@ $('#btnEliminarEmp').click(function () {
 })
 
 
+//guardado home
 let idSaveProducto=document.querySelectorAll(".idSaveProducto");
 let saveProducto=document.querySelectorAll(".saveProducto");
-
-console.log(idSaveProducto)
-console.log(saveProducto)
-
  for(let i=0; i<idSaveProducto.length;i++){
 	for(let j=i+1; j<idSaveProducto.length;j++)
 	if(idSaveProducto[i].textContent==idSaveProducto[j].textContent){
@@ -737,4 +761,58 @@ console.log(saveProducto)
 			saveProducto[i*2+1].classList.toggle("hidden");
 	}
 }
+//mostrar Evaluar emprendimiento
+let preguntaConsumidor= document.querySelectorAll("#pregunta-consumidor")
+let entregado= document.querySelectorAll(".btn-usuario-entregado")
+let order= {
+	id:"",
+	firstQuestion:"",
+	secondQuestion:"",
+	thirdQuestion:"",
+	average:"",
+	comment:""
+}
+let nombreEmprendimiento=document.querySelectorAll(".contact-info")
+let ponerNombreEmprendimiento=document.querySelectorAll("#pregunta-consumidor .emp-info h2")
+let ponerProvinciaEmprendimiento=document.querySelectorAll("#pregunta-consumidor .emp-info p")
+let ponerFotoEmprendimiento=document.querySelectorAll("#pregunta-consumidor .emp-header-min img")
+let provinciaEmprendimiento=document.querySelectorAll(".provinciaEmprendimiento")
+let localidadEmprendimiento=document.querySelectorAll(".localidadEmprendimiento")
+let idFotoEmprendimiento=document.querySelectorAll(".idFotoEmprendimiento")
 
+entregado.forEach((element,key)=>{element.addEventListener("click",function(){
+		ponerNombreEmprendimiento[0].innerHTML=nombreEmprendimiento[key].textContent
+		ponerProvinciaEmprendimiento[0].innerHTML=`${provinciaEmprendimiento[key].textContent}, ${localidadEmprendimiento[key].textContent}`
+		ponerProvinciaEmprendimiento[0].style.color="white"
+		ponerFotoEmprendimiento[0].src="/foto/load/"+idFotoEmprendimiento[key].textContent
+		preguntaConsumidor[0].classList.toggle("hidden")
+		order.id=tomarIdPedidos[key].textContent
+})})
+let tomarIdPedidos=document.querySelectorAll(".tomarIdPedidos")
+let step1=document.querySelectorAll("#step-1");
+step1[0].addEventListener("submit",function(e){
+	e.preventDefault()
+	let inputs=document.querySelectorAll("#step-1 .active")
+	order.firstQuestion=inputs.length
+})
+let step2=document.querySelectorAll("#step-2");
+step2[0].addEventListener("submit",function(e){
+	e.preventDefault()
+	let inputs=document.querySelectorAll("#step-2 .active")
+	order.secondQuestion=inputs.length
+})
+let step3=document.querySelectorAll("#step-3");
+step3[0].addEventListener("submit",function(e){
+	e.preventDefault()
+	let inputs=document.querySelectorAll("#step-3 .active")
+	order.thirdQuestion=inputs.length
+})
+let stepThanks=document.querySelectorAll("#step-thanks");
+stepThanks[0].addEventListener("submit",function(e){
+	e.preventDefault()
+	let inputsComentario=document.querySelector("#step-thanks .form-control").value
+	order.average=(order.firstQuestion+order.secondQuestion+order.thirdQuestion)/3
+	order.comment=inputsComentario
+	console.log(order)
+
+})

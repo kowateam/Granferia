@@ -10,7 +10,7 @@
 
 	<!-- Styles -->
 	<link href="/css/styles.css" rel="stylesheet" type="text/css">
-
+	<link href="/css/stylesNew.css" rel="stylesheet" type="text/css">
 	<!-- Icons + App name -->
 	<div th:replace="fragments :: meta-info"></div>
 </head>
@@ -175,6 +175,7 @@
 		</div>
 	</nav>
 
+	
 	<div class="main-container x5 public-landing">
 
 		<!-- (Menu) -->
@@ -199,11 +200,35 @@
 									</p>
 								</div>
 							</div>
+						
 						</div>
+						<div class="p-seguir-emprendimiento">
+							<p class="parraforEmprendimiento">Nacimos de la pasion por el cuero y el campo asdasdasdasd</p>
+							<button class="btn btn-border btn-seguir-emprendimiento">Seguir</button>
+							<p class="estadisticasEmprendimiento">Estadisticas</p>
+							<div class="flex-father">
+							<div class="flex-column">
+								<p class="number">1026</p>
+								<p class="descripcionEmprendimiento">Seguidores</p>
+								</div>
+							<div class="flex-column">
+								<p class="number">305</p>
+								<p class="descripcionEmprendimiento">Pedidos</p>
+							</div>
+							<div class="flex-column">
+								
+								<div class="flex-fila"><p class="number">3.6</p><img class="starEmp" src="img/gt/icons/star.svg" alt=""></div>
+								
+								<p class="descripcionEmprendimiento">Valoraciones</p>
+							</div>
+							</div>
+						</div>
+						
+						
 					</div>
 				</div>
 			</header>
-
+	
 			<div class="container x5">
 				<div class="row">
 					<div class="col-xs-12">
@@ -212,7 +237,7 @@
 						</section>
 					</div>
 				</div>
-
+			
 				<!-- Categorias y productos -->
 				<section th:each="categoria, i : ${categorias}" class="emp x3">
 
@@ -222,7 +247,7 @@
 					</h2>
 
 					<!-- Contenedor del producto -->
-					<div th:replace="fragments :: card-producto-landing-public"></div>
+					<!-- <div th:replace="fragments :: card-producto-landing-public"></div> -->
 				</section>
 				<!-- <div class="row social-nets"  th:if="${emprendimiento.instagram != null && emprendimiento.instagram != '' || emprendimiento.facebook != null && emprendimiento.facebook != '' || emprendimiento.website != null && emprendimiento.website != '' || emprendimiento.esWhatsapp != null && emprendimiento.esWhatsapp != ''}">
 					<div class="col-xs-12">

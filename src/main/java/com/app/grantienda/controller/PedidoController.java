@@ -98,6 +98,7 @@ public class PedidoController {
 		
 		return "paginaPedidoRealizado.html";
 	}
+
 	
 	@GetMapping("/cancelar")
 	public String cancelarPedido(@RequestParam String idpedido,@RequestParam String motivo) {

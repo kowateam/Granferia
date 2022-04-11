@@ -31,3 +31,59 @@
     background-color: black;
     color: white;
 }
+.btn-seguir-emprendimiento{
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+    max-width: 350px;
+    margin-top: 30px;
+}
+.p-seguir-emprendimiento{
+    margin-top: 10px;
+    max-width: 380px;
+    margin-left: 5px;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}
+.flex-father{
+    display: flex;
+    margin-top: 10px;
+}
+.starEmp{
+    width: 18px;
+    height: 18px;
+    margin-left: 7px;
+}
+.flex-fila{
+    display: flex;
+    align-items: center;
+}
+.number{
+    
+font-family: 'Noto Serif';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+}
+.parraforEmprendimiento{
+    font-family: 'Noto Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+}
+.estadisticasEmprendimiento{
+   
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+}
+.descripcionEmprendimiento{
+   
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+color:#909090
+}

@@ -60,8 +60,9 @@
 
 					<!-- Avatar -->
 					<div class="menu-item menu-p" th:if="${session.usersession != null}">
-						<span class="avatar"
+						<span class="avatar clickHidden"
 							th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + ');'"></span>
+							<p class="hidden idUsuario" th:text="${session.usersession.id}">hola</p>
 					</div>
 				</div>
 			</div>
@@ -84,7 +85,7 @@
 
 			<div class="row hidden profile-clear" id="menu-profile">
 				<div class="col-xs-12">
-					<div class="menu-item m-close m-33">
+					<div class="menu-item m-close m-33 clickHidden2">
 						<img src="/img/gt/icons/arrow-left.svg" height="18" alt="Volver" title="Volver">
 					</div>
 
@@ -626,8 +627,8 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<a href="/" target="_self" title="Inicio">
-						<img class="logo img-b close-search profile-clear" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
-						<img class="logo img-w close-search profile-clear" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+						<img class="logo img-b close-search profile-clear" src="/img/gt/logo2.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+						<img class="logo img-w close-search profile-clear" src="/img/gt/logo2.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
 					</a>
 				</div>
 

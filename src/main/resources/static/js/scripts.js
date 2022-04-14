@@ -783,8 +783,9 @@ let idFotoEmprendimiento=document.querySelectorAll(".idFotoEmprendimiento")
 entregado.forEach((element,key)=>{element.addEventListener("click",function(){
 		ponerNombreEmprendimiento[0].innerHTML=nombreEmprendimiento[key].textContent
 		ponerProvinciaEmprendimiento[0].innerHTML=`${provinciaEmprendimiento[key].textContent}, ${localidadEmprendimiento[key].textContent}`
+	
 		ponerProvinciaEmprendimiento[0].style.color="white"
-		ponerFotoEmprendimiento[0].src="/foto/load/"+idFotoEmprendimiento[key].textContent
+	 	ponerFotoEmprendimiento[0].src="/foto/load/"+idFotoEmprendimiento[key].textContent 
 		preguntaConsumidor[0].classList.toggle("hidden")
 		order.id=tomarIdPedidos[key].textContent
 })})
@@ -801,12 +802,7 @@ step2[0].addEventListener("submit",function(e){
 	let inputs=document.querySelectorAll("#step-2 .active")
 	order.secondQuestion=inputs.length
 })
-let step3=document.querySelectorAll("#step-3");
-step3[0].addEventListener("submit",function(e){
-	e.preventDefault()
-	let inputs=document.querySelectorAll("#step-3 .active")
-	order.thirdQuestion=inputs.length
-})
+
 let stepThanks=document.querySelectorAll("#step-thanks");
 stepThanks[0].addEventListener("submit",function(e){
 	e.preventDefault()
@@ -815,4 +811,10 @@ stepThanks[0].addEventListener("submit",function(e){
 	order.comment=inputsComentario
 	console.log(order)
 
+})
+let step3=document.querySelectorAll("#step-3");
+step3[0].addEventListener("submit",function(e){
+	e.preventDefault()
+	let inputs=document.querySelectorAll("#step-3 .active")
+	order.thirdQuestion=inputs.length
 })

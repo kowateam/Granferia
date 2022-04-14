@@ -85,98 +85,10 @@
 	</section>
 
 	<!-- Navegación flotante -->
-	<nav class="floating-menu">
-		<div class="container">
-			<div class="access-bar hidden" th:if="${session.usersession == null}">
-				<div class="item">
-					<a href="/ingresar" target="_self" title="Ingresar">Ingresar</a>
-				</div>
-
-				<div class="item">
-					<a href="/crearcuenta" target="_self" title="Crear cuenta">Crear cuenta</a>
-				</div>
-			</div>
-
-			<div class="access-bar-overlay hidden" th:if="${session.usersession == null}"></div>
-
-			<!-- USER -->
-			<div class="row user" id="main-menu" sec:authorize="hasRole('USER')" th:if="${session.usersession != null}">
-				<div class="col-xs-12">
-					<div class="menu-item menu-m m-33">
-						<img class="img-b" src="/img/gt/nav/menu.svg" alt="Menu" title="Abrir menu">
-						<img class="img-w" src="/img/gt/nav/menu-w.svg" alt="Menu" title="Abrir menu">
-					</div>
-
-					<a class="menu-item menu-h m-33" href="/" target="_self">
-						<img class="img-b" src="/img/gt/nav/home.svg" alt="Home" title="Ir al home">
-						<img class="img-w" src="/img/gt/nav/home-w.svg" alt="Home" title="Ir al home">
-					</a>
-
-					<a class="menu-item menu-a m-33 logged" href="/emp/devolverperfil" target="_self" th:if="${session.usersession != null}" title="Ir al perfil">
-						<span class="avatar x2--top hidden-xs" th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + '); background-size: cover'"></span>
-						<span class="avatar hidden-lg" th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + '); background-size: cover'"></span>
-					</a>
-
-					<div class="menu-item menu-a m-33" th:if="${session.usersession == null}">
-						<span class="hidden-xs">
-							<img class="img-b x2--top" src="/img/gt/nav/access.svg" alt="Acceder" title="Acceder">
-							<img class="img-w x2--top" src="/img/gt/nav/access-w.svg" alt="Acceder" title="Acceder">
-						</span>
-
-						<span class="hidden-lg">
-							<img class="img-b" src="/img/gt/nav/access.svg" alt="Acceder" title="Acceder">
-							<img class="img-w" src="/img/gt/nav/access-w.svg" alt="Acceder" title="Acceder">
-						</span>
-					</div>
-				</div>
-			</div>
-
-			<!-- SUPERADMIN -->
-			<div class="row admin" id="main-menu" sec:authorize="hasRole('SUPERADMIN')" th:if="${session.usersession != null}">
-				<div class="col-xs-12">
-					<div class="menu-item menu-m m-33">
-						<img class="img-b" src="/img/gt/nav/menu.svg" alt="Menu" title="Abrir menu">
-						<img class="img-w" src="/img/gt/nav/menu-w.svg" alt="Menu" title="Abrir menu">
-					</div>
-
-					<a class="menu-item menu-h m-33" href="/" target="_self">
-						<img class="img-b" src="/img/gt/nav/home.svg" alt="Home" title="Ir al home">
-						<img class="img-w" src="/img/gt/nav/home-w.svg" alt="Home" title="Ir al home">
-					</a>
-
-					<a class="menu-item menu-a m-33 logged" href="/emp/devolverperfil" target="_self" th:if="${session.usersession != null}" title="Ir al perfil">
-						<span class="avatar x2--top hidden-xs" th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + '); background-size: cover'"></span>
-						<span class="avatar hidden-lg" th:style="'background-image:url('+@{/img/shared/avatars/} + ${session.usersession.avatar}+.jpg + '); background-size: cover'"></span>
-					</a>
-
-					<div class="menu-item menu-a m-33" th:if="${session.usersession == null}">
-						<span class="hidden-xs">
-							<img class="img-b x2--top" src="/img/gt/nav/access.svg" alt="Acceder" title="Acceder">
-							<img class="img-w x2--top" src="/img/gt/nav/access-w.svg" alt="Acceder" title="Acceder">
-						</span>
-
-						<span class="hidden-lg">
-							<img class="img-b" src="/img/gt/nav/access.svg" alt="Acceder" title="Acceder">
-							<img class="img-w" src="/img/gt/nav/access-w.svg" alt="Acceder" title="Acceder">
-						</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="row profile-clear hidden" id="menu-close">
-				<div class="col-xs-12">
-					<div class="menu-item m-close full--width">
-						<img class="img-b" src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar menu">
-						<img class="img-w" src="/img/gt/nav/close-w.svg" alt="Cerrar" title="Cerrar menu">
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</nav>
+	<div th:replace="fragments :: floating-menu"></div>
 
 	
-	<div class="main-container x5 public-landing">
+	<div id="idClickHidden2" class="main-container x5 public-landing">
 
 		<!-- (Menu) -->
 		<div th:replace="fragments :: segment-menu"></div>
@@ -198,13 +110,15 @@
 									<p
 										th:text="${emprendimiento.direccion.provincia.nombre}+', '+ ${emprendimiento.direccion.localidadEmp}">
 									</p>
+									<p class="hidden idEmprendimiento" th:text="${emprendimiento.id}"> </p>
 								</div>
 							</div>
 						
 						</div>
 						<div class="p-seguir-emprendimiento">
 							<p class="parraforEmprendimiento">Nacimos de la pasion por el cuero y el campo asdasdasdasd</p>
-							<button class="btn btn-border btn-seguir-emprendimiento">Seguir</button>
+							<button class="btn btn-border btn-seguir-emprendimiento" >Seguir</button>
+                            <button class="btn btn-border btn-DejarDeSeguir-emprendimiento" th:if="${seguir=='true'}">Dejar de Seguir</button>
 							<p class="estadisticasEmprendimiento">Estadisticas</p>
 							<div class="flex-father">
 							<div class="flex-column">
@@ -247,7 +161,7 @@
 					</h2>
 
 					<!-- Contenedor del producto -->
-					<!-- <div th:replace="fragments :: card-producto-landing-public"></div> -->
+					 <div th:replace="fragments :: card-producto-landing-public"></div>
 				</section>
 				<!-- <div class="row social-nets"  th:if="${emprendimiento.instagram != null && emprendimiento.instagram != '' || emprendimiento.facebook != null && emprendimiento.facebook != '' || emprendimiento.website != null && emprendimiento.website != '' || emprendimiento.esWhatsapp != null && emprendimiento.esWhatsapp != ''}">
 					<div class="col-xs-12">
@@ -287,12 +201,127 @@
 		</div>
 	</div>
 
+	<div id="idClickHidden" class="main-container hidden">
+		<!-- (IZQUIERDA) -->
+		<div th:replace="fragments :: segment-menu"></div>
+
+		<!-- (CENTRAL) -->
+		<div class="segment" id="segment-main">
+			<header>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<img class="logo img-b close-search profile-clear" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+							<img class="logo img-w close-search profile-clear" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Header Bienvenida -->
+			<div class="container" th:if="${session.usersession == null}">
+				<div class="row">
+					<div class="col-xs-12 col-lg-6">
+						<div class="banner">
+							<h1>Te damos la bienvenida a granferia.</h1>
+							<div class="col-xs-12 col-lg-6">
+									<div class="homePageWidth">
+										<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+									</div>
+							</div>
+							<p class="x2">Podés navegar, descubrir y guardar lo que más te gusta, realizá tus pedidos en
+								dos simples pasos.</p>
+							<p class="x2">Además podés crear tu propio stand y mostrar lo que haces a la comunidad
+								emprendedora.</p>
+
+							<div class="hidden-xs">
+								<a class="btn btn-primary" href="/crearcuenta" target="_self">Crear cuenta</a>
+								<a class="underline text--center" href="/ingresar" target="_self">Ingresar</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-lg-6">
+							<div class="homePageWidth1">
+								<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+							</div>
+					</div>
+				</div>
+
+				<div class="hidden-lg banner x0--top">
+					<a class="btn btn-primary" href="/crearcuenta" target="_self">Crear cuenta</a>
+					<a class="underline text--center" href="/ingresar" target="_self">Ingresar</a>
+				</div>
+			</div>
+
+			<!-- Header crear -->
+			<div class="container banner crear-emp-first" id="main-banner" th:if="${session.usersession != null && session.usersession.crearEmpNotifi != true && session.usersession.mostrarCrearEmp != true}" sec:authorize="hasAnyRole('ROLE_USER')">
+				<div class="row">
+					<div class="col-xs-12 col-lg-6">
+						<div class="banner">
+							<h1>Tu emprendimiento en granferia.</h1>
+							<div class="col-xs-12 col-lg-6">
+								<div class="homePageWidth">
+									<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+								</div>
+						</div>
+							<p class="x2">Creá y personalizá tu stand para mostrar tus productos en granferia, conocé <a class="underline x0 x0--top x0--left x0--right" style="display: inline-block; width: auto;" href="/emp/elegircuenta" target="_self">nuestros planes</a>.</p>
+
+							<div class="hidden-xs">
+								<span id="iduser" th:text="${session.usersession.id}" hidden></span>
+								<a class="btn btn-large btn-primary" href="/emp/elegircuenta" target="_self">Crear emprendimiento gratis</a>
+								<span class="btnEmpMasTarde underline text--center">Ocultar</span>
+							</div>
+						</div>
+					</div>
+
+					
+					<div class="col-xs-12 col-lg-6">
+						<div class="homePageWidth1">
+							<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+						</div>
+				</div>
+				</div>
+
+				<div class="hidden-lg x0--top">
+					<a class="btn btn-primary" href="/emp/elegircuenta" target="_self">Crear emprendimiento gratis</a>
+					<span class="btnEmpMasTarde underline text--center">Ocultar</span>
+				</div>
+			</div>
+
+			<!-- Listado de emprendimientos -->
+			<div class="container x5">
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- Seccion emprendimiento -->
+						<div th:replace="fragments :: emprendimiento-home"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:replace="fragments :: segment-profile"></div>
+
+		<!-- Redirección al perfil-->
+		<div th:if="${session.volverperfil != null}">
+			<script>
+				$(function () {
+					openProfile();
+				});
+			</script>
+		</div>
+
+	</div>
+	
 	<div th:replace="fragments :: footer"></div>
 </body>
 
 <!-- Javascript -->
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/empLanding.js"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
+
+
 <script type="text/javascript" src="/js/landingEdit.js"></script>
 
 <script>

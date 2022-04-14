@@ -255,10 +255,18 @@
 										<div class="row head x2">
 											<div class="col-8">
 												<p class="large underline contact-info" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.regEmpNombre}"> Nombre</p>
-												<p class="provinciaEmprendimiento hidden" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.direccion.provincia.nombre}"> Nombre</p>
-												<p class="localidadEmprendimiento hidden" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.direccion.localidadEmp}"> Nombre</p>
-												<p class="idFotoEmprendimiento hidden" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.foto.id}"> Nombre</p>
+												<div class="hidden"><p class="provinciaEmprendimiento" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.direccion.provincia.nombre}"> Nombre</p></div>
+												<div class="hidden"><p class="localidadEmprendimiento" th:if="${ped.estado == 'aceptarEmp'}" th:text="${ped.emprendimiento.direccion.localidadEmp}"> Nombre</p></div>
 												
+												<!-- <div class="hidden"><p class="idFotoEmprendimiento" th:if="${ped.emprendimiento.foto.id !== null} " th:text="${ped.emprendimiento.foto.id}"> Nombre</p></div> -->
+												
+								<div class="hidden">
+                                <span class="avatar camera huge" th:if="${ped.emprendimiento.foto == null}"></span>
+                                <div class="avatar huge idFotoEmprendimiento" th:if="${ped.emprendimiento.foto != null}"
+                                    th:text="${ped.emprendimiento.foto.id}">
+                                </div>
+                                </div>
+							
 												<p class="large" th:if="${ped.estado == 'rechazarEmp'}" th:text="${ped.user.RegNombre}">Nombre</p>
 											</div>
 
@@ -317,7 +325,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+
 
 <section class="modal-container hidden" id="pregunta-consumidor">
 

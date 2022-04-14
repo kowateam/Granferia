@@ -87,3 +87,24 @@ font-weight: 400;
 font-size: 16px;
 color:#909090
 }
+.homePageWidth1{
+    max-width: 90vw;
+    display: none;
+    
+}
+.homePageWidth{
+    margin-bottom: 40px;
+}
+.homePageFullWidth{
+    width: 100%;
+    
+}
+@media all and (min-width:1000px){
+    .homePageWidth1{
+       display: block;
+    }
+    .homePageWidth{
+        display: none;
+    }
+
+}

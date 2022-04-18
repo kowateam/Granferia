@@ -34,33 +34,6 @@
 	</div>
 
 	<!-- Modal: (Admin) Información de contacto -->
-	<section class="modal-container hidden" id="contacto-modal" sec:authorize="hasRole('SUPERADMIN')" th:if="${session.usersession != null}">
-		<div class="modal-content">
-			<h2 class="question text--left x0--left x0--right x3">Contactar emprendimiento</h2>
-
-			<div class="input-group x2">
-				<p class="label-read">Nombre del titular</p>
-				<p class="input-read" th:text="${emprendimiento.nombreRazonSocial}">Nombre</p>
-			</div>
-
-			<div class="input-group x2">
-				<p class="label-read">Email</p>
-				<p class="input-read" th:text="${emprendimiento.user.mail}">Email</p>
-			</div>
-
-			<div class="input-group x2">
-				<p class="label-read">Teléfono</p>
-				<p class="input-read" >+54 9 <span th:text="${emprendimiento.empTel}"></span></p>
-			</div>
-
-			<div class="btn-container">
-				<button class="btn close-modal full--width"
-					type="button">Volver</button>
-			</div>
-		</div>
-
-		<span class="overlay close-modal"></span>
-	</section>
 	
 	<!-- Calificación usuario -->
 	<div th:replace="fragments :: pregunta-consumidor"></div>

@@ -31,7 +31,14 @@
     background-color: black;
     color: white;
 }
-.btn-seguir-emprendimiento{
+.btn-seguir-emprendimiento button{
+    margin-bottom: 20px;
+    background-color: black;
+    color: white;
+    max-width: 350px;
+    margin-top: 30px;
+}
+.btn-noseguir-emprendimiento button{
     margin-bottom: 20px;
     background-color: black;
     color: white;
@@ -107,4 +114,36 @@ color:#909090
         display: none;
     }
 
+}
+
+#logoCarru{
+    width: 60px;
+    height: 60px;
+    top: 80px
+}
+#name55{
+    font-family: 'Noto Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+    padding-top: 13px;
+}
+#name56{
+    font-family: 'Noto Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+color: white;
+}
+#displayFlexSpaceBet{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#editQuestion{
+    padding: 0px;
+}
+#editQuestion2{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }

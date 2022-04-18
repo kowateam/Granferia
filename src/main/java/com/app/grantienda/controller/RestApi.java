@@ -7,15 +7,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.grantienda.entidades.Foto;
+import com.app.grantienda.entidades.Pedido;
 import com.app.grantienda.entidades.User;
 import com.app.grantienda.service.FotoService;
 import com.app.grantienda.service.NotificacionService;
+import com.app.grantienda.service.PedidoService;
 import com.app.grantienda.service.ProductoService;
+import com.app.grantienda.service.SeguidoresService;
 import com.app.grantienda.service.UsuarioService;
+import com.app.grantienda.service.ValoracionService;
 
 @RestController
 @RequestMapping("/rest")
@@ -25,9 +31,16 @@ public class RestApi {
 	@Autowired
 	private FotoService fs;
 	@Autowired
+	private SeguidoresService seguidoresService;
+	@Autowired
 	private ProductoService ps;
 	@Autowired
+	private ValoracionService valoracionService;
+	@Autowired
 	private NotificacionService ns;
+	
+	@Autowired
+	private PedidoService pedidoService;
 	@GetMapping(path = "/{id}/{celular}")
 	public void guardarTelefonoUsuario(@PathVariable String id,@PathVariable String celular){
 		try {
@@ -112,6 +125,22 @@ public class RestApi {
 		}
 		
 	}
+	
+	@GetMapping("/seguir/{idEmprendimiento}/{idUser}")		
+	public void Seguir(@PathVariable String idEmprendimiento,@PathVariable String idUser) {
+
+		seguidoresService.sumarSeguidor(idEmprendimiento,idUser);	
+}
+	
+	@GetMapping("/valorar/{tiempo}/{producto}/{servicio}/{comentario}/{idPedido}")		
+	public void valoracion(@PathVariable String tiempo,@PathVariable String producto,@PathVariable String servicio,@PathVariable String comentario,String idPedido) {
+        //String id = pedidoService.(idPedido);
+		Pedido pedido = pedidoService.pedido(idPedido);
+		String idUser = pedido.getUser().getId();
+		String idProducto= pedido.getIdProducto();
+		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, idProducto);
+			
+}
 	
 	
 	

@@ -20,5 +20,10 @@ public interface PedidoRepository extends JpaRepository<Pedido,String>{
 	
 	@Query(value ="SELECT * FROM granferia.pedido where user_id like :id order by granferia.pedido.alta limit 1"  ,nativeQuery= true)
 	public Pedido buscarPorUserUltimoPedido(@Param("id")String id);
-
+	
+	@Query(value ="SELECT pedido_id from pedido_productos where productos_id = :id"  ,nativeQuery= true)
+	public String buscarPorIdPedido(@Param("id")String id);
+	
+	@Query(value ="SELECT * from pedido where id = :id"  ,nativeQuery= true)
+	public Pedido buscarPedido(@Param("id")String id);
 }

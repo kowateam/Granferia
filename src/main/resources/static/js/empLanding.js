@@ -17,12 +17,25 @@ clickHidden2.addEventListener("click",function(){
 })
 let idUsuario=document.querySelectorAll(".idUsuario")
 let idEmprendimiento=document.querySelectorAll(".idEmprendimiento")
-console.log(idUsuario[0].textContent)
-console.log(idEmprendimiento[0].textContent)
-let guargarvariable=document.querySelector(".btn-seguir-emprendimiento");
-guargarvariable.addEventListener("click",function(){
+let guargarvariable=document.querySelectorAll(".btn-seguir-emprendimiento");
+
+
+let noseguir=document.querySelector(".btn-noseguir-emprendimiento");
+noseguir.addEventListener("click",function(){
+	var idEmprendimiento = $('.idEmprendimiento').text();
+	var idUser =$('.idUsuario').text();
     $.ajax({
         method: "GET",
-        url: base_url + "/seguir" +idUsuario[0].textContent+idEmprendimiento[0].textContent
+        url: base_url + "/rest/seguir/" +idEmprendimiento+"/"+idUser,
+    });
+})
+
+guargarvariable[0].addEventListener("click",function(){
+	var idEmprendimiento = $('.idEmprendimiento').text();
+	var idUser =$('.idUsuario').text();
+    $.ajax({
+        method: "GET",
+        url: base_url + "/rest/seguir/" +idEmprendimiento+"/"+idUser,
+        //data:idUser
     });
 })

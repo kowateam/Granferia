@@ -275,12 +275,14 @@
 												<p th:if="${ped.estado == 'rechazarEmp'}">Rechazado</p>
 											</div>
 										</div>
-
+										<div th:each="ped,count : ${ped}">
+                                           <p th:text="${ped.id}" class="tomarIdPedidos hidden"></p>
+										</div>
 										<!-- Detalles del pedido -->
 										<div class="row x2">
 											<div class="col-8" th:each="prod,count : ${ped.productos}">
 												<p th:text="${prod.nombre}"></p>
-												<p th:text="${prod.id}" class="tomarIdPedidos hidden"></p>
+												<p th:text="${prod}" class="IdPedidos hidden"></p>
 												<p class="detail"
 													th:if="${prod.variablePedido != null && prod.itemPedido != null}"
 													th:text="${prod.variablePedido}+ ' ' + ${prod.itemPedido}"></p>

@@ -117,21 +117,27 @@
 						</div>
 						<div class="p-seguir-emprendimiento">
 							<p class="parraforEmprendimiento">Nacimos de la pasion por el cuero y el campo asdasdasdasd</p>
-							<button class="btn btn-border btn-seguir-emprendimiento" >Seguir</button>
-                            <button class="btn btn-border btn-DejarDeSeguir-emprendimiento" th:if="${seguir=='true'}">Dejar de Seguir</button>
+							<div class="btn-seguir-emprendimiento">
+							    <button class="btn btn-border" th:if="${seguir!='true'}">Seguir</button>
+							</div>
+							<div class="btn-noseguir-emprendimiento">
+							    <button class="btn btn-border" th:if="${seguir=='true'}">Dejar de Seguir</button>
+							</div>
+                           
 							<p class="estadisticasEmprendimiento">Estadisticas</p>
+							<p th:text="${seguir}">Estadisticas</p>
 							<div class="flex-father">
 							<div class="flex-column">
-								<p class="number">1026</p>
+								<p class="number" th:text="${seguidores}"></p>
 								<p class="descripcionEmprendimiento">Seguidores</p>
 								</div>
 							<div class="flex-column">
-								<p class="number">305</p>
+								<p class="number" th:text="${pedidos}">305</p>
 								<p class="descripcionEmprendimiento">Pedidos</p>
 							</div>
 							<div class="flex-column">
 								
-								<div class="flex-fila"><p class="number">3.6</p><img class="starEmp" src="img/gt/icons/star.svg" alt=""></div>
+								<div class="flex-fila"><p class="number" th:text="${promedio}">3.6</p><img class="starEmp" src="img/gt/icons/star.svg" alt=""></div>
 								
 								<p class="descripcionEmprendimiento">Valoraciones</p>
 							</div>

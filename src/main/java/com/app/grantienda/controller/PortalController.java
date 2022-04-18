@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.app.grantienda.Utility;
 import com.app.grantienda.entidades.CantidadVistas;
@@ -37,15 +39,23 @@ import com.app.grantienda.service.EmprendimientoService;
 import com.app.grantienda.service.HistorialService;
 import com.app.grantienda.service.PedidoService;
 import com.app.grantienda.service.ProductoGuardadoService;
+import com.app.grantienda.service.ProductoPedidoService;
 import com.app.grantienda.service.ProductoService;
+import com.app.grantienda.service.SeguidoresService;
 import com.app.grantienda.service.UsuarioService;
+import com.app.grantienda.service.ValoracionService;
 
 
 @Controller
 @RequestMapping("/")
 public class PortalController {
 
-
+	@Autowired
+	private SeguidoresService seguidoresService;
+	@Autowired
+	private ValoracionService valoracionService;
+	@Autowired
+	private ProductoPedidoService productoPedidoService;
 	@Autowired
 	private CookiesService cs;
 	@Autowired
@@ -218,6 +228,7 @@ public class PortalController {
 		
 		return"redirect:/emp/devolverperfil";
 	}
+	
 
 	@GetMapping("/verificar")
 	public String verificarCuenta(@RequestParam("code") String codigoDeVerificacion, ModelMap modelo) {
@@ -315,18 +326,33 @@ public class PortalController {
 	}
 	
 	@GetMapping("/{direccionweb}")
-	public String direccionWeb(@PathVariable String direccionweb,ModelMap modelo) {
+	public String direccionWeb(@PathVariable String direccionweb,HttpSession session,ModelMap modelo) {
 		Emprendimiento emp = es.buscarEmprendimientoPorDireccionWeb(direccionweb);			
 			if(emp != null) {
+				User 	usuario= (User) session.getAttribute("usersession");
 				cvs.guardarVistasEmprendimiento(emp.getId());
 				modelo.addAttribute("emprendimiento",emp);
 				List<CategoriaProducto> catego= cv.buscarCategorias(emp.getId());
+				String pedidos = productoPedidoService.contadorDePedido(emp.getId());
+				String existe = seguidoresService.verificarSeguidor(emp.getId(),usuario.getId());
+				String seguidores = seguidoresService.contadorDeSeguidores(emp.getId());
+				
+				String promedioT = valoracionService.ValoracionTotal(emp.getId());
+				if(promedioT== null || promedioT == "") {
+					promedioT="0,0";
+				}
 				modelo.addAttribute("categorias",catego);
+				modelo.addAttribute("seguir",existe);
+				modelo.addAttribute("seguidores",seguidores);
+				modelo.addAttribute("pedidos",pedidos);
+				modelo.addAttribute("promedio",promedioT);
 			}
 
 		
 		return "landingPublic.html";
 	}
+	
+
 	@GetMapping("/quienessomos")
 	public String quienesSomos() {
 		
@@ -337,7 +363,6 @@ public class PortalController {
 		
 		return"soporte.html";
 	}
-	
 		
 	}
 

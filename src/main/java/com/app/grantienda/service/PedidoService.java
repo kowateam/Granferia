@@ -306,5 +306,13 @@ public class PedidoService {
 		return producto;
 	}
 	
+	public String buscarPoridpedido(String id) {
+		String producto =pr.buscarPorIdPedido(id);
+		return producto;
+	}
+	public Pedido pedido(String id) {
+		Pedido producto =pr.getById(id);
+		return producto;
+	}
 	
 }

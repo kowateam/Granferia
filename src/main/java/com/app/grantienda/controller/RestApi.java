@@ -132,14 +132,12 @@ public class RestApi {
 		seguidoresService.sumarSeguidor(idEmprendimiento,idUser);	
 }
 	
-	@GetMapping("/valorar/{tiempo}/{producto}/{servicio}/{comentario}/{idPedido}")		
-	public void valoracion(@PathVariable String tiempo,@PathVariable String producto,@PathVariable String servicio,@PathVariable String comentario,String idPedido) {
-        //String id = pedidoService.(idPedido);
-		Pedido pedido = pedidoService.pedido(idPedido);
-		String idUser = pedido.getUser().getId();
-		String idProducto= pedido.getIdProducto();
-		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, idProducto);
-			
+	@GetMapping("/valorar/{prod}/{tiempo}/{producto}/{servicio}/{comentario}")		
+	public String valoracion(@PathVariable String tiempo,@PathVariable String producto,@PathVariable String servicio,@PathVariable String comentario,@PathVariable String prod, HttpSession session) {
+		User usuario= (User) session.getAttribute("usersession");
+		String idUser = usuario.getId();
+		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, prod);
+			return tiempo;
 }
 	
 	

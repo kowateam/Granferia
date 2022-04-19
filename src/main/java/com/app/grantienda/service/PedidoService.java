@@ -124,7 +124,7 @@ public class PedidoService {
 		pr.delete(pedido);
 		
 	}
-	
+	@Transactional
     public void timerReg(Pedido pedido) {
     	
     	Timer timer =new Timer();
@@ -147,10 +147,12 @@ public class PedidoService {
 		};
     	timer.schedule(task,86400000);	
     }
+	@Transactional
 	public void guardarPedido(Pedido pedido) {
 		pr.save(pedido);
 		
 	}
+	@Transactional
 	public List<Pedido> buscarPedidoPorEmprendimiento(String idemprendimiento) {
 		List<Pedido> pedido = pr.buscarPorEmprendimiento(idemprendimiento);
 		return pedido;
@@ -226,6 +228,7 @@ public class PedidoService {
 		ns.enviar(pedido.getUser().getMail(), "Cambio en el estado de tu pedido", cuerpo);
 		return pedido;
 	}
+	@Transactional
 	public void borrarEmprendimientoEnPedido(String id,String motivo) {
 		List<Pedido> pedidos=buscarPedidoPorEmprendimiento(id);
 		for (Pedido pedido : pedidos) {
@@ -301,18 +304,36 @@ public class PedidoService {
 		}
 		
 	}
+	@Transactional
 	public Pedido buscarUltimoPedido(String id) {
 		Pedido producto =pr.buscarPorUserUltimoPedido(id);
 		return producto;
 	}
-	
+	@Transactional
 	public String buscarPoridpedido(String id) {
 		String producto =pr.buscarPorIdPedido(id);
 		return producto;
 	}
+	@Transactional
 	public Pedido pedido(String id) {
 		Pedido producto =pr.getById(id);
 		return producto;
 	}
+	@Transactional
+	public String buscarProductoPedido(String id) {
+		String producto = pr.buscarProductoPedido(id);
+		return producto;
+	}
+	@Transactional
+	public String buscaruserPedido(String id) {
+		String user = pr.buscarUserPedido(id);
+		return user;
+	}
+	@Transactional
+	public String buscarProductoPedidoPorUsuario(String iduser, String id) {
+		String user = pr.buscarProductoPedidoPorUsuario(iduser, id);
+		return user;
+	}
+	
 	
 }

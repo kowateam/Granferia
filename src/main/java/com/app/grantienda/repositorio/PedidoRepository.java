@@ -26,4 +26,15 @@ public interface PedidoRepository extends JpaRepository<Pedido,String>{
 	
 	@Query(value ="SELECT * from pedido where id = :id"  ,nativeQuery= true)
 	public Pedido buscarPedido(@Param("id")String id);
+	
+	
+	@Query(value ="SELECT user_id FROM pedido WHERE id = :id "  ,nativeQuery= true)
+	public String buscarUserPedido(@Param("id")String id);
+
+	
+	@Query(value ="SELECT id_producto FROM pedido WHERE id = :id "  ,nativeQuery= true)
+	public String buscarProductoPedido(@Param("id")String id);
+	
+	@Query(value ="SELECT id_producto FROM pedido WHERE user_id = :iduser  and id=:id"  ,nativeQuery= true)
+	public String buscarProductoPedidoPorUsuario(@Param("iduser")String iduser, @Param("id")String id);
 }

@@ -784,9 +784,14 @@ let idFotoEmprendimiento=document.querySelectorAll(".idFotoEmprendimiento")
 entregado.forEach((element,key)=>{element.addEventListener("click",function(){
 		ponerNombreEmprendimiento[0].innerHTML=nombreEmprendimiento[key].textContent
 		ponerProvinciaEmprendimiento[0].innerHTML=`${provinciaEmprendimiento[key].textContent}, ${localidadEmprendimiento[key].textContent}`
-	
 		ponerProvinciaEmprendimiento[0].style.color="white"
-	 	//ponerFotoEmprendimiento[0].src="/foto/load/"+idFotoEmprendimiento[key].textContent 
+		
+		if(idFotoEmprendimiento[key]){
+			ponerFotoEmprendimiento[0].src="/foto/load/"+idFotoEmprendimiento[key].textContent 
+		}else{
+			ponerFotoEmprendimiento[0].src=""
+		}
+		
 		preguntaConsumidor[0].classList.toggle("hidden")
 		order.id=tomarIdPedidos[key].textContent
 })})
@@ -815,9 +820,6 @@ stepThanks[0].addEventListener("submit",function(e){
 	idproducto=idproducto[0].innerText;
 	order.id=idproducto;
 	console.log(tomarIdPedidos)
-	//console.log(entregado)
-	//console.log(nombreEmprendimiento)
-	console.log(order)
 	$.ajax({
         method: "GET",
          url: base_url + "/rest/valorar/"+order.id+"/"+order.thirdQuestion+"/"+order.secondQuestion+"/"+order.firstQuestion+"/"+order.comment

@@ -494,20 +494,25 @@
 	</p>
 
 	<div class="emp-container">
-		<section class="emp" th:each="empren : ${todosEmprendimientos}">
+		<section  class="emp" th:each="empren : ${todosEmprendimientos}">
 			<!-- Cabecera -->
-			<a class="emp-head" target="_self" th:href="'/' + ${empren.regEmpDir}" title="Ver emprendimiento">
-				<span class="emp-logo" th:if="${empren.foto != null}"
-					th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
-				<span class="emp-logo default" th:if="${empren.foto == null}"></span>
-
-				<div class="emp-info">
-					<h1 th:text="${empren.regEmpNombre}">Nombre</h1>
-					<p th:text="${empren.categoria.nombre}">Categoría</p>
-					<span class="hidden" th:text="${empren.direccion.provincia.nombre}">Provincia</span>
-					<span class="hidden" th:text="${empren.direccion.localidadEmp}">Localidad</span>
-				</div>
-			</a>
+			<div id="displayFlexSpaceBet">
+				<a class="emp-head" target="_self" th:href="'/' + ${empren.regEmpDir}" title="Ver emprendimiento">
+					<span   class="emp-logo" th:if="${empren.foto != null}"
+						th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+					<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+	
+					<div class="emp-info">
+						<h1 id="nombreEmprendimiento" th:text="${empren.regEmpNombre}">Nombre</h1>
+						<p th:text="${empren.categoria.nombre}">Categoría</p>
+						<p class="hidden idEmprendimiento" th:text="${empren.id}"> </p>
+						<span class="hidden" th:text="${empren.direccion.provincia.nombre}">Provincia</span>
+						<span class="hidden" th:text="${empren.direccion.localidadEmp}">Localidad</span>
+					</div>
+				</a>
+				<a id="puntos" href="#"><img src="img/shared/puntitos.svg" alt=""></a>
+			</div>
+		
 
 			<!-- Slider -->
 			<article class="slide-row">
@@ -543,8 +548,8 @@
 									</span>
 
 									<!-- Detalles -->
-									<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
-									<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+									<span  class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+									<span  class="emp-logo default" th:if="${empren.foto == null}"></span>
 
 									<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
 
@@ -594,7 +599,7 @@
 
 									<!-- Detalles -->
 									<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
-									<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+									<span  class="emp-logo default" th:if="${empren.foto == null}"></span>
 
 									<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
 

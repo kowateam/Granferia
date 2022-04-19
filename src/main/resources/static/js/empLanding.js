@@ -28,6 +28,7 @@ noseguir.addEventListener("click",function(){
         method: "GET",
         url: base_url + "/rest/seguir/" +idEmprendimiento+"/"+idUser,
     });
+    setTimeout('location.reload()', 300);
 })
 
 guargarvariable[0].addEventListener("click",function(){
@@ -38,4 +39,5 @@ guargarvariable[0].addEventListener("click",function(){
         url: base_url + "/rest/seguir/" +idEmprendimiento+"/"+idUser,
         //data:idUser
     });
+    setTimeout('location.reload()', 300);
 })

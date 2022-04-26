@@ -119,8 +119,6 @@ public class ValoracionService {
 	public void guardarValoracion(String tiempo, String producto, String servicio, String comentario, String idUser,String idProducto) {
 	          
 		String existe = valoracionRepository.buscar(idUser, idProducto);
-		User user = userRepository.buscarUserPorId(idUser);
-	    Producto product = productoRepository.buscarProductoPorId(idProducto);
 		
 		if(existe==null) {
 		   Valoracion valoracion = new Valoracion();
@@ -128,11 +126,8 @@ public class ValoracionService {
 	         valoracion.setProductoV(producto);
 	         valoracion.setServicioV(servicio);
 	         valoracion.setComentario(comentario);
-	            
-	         
-	         valoracion.setUser(user);
-	         valoracion.setProducto(product);
-	         
+	         valoracion.setUser(idUser);
+	         valoracion.setProducto(idProducto);
 	        valoracionRepository.save(valoracion);
 		}else {
 		
@@ -142,9 +137,8 @@ public class ValoracionService {
         valoracion.setProductoV(producto);
         valoracion.setServicioV(servicio);
         valoracion.setComentario(comentario);
-           
-        valoracion.setUser(user);
-        valoracion.setProducto(product);
+        valoracion.setUser(idUser);
+        valoracion.setProducto(idProducto);
 	
         valoracionRepository.save(valoracion);   
 		}

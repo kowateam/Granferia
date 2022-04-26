@@ -824,14 +824,14 @@ stepThanks[0].addEventListener("submit",function(e){
 	let inputsComentario=document.querySelector("#step-thanks .form-control").value
 	order.average=(order.firstQuestion+order.secondQuestion+order.thirdQuestion)/3
 	order.comment=inputsComentario
-	let idusuario = $('.saveProducto');
+	let idproducto = $('.tomarIdProducto');
+	idproducto=idproducto[0].innerText;
+	order.id=idproducto;
 	console.log(tomarIdPedidos)
-	console.log(entregado)
-	console.log(nombreEmprendimiento)
-	console.log(order.id)
 	$.ajax({
         method: "GET",
-         url: base_url + "/rest/valorar/"+order.thirdQuestion+"/"+order.secondQuestion+"/"+order.firstQuestion+"/"+order.comment+"/"+order.id,
+         url: base_url + "/rest/valorar/"+order.id+"/"+order.thirdQuestion+"/"+order.secondQuestion+"/"+order.firstQuestion+"/"+order.comment
+         //+"/"+idproducto[0].innerText
     });
 	
 })

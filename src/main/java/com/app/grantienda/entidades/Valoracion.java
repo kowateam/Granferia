@@ -19,14 +19,15 @@ public class Valoracion {
 	private String servicioV;
 	private String productoV;
 	private String comentario = null;
-	
+	private String producto;
+	private String user;
 	public Valoracion() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+}
 	
 	public Valoracion(String id, String tiempoV, String servicioV, String productoV, String comentario,
-			Producto producto, User user) {
+			String producto, String user) {
 		super();
 		this.id = id;
 		this.tiempoV = tiempoV;
@@ -38,12 +39,8 @@ public class Valoracion {
 	}
 
 	
-	@OneToOne
-	private Producto producto;
 	
-	@OneToOne
-	private User user;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -84,19 +81,19 @@ public class Valoracion {
 		this.comentario = comentario;
 	}
 
-	public Producto getProducto() {
+	public String getProducto() {
 		return producto;
 	}
 
-	public void setProducto(Producto producto) {
+	public void setProducto(String producto) {
 		this.producto = producto;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 	

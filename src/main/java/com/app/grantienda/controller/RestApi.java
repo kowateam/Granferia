@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.grantienda.entidades.Foto;
 import com.app.grantienda.entidades.Pedido;
+import com.app.grantienda.entidades.Producto;
 import com.app.grantienda.entidades.User;
+import com.app.grantienda.service.CoordenadasEmpService;
 import com.app.grantienda.service.FotoService;
 import com.app.grantienda.service.NotificacionService;
 import com.app.grantienda.service.PedidoService;
@@ -38,6 +40,9 @@ public class RestApi {
 	private ValoracionService valoracionService;
 	@Autowired
 	private NotificacionService ns;
+	@Autowired
+	private CoordenadasEmpService coordenadasEmpService;
+	
 	
 	@Autowired
 	private PedidoService pedidoService;
@@ -132,16 +137,18 @@ public class RestApi {
 		seguidoresService.sumarSeguidor(idEmprendimiento,idUser);	
 }
 	
-	@GetMapping("/valorar/{tiempo}/{producto}/{servicio}/{comentario}/{idPedido}")		
-	public void valoracion(@PathVariable String tiempo,@PathVariable String producto,@PathVariable String servicio,@PathVariable String comentario,String idPedido) {
-        //String id = pedidoService.(idPedido);
-		Pedido pedido = pedidoService.pedido(idPedido);
-		String idUser = pedido.getUser().getId();
-		String idProducto= pedido.getIdProducto();
-		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, idProducto);
-			
+	@GetMapping("/valorar/{prod}/{tiempo}/{producto}/{servicio}/{comentario}")		
+	public String valoracion(@PathVariable String tiempo,@PathVariable String producto,@PathVariable String servicio,@PathVariable String comentario,@PathVariable String prod, HttpSession session) {
+		User usuario= (User) session.getAttribute("usersession");
+		String idUser = usuario.getId();
+		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, prod);
+			return tiempo;
 }
-	
+	@GetMapping("/gps/{latitud}/{longitud}")		
+	public void AgregarLocalizacion(@PathVariable double latitud,@PathVariable double longitud) {
+
+		coordenadasEmpService.saveCoordenadas(latitud, longitud);
+}
 	
 	
 }

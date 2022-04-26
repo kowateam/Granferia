@@ -278,6 +278,9 @@
 										<div th:each="ped,count : ${ped}">
                                            <p th:text="${ped.id}" class="tomarIdPedidos hidden"></p>
 										</div>
+										<div th:each="product,count : ${ped}">
+                                           <p th:text="${product.idProducto}" class="tomarIdProducto hidden"></p>
+										</div>
 										<!-- Detalles del pedido -->
 										<div class="row x2">
 											<div class="col-8" th:each="prod,count : ${ped.productos}">

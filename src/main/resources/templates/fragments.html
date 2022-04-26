@@ -497,7 +497,20 @@
 		<section  class="emp" th:each="empren : ${todosEmprendimientos}">
 			<!-- Cabecera -->
 			<div id="displayFlexSpaceBet">
-				<a class="emp-head" target="_self" th:href="'/' + ${empren.regEmpDir}" title="Ver emprendimiento">
+				<a class="emp-head" target="_self" th:if="${session.usersession != null}" th:href="'/' + ${empren.regEmpDir}" title="Ver emprendimiento">
+					<span   class="emp-logo" th:if="${empren.foto != null}"
+						th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+					<span class="emp-logo default" th:if="${empren.foto == null}"></span>
+	
+					<div class="emp-info">
+						<h1 id="nombreEmprendimiento" th:text="${empren.regEmpNombre}">Nombre</h1>
+						<p th:text="${empren.categoria.nombre}">Categoría</p>
+						<p class="hidden idEmprendimiento" th:text="${empren.id}"> </p>
+						<span class="hidden" th:text="${empren.direccion.provincia.nombre}">Provincia</span>
+						<span class="hidden" th:text="${empren.direccion.localidadEmp}">Localidad</span>
+					</div>
+				</a>
+				<a class="emp-head" target="_self" th:if="${session.usersession == null}" th:href="'/ingresar'" title="Ver emprendimiento">
 					<span   class="emp-logo" th:if="${empren.foto != null}"
 						th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
 					<span class="emp-logo default" th:if="${empren.foto == null}"></span>

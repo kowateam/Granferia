@@ -46,14 +46,12 @@
 
 		<div th:replace="fragments :: use-cookies"></div>
 	</span>
-
-	<!-- Buscar / Filtrar -->
-	<div th:replace="fragments :: g-buscar-filtrar"></div>
-	
-
 	<!-- Navegación flotante -->
 	<div th:replace="fragments :: floating-menu"></div>
-
+	
+	
+	
+	
 	<div class="main-container">
 		<!-- (IZQUIERDA) -->
 		<div th:replace="fragments :: segment-menu"></div>
@@ -141,6 +139,30 @@
 					<span class="btnEmpMasTarde underline text--center">Ocultar</span>
 				</div>
 			</div>
+			<div class="container container33 x5">
+		<div class="row">
+			<div class="col-xs-12">
+				<p>Productos destacados</p>
+				
+				<div class="emp-container">
+					
+						<!-- Slider -->
+						<article class="slide-row">
+							<div id="prodDestacados" class="content">
+				
+								
+				
+								<!-- Card de producto o servicio -->
+								
+				
+							</div>
+						</article>
+				
+						
+					</div>
+			</div>
+		</div>
+	</div>
 
 			<!-- Listado de emprendimientos -->
 			<div class="container x5">
@@ -165,13 +187,19 @@
 		</div>
 
 	</div>
-	<section class="modal-container hidden" id="modalSeguir">
+	<!-- Buscar / Filtrar -->
+	<div th:replace="fragments :: g-buscar-filtrar"></div>
+	
+
+
+
+	<section class="modal-container hidden"  id="modalSeguir">
 
 		<div id="editQuestion" class="modal-content">
 	
 	
 				
-					<button id="editQuestion2" class="btn right seguirEmprendimiento"  type="button">Seguir emprendimiento</button>
+					<button  id="editQuestion2" class="btn right seguirEmprendimiento"  type="button">Seguir emprendimiento</button>
 					<button id="editQuestion2" class="btn right irEmprendimiento"  type="button">Ver emprendimiento</button>
 					<button class="btn close-modal" type="button">Atras</button>
 		
@@ -183,126 +211,7 @@
 		<span class="overlay"></span>
 	</section>
 
-	<div class="container x5">
-		<div class="row">
-			<div class="col-xs-12">
-				<p>Productos destacados</p>
-
-				<div class="emp-container">
-					<section  class="emp" th:each="empren : ${todosEmprendimientos}">
-					
-						<!-- Slider -->
-						<article class="slide-row">
-							<div class="content">
-				
-								<!-- Cita / Frase del emprendimiento -->
-								<span>
-									<div class="slide-card main">
-										<p>"<span th:text="${empren.regEmpDescripcion}"></span>"</p>
-									</div>
-								</span>
-				
-								<!-- Card de producto o servicio -->
-								<span th:each="prod , e : ${empren.productos}">
-									<span th:each="fot , i : ${prod.foto}">
-										<div class="slide-card prod" th:if="${i.index == 0 and e.index lt 3}"
-											th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
-											<p class="alt">Fotografía</p>
-				
-											<span class="show-details"></span>
-				
-											<div class="slide-details hidden ">
-												<span  class="icon save">
-													<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
-													<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
-													
-													<img  class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
-													<img  class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
-												</span>
-				
-												<span class="icon close">
-													<img src="/img/gt/card/close.png" alt="Cerrar">
-												</span>
-				
-												<!-- Detalles -->
-												<span  class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
-												<span  class="emp-logo default" th:if="${empren.foto == null}"></span>
-				
-												<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
-				
-												<span th:if="${prod.aCotizar != 'aCotizar'}">
-													<p class="price offer" th:if="${prod.oferta == 'oferta'}">$<span class="ammount" th:text="${prod.precioOferta}">Precio oferta</span></p>
-													<p class="price">$<span class="ammount" th:text="${prod.precio}">Precio</span></p>
-												</span>
-				
-												<span th:if="${prod.aCotizar == 'aCotizar'}">
-													<button class="btn btn-secondary quote" type="button">A cotizar</button>
-												</span>
-				
-												<a class="btn-details" target="_self"
-													th:href="@{/producto/} + ${prod.id} +'/'+ ${empren.id}">Ver detalles</a>
-											</div>
-										</div>
-									</span>
-								</span>
-				
-							</div>
-						</article>
-				
-						<article class="slide-row">
-							<div class="content">
-				
-								<!-- Card de producto o servicio -->
-								<span th:each="prod , e : ${empren.productos}">
-									<span th:each="fot , i : ${prod.foto}">
-										<div class="slide-card" th:if="${i.index == 0 and e.index lt 8 and e.index ge 4}"
-											th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
-											<p class="alt">Fotografía</p>
-				
-											<span class="show-details"></span>
-				
-											<div class="slide-details hidden">
-												<span class="icon save">
-													<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
-													<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
-													
-													<img class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
-													<img class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
-												</span>
-				
-												<span class="icon close">
-													<img src="/img/gt/card/close.png" alt="Cerrar">
-												</span>
-				
-												<!-- Detalles -->
-												<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
-												<span  class="emp-logo default" th:if="${empren.foto == null}"></span>
-				
-												<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
-				
-												<span th:if="${prod.aCotizar != 'aCotizar'}">
-													<p class="price offer" th:if="${prod.oferta == 'oferta'}">$<span class="ammount" th:text="${prod.precioOferta}">Precio oferta</span></p>
-													<p class="price">$<span class="ammount" th:text="${prod.precio}">Precio</span></p>
-												</span>
-				
-												<span th:if="${prod.aCotizar == 'aCotizar'}">
-													<button class="btn btn-secondary quote" type="button">A cotizar</button>
-												</span>
-				
-												<a class="btn-details" target="_self"
-													th:href="@{/producto/} + ${prod.id} +'/'+ ${empren.id}">Ver detalles</a>
-											</div>
-										</div>
-									</span>
-								</span>
-								
-							</div>
-						</article>
-					</section>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	
 	<div th:replace="fragments :: footer"></div>
@@ -310,8 +219,9 @@
 
 <!-- Javascript -->
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/scripts.js"></script>
 <script type="text/javascript" src="/js/puntitos.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+
 <script type="text/javascript" src="/js/pedidos.js"></script>
 
 <script>

@@ -1,4 +1,4 @@
-var base_url = window.location.origin;
+ar base_url = window.location.origin;
 let puntitos=document.querySelectorAll("#puntos")
 let modalSeguir=document.querySelectorAll("#modalSeguir")
 let moveBack=document.querySelectorAll("#moveBack")
@@ -25,4 +25,57 @@ puntitos.forEach((element,key)=>{
         })})
     })
 })
+$.ajax({
+    method: "GET",
+    url: base_url + "url",
+}).done(function(data) {
+    let result= JSON.parse(data) 
+    renderCarru(result)
+  });
+function renderCarru(obj){
+    
+//let arrayDeObjetos=[{nombre:"pancho",img:"/foto/load/4281ac29-d9ab-4cc5-a708-d86446be9f9c"},{nombre:"pancho",img:"/foto/load/4281ac29-d9ab-4cc5-a708-d86446be9f9c"},{nombre:"pancho",img:"/foto/load/4281ac29-d9ab-4cc5-a708-d86446be9f9c"},{nombre:"pedro",img:"/foto/load/4281ac29-d9ab-4cc5-a708-d86446be9f9c"}]
+let arrayDeObjetos=obj;
+let prodDestacados=document.querySelector("#prodDestacados")
+for(let i=0;i<arrayDeObjetos.length;i++){
+    prodDestacados.innerHTML+=`<span >
+    <div class="slide-card prod" style="background:url(${arrayDeObjetos[i].img}); background-size: auto 100%" >
+       
+
+        <span class="show-details "></span>
+
+        <div class="slide-details  hidden ">
+            <span  class="icon save">
+                <p class="idSaveProducto hidden" ></p>
+                <p class="idSaveUsuario hidden" ></p>
+                
+                <img  class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
+                <img  class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
+            </span>
+
+            <span class="icon close">
+                <img src="/img/gt/card/close.png" alt="Cerrar">
+            </span>
+
+            <!-- Detalles -->
+            <span  class="emp-logo" ></span>
+            <span  class="emp-logo default" ></span>
+
+            <p class="name" >${arrayDeObjetos[i].nombre}</p>
+
+            <span >
+                <p class="price offer" >$<span class="ammount" >Precio oferta</span></p>
+                <p class="price">$<span class="ammount" >Precio</span></p>
+            </span>
+
+            <span >
+                <button class="btn btn-secondary quote" type="button">A cotizar</button>
+            </span>
+
+            <a class="btn-details" target="_self">Ver detalles</a>
+        </div>
+    </div>
+</span>`
+    
+}}
 

@@ -41,3 +41,4 @@ guargarvariable[0].addEventListener("click",function(){
     });
     setTimeout('location.reload()', 300);
 })
+

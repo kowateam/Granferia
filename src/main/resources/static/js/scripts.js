@@ -96,7 +96,7 @@ $('.menu-p').click(function () {
 	$('.main-container').scrollLeft(left * 2);
 	$('.floating-menu .row').addClass('hidden');
 	$('.floating-menu #menu-profile').removeClass('hidden');
-
+	$('.container33').addClass('hidden');
 	setTimeout(function () {
 		$('#segment-main').addClass('vh');
 		$('body, html').scrollTop(0);
@@ -140,6 +140,7 @@ $('.menu-h, .m-close, header .logo').click(function () {
 	$('.floating-menu #main-menu').removeClass('hidden');
 	$('#segment-main').removeClass('vh');
 	$('.main-container').scrollLeft(left);
+	$('.container33').removeClass('hidden');
 });
 
 // Ocultar banner / Guardar crear emp
@@ -161,9 +162,16 @@ $('.btnEmpMasTarde').click(function () {
 // --------------------------------------------
 // Mostrar / Ocultar detalles de cards
 $('.slide-card .show-details').click(function () {
+	console.log("toco")
 	$(this).addClass('hidden');
 	$(this).parent('.slide-card').find('.slide-details').removeClass('hidden');
 });
+
+$('.slide-card .close').click(function () {
+	$(this).closest('.slide-card').find('.slide-details').addClass('hidden');
+	$(this).closest('.slide-card').find('.show-details').removeClass('hidden');
+});
+
 
 $('.slide-card .close').click(function () {
 	$(this).closest('.slide-card').find('.slide-details').addClass('hidden');

@@ -31,5 +31,9 @@ public interface ProductoRepositorio extends JpaRepository<Producto,String> {
 		@Query(value="SELECT * FROM producto LEFT OUTER JOIN emprendimiento_productos on producto.id = emprendimiento_productos.productos_id where emprendimiento_productos.emprendimiento_id like :id",nativeQuery = true)
 		public List<Producto> buscarProductosPorEmprendimiento(@Param("id") String id);
 
-
+		@Query(value="SELECT * FROM producto",nativeQuery = true)
+		public List<Producto> buscarTodosproductos();
+		
+		@Query(value="SELECT id FROM producto",nativeQuery = true)
+		public String[] buscarTodosIdsproductos();
 }

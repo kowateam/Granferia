@@ -1,5 +1,9 @@
 package com.app.grantienda.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,7 +146,40 @@ public class ValoracionService {
 	
         valoracionRepository.save(valoracion);   
 		}
-	}        
+	}    
+	@Transactional
+	public List<Producto> masValorados() {
+		List<Producto> lista;
+		List<Producto> lista2;
+		lista = new ArrayList<>();
+		lista2 = new ArrayList<>();
+		String[] ids = productoRepository.buscarTodosIdsproductos();
+		Random ran = new Random();
+		for(int i = 0; i < ids.length;i++) {
+			String num = this.ValoracionP(ids[i]);
+			if(num=="") {}
+			else {
+				double val = Double.valueOf(num);
+				if(val >= 4) {
+					Producto prod = productoRepository.buscarProductoPorId(ids[i]);
+					lista.add(prod);
+				}
+			}
+		}
+		if(lista.size()>8) {
+			for(int i = 0; i <8;i++) {
+				int random= ran.nextInt(lista.size());
+				lista2.add(lista.get(random));
+			}
+			return lista2;
+			
+		}
+		
+		return lista;
+	}
+	
+	
+	
 	            
 	}
 	

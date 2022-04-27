@@ -148,15 +148,53 @@
 					
 						<!-- Slider -->
 						<article class="slide-row">
-							<div id="prodDestacados" class="content">
-				
-								
-				
-								<!-- Card de producto o servicio -->
-								
-				
+				<div class="content">
+
+					<!-- Card de producto o servicio -->
+					<span th:each="prod , e : ${masvalorados}">
+						<span th:each="fot , i : ${prod.foto}">
+							<div class="slide-card" th:if="${i.index == 0 and e.index lt 8 and e.index ge 4}"
+								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+								<p class="alt">Fotografía</p>
+
+								<span class="show-details"></span>
+
+								<div class="slide-details hidden">
+									<span class="icon save">
+										<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
+										<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
+										
+										<img class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
+										<img class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
+									</span>
+
+									<span class="icon close">
+										<img src="/img/gt/card/close.png" alt="Cerrar">
+									</span>
+
+									<!-- Detalles -->
+									<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
+									<span  class="emp-logo default" th:if="${empren.foto == null}"></span>
+
+									<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
+
+									<span th:if="${prod.aCotizar != 'aCotizar'}">
+										<p class="price offer" th:if="${prod.oferta == 'oferta'}">$<span class="ammount" th:text="${prod.precioOferta}">Precio oferta</span></p>
+										<p class="price">$<span class="ammount" th:text="${prod.precio}">Precio</span></p>
+									</span>
+
+									<span th:if="${prod.aCotizar == 'aCotizar'}">
+										<button class="btn btn-secondary quote" type="button">A cotizar</button>
+									</span>
+
+						
+								</div>
 							</div>
-						</article>
+						</span>
+					</span>
+					
+				</div>
+			</article>
 				
 						
 					</div>

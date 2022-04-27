@@ -96,6 +96,8 @@ public class PortalController {
 				return"redirect:inicio";
 			}
 			List<Emprendimiento>todosEmprendimientos=es.buscartodos();
+			List<Producto> lista = valoracionService.masValorados();
+			modelo.addAttribute("masvalorados",lista);
 			modelo.addAttribute("todosEmprendimientos",todosEmprendimientos);
 			modelo.addAttribute("provincias",Provincias.values());
 		return "index.html";

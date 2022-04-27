@@ -36,4 +36,8 @@ public interface ProductoRepositorio extends JpaRepository<Producto,String> {
 		
 		@Query(value="SELECT id FROM producto",nativeQuery = true)
 		public String[] buscarTodosIdsproductos();
+		
+		@Query(value="SELECT emprendimiento_id FROM emprendimiento_productos WHERE producto_id=:id",nativeQuery = true)
+		public String buscarIdEmprendimiento(@Param("id") String id);
+		
 }

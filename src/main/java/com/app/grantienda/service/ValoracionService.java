@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.app.grantienda.entidades.Producto;
 import com.app.grantienda.entidades.User;
 import com.app.grantienda.entidades.Valoracion;
+import com.app.grantienda.repositorio.EmprendimientoRepositorio;
 import com.app.grantienda.repositorio.ProductoRepositorio;
 import com.app.grantienda.repositorio.UserRepository;
 import com.app.grantienda.repositorio.ValoracionRepository;
@@ -27,6 +28,8 @@ public class ValoracionService {
 	private UserRepository userRepository ;
 	@Autowired
 	private ProductoRepositorio productoRepository ;
+	@Autowired
+	private EmprendimientoRepositorio emprendimientoRepository ;
 	@Transactional
 	public String ValoracionP(String id) {
 		
@@ -162,12 +165,15 @@ public class ValoracionService {
 				double val = Double.valueOf(num);
 				if(val >= 4) {
 					Producto prod = productoRepository.buscarProductoPorId(ids[i]);
+					
 					lista.add(prod);
 				}
 			}
 		}
+		
 		if(lista.size()>8) {
 			for(int i = 0; i <8;i++) {
+				
 				int random= ran.nextInt(lista.size());
 				lista2.add(lista.get(random));
 			}
@@ -178,7 +184,28 @@ public class ValoracionService {
 		return lista;
 	}
 	
+	@Transactional
+	public List<String> listaidsemprendimientos(List<Producto> lista) {
+		List<String> ids;
+		ids= new ArrayList<>();
+		for(int i = 0; i<lista.size();i++) {
+			String id = lista.get(i).getId();
+			ids.add(productoRepository.buscarIdEmprendimiento(id));
+		}
+		return ids;
+	}
 	
+	
+	@Transactional
+	public List<String> listaidsemprendimientosFotos(List<String> lista) {
+		List<String> ids;
+		ids= new ArrayList<>();
+		for(int i = 0; i<lista.size();i++) {
+			String id = lista.get(i);
+			ids.add(emprendimientoRepository.buscariddefoto(id));
+		}
+		return ids;
+	}
 	
 	            
 	}

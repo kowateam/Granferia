@@ -39,5 +39,6 @@ public interface EmprendimientoRepositorio extends JpaRepository<Emprendimiento,
 	@Query("SELECT c FROM Emprendimiento c where c.regEmpDir LIKE :direccionweb")
 	public Emprendimiento buscarUnoPorNombrePagina(@Param("direccionweb") String direccionweb);
 
-	
+	@Query(value="SELECT foto_id FROM Emprendimiento where id=:id",nativeQuery = true)
+	public String buscariddefoto(@Param("id") String id);
 }

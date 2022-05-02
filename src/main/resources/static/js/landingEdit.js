@@ -406,13 +406,13 @@ function cargaForm() {
 }
 
 // Botón "Pedidos"
-var cantidadPedidos = $('#btnEmpPedidos .pedidos-count').text();
+/* var cantidadPedidos = $('#btnEmpPedidos .pedidos-count').text();
 
 if (cantidadPedidos == 0) {
     $('#btnEmpPedidos').addClass('disabled');
 } else {
     $('#btnEmpPedidos').removeClass('disabled');
-}
+} */
 
 // Cantidad de productos en categorias
 $('.emp').each(function () {

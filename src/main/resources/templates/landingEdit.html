@@ -137,7 +137,7 @@
 
 					<div class="row">
 						<div class="col-xs-12">
-							<a class="btn btn-highlight x3 disabled" id="btnEmpPedidos" target="_self" th:href="@{/pedido/lista/} + ${emprendimiento.id}">Pedidos
+							<a class="btn btn-highlight x3" id="btnEmpPedidos" target="_self" th:href="@{/pedido/lista/} + ${emprendimiento.id}">Pedidos
 								pendientes (<span class="pedidos-count" th:text="${cantidad}">0</span>)</a>
 
 							<section class="emp x0">
@@ -281,6 +281,9 @@
 						<div class="col-xs-12">
 							<span th:if="${emprendimiento.membresia == 'GRATIS' }">
 								<button th:if="${emprendimiento.productos.size() le 3}"class="btn btn-primary x2" id="btnCargarF" type="button">Cargar nuevo</button>
+							</span>
+							<span >
+								<button class="btn btn-primary x2 x2--top" type="button">Activa la ubicación</button>
 							</span>
 
 							<span th:if="${emprendimiento.membresia == 'PREMIUM'}">

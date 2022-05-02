@@ -58,7 +58,18 @@
 	</section>
 
 	<!-- Navegación flotante -->
-	<div th:replace="fragments :: floating-menu"></div>
+	<nav class="floating-menu inner-page">
+		<div class="container">
+			<div class="row one-item">
+				<div class="col-xs-12">
+					<div class="menu-item full--width" onclick="history.back()">
+						<img src="/img/gt/nav/close.svg" alt="Cerrar" title="Cerrar página">
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</nav>
 
 	
 	<div id="idClickHidden2" class="main-container x5 public-landing">

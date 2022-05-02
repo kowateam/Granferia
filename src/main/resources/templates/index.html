@@ -32,6 +32,19 @@
 </script>
 
 <body>
+	<div class ="hidden" th:if=" ${masvalorados} != null">
+		<span th:each="proe,i : ${idEmp}">
+			<label id="idEmprendimientoValorado" th:text="${proe}"></label>
+		</span>
+		<span  th:each="proa,i : ${idfotos}">
+			<label id="idFotoProdValorado" th:text="${proa}"></label>
+		</span>
+		<span  th:each="pro,i : ${masvalorados}">
+		<label id="idProductoValorado" th:text="${pro.id}"></label>
+		</span>
+	
+	</div>
+
 	<span th:if="${cookie != null}">
 		<span class="loading-spinner" id="loading-short">
 			<img src="/img/gt/spinner.gif" width="300" height="300" alt="Cargando">
@@ -140,65 +153,101 @@
 				</div>
 			</div>
 			<div class="container container33 x5">
-		<div class="row">
-			<div class="col-xs-12">
-				<p>Productos destacados</p>
-				
-				<div class="emp-container">
-					
+				<div class="row">
+						<div class="col-xs-12">
+							<p class="productosDestacados">Destacados en granferia</p>
+						<p class="productosDestacados2">Descubri los productos destacados de </p>
+							<p class="productosDestacados3">este mes. </p>
+
+								<div class="emp-container">
+
 						<!-- Slider -->
 						<article class="slide-row">
-				<div class="content">
+								<div class="content">
 
 					<!-- Card de producto o servicio -->
-					<span th:each="prod , e : ${masvalorados}">
-						<span th:each="fot , i : ${prod.foto}">
-							<div class="slide-card" th:if="${i.index == 0 and e.index lt 8 and e.index ge 4}"
-								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
-								<p class="alt">Fotografía</p>
+							<span th:each="prod , e : ${masvalorados}">
+							<span th:each="fot , e : ${prod.foto}">
+							<div th:if="${e.index==0}" class="slide-card slide-card2"
+							th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+							<p class="alt"></p>
 
-								<span class="show-details"></span>
+							<span class="show-details"></span>
 
-								<div class="slide-details hidden">
-									<span class="icon save">
-										<p class="idSaveProducto hidden" th:text="${prod.id}"></p>
-										<p class="idSaveUsuario hidden" th:if="${session.usersession}" th:text="${session.usersession.id}"></p>
-										
-										<img class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
-										<img class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
-									</span>
+							<div class="slide-details
+							 hidden">
+								
 
-									<span class="icon close">
-										<img src="/img/gt/card/close.png" alt="Cerrar">
-									</span>
+								<span class="icon close">
+									<img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
+								</span>
 
-									<!-- Detalles -->
-									<span class="emp-logo" th:if="${empren.foto != null}" th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
-									<span  class="emp-logo default" th:if="${empren.foto == null}"></span>
+								<!-- Detalles -->
+							
+								<span class="logoValorado emp-logo emp-logo2" ></span>
+								
 
-									<p class="name" th:text="${prod.nombreProductoServicio}">Nombre</p>
+								<p class="name name2" th:text="${prod.nombreProductoServicio}">Nombre</p>
 
-									<span th:if="${prod.aCotizar != 'aCotizar'}">
-										<p class="price offer" th:if="${prod.oferta == 'oferta'}">$<span class="ammount" th:text="${prod.precioOferta}">Precio oferta</span></p>
-										<p class="price">$<span class="ammount" th:text="${prod.precio}">Precio</span></p>
-									</span>
 
-									<span th:if="${prod.aCotizar == 'aCotizar'}">
-										<button class="btn btn-secondary quote" type="button">A cotizar</button>
-									</span>
-
-						
-								</div>
+								<a id="btn-ir" class="btn-details btn-details2" target="_self"
+									>Ver detalles</a> 
 							</div>
-						</span>
+						</div>
 					</span>
-					
+				</span>
+				</span>
 				</div>
-			</article>
-				
-						
+			</article>	   
 					</div>
 			</div>
+		<!-- 	<a class="btn btn-large btn-primary maxx" target="_self">Activar ubicación</a> -->
+			<div class="col-xs-12 marginnn">
+				<p class="productosDestacados">Emprendimientos cerca tuyo</p>
+
+
+					<div class="emp-container">
+
+			<!-- Slider -->
+			<article class="slide-row">
+					<div class="content">
+
+		<!-- Card de producto o servicio -->
+				<span th:each="prod , e : ${masvalorados}">
+				<span th:each="fot , e : ${prod.foto}">
+				<div th:if="${e.index==0}" class="slide-card slide-card2"
+				th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+				<p class="alt"></p>
+
+				<span class="show-details"></span>
+
+				<div class="slide-details
+				 hidden">
+					
+
+					<span class="icon close">
+						<img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
+					</span>
+
+					<!-- Detalles -->
+				
+					<span class="logoValorado emp-logo emp-logo2" ></span>
+					
+
+					<p class="name name2" th:text="${prod.nombreProductoServicio}">Nombre</p>
+
+
+					<a id="btn-ir" class="btn-details btn-details2" target="_self"
+						>Ver detalles</a> 
+				</div>
+			</div>
+		</span>
+	</span>
+	</span>
+	</div>
+</article>	   
+		</div>
+</div>
 		</div>
 	</div>
 
@@ -243,6 +292,24 @@
 		
 			
 			<!-- Preguntas -->
+		
+		</div>
+	
+		<span class="overlay"></span>
+	</section>
+	<section class="modal-container" >
+
+		<div  class="modal-content">
+	
+	         <p class="pone">Activar ubicación</p>
+			 <p class="ptwo">Para continuar, activa la ubicación que usa el servicio de ubicación del sitio web</p>
+				
+				
+			<div class="btn-container">
+				<button class="btn close-modal" type="button">Cancelar</button>
+				<button class="btn right"  type="button">Activar</button>
+			</div>
+
 		
 		</div>
 	

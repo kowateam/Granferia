@@ -1,4 +1,4 @@
-ar base_url = window.location.origin;
+var base_url = window.location.origin;
 let puntitos=document.querySelectorAll("#puntos")
 let modalSeguir=document.querySelectorAll("#modalSeguir")
 let moveBack=document.querySelectorAll("#moveBack")
@@ -25,6 +25,7 @@ puntitos.forEach((element,key)=>{
         })})
     })
 })
+/* 
 $.ajax({
     method: "GET",
     url: base_url + "url",
@@ -78,4 +79,27 @@ for(let i=0;i<arrayDeObjetos.length;i++){
 </span>`
     
 }}
+ */
 
+let idFotoProdValorado= document.querySelectorAll("#idFotoProdValorado")
+let idEmprendimientoValorado=document.querySelectorAll("#idEmprendimientoValorado")
+let idProductoValorado=document.querySelectorAll("#idProductoValorado")
+let btnIr=document.querySelectorAll("#btn-ir")
+
+let logoValorado=document.querySelectorAll(".logoValorado")
+logoValorado.forEach((element,index)=>{
+    const base="url("
+    const adicional="/foto/load/"
+    let linkEmp=base_url+"/producto/"+idProductoValorado[index].textContent+"/"+idEmprendimientoValorado[index].textContent
+    if(idFotoProdValorado[index].textContent){
+        element.style.background=base+base_url+adicional+idFotoProdValorado[index].textContent
+        element.style.backgroundSize="cover"
+        
+    }
+    else{
+        element.classList.add("default")
+    }
+    btnIr[index].setAttribute("href",linkEmp)
+})
+//<a class="btn-details" target="_self"
+//									th:href="@{/producto/} + ${prod.id} +'/'+ ${empren.id}">Ver detalles</a> 

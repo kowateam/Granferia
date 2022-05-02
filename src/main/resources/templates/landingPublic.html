@@ -100,7 +100,7 @@
 						
 						</div>
 						<div class="p-seguir-emprendimiento">
-							<p class="parraforEmprendimiento">Nacimos de la pasion por el cuero y el campo asdasdasdasd</p>
+							<p class="parraforEmprendimiento emp-description"  th:text="${emprendimiento.regEmpDescripcion}">Nacimos de la pasion por el cuero y el campo asdasdasdasd</p>
 							<div class="btn-seguir-emprendimiento">
 							    <button class="btn btn-border" th:if="${seguir!='true'}">Seguir</button>
 							</div>
@@ -109,7 +109,7 @@
 							</div>
                            
 							<p class="estadisticasEmprendimiento">Estadisticas</p>
-							<p th:text="${seguir}">Estadisticas</p>
+							
 							<div class="flex-father">
 							<div class="flex-column">
 								<p class="number" th:text="${seguidores}"></p>
@@ -137,7 +137,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<section class="emp">
-							<p class="emp-description" th:text="${emprendimiento.regEmpDescripcion}">Descripción</p>
+							
 						</section>
 					</div>
 				</div>
@@ -191,117 +191,7 @@
 		</div>
 	</div>
 
-	<div id="idClickHidden" class="main-container hidden">
-		<!-- (IZQUIERDA) -->
-		<div th:replace="fragments :: segment-menu"></div>
-
-		<!-- (CENTRAL) -->
-		<div class="segment" id="segment-main">
-			<header>
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-12">
-							<img class="logo img-b close-search profile-clear" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
-							<img class="logo img-w close-search profile-clear" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
-						</div>
-					</div>
-				</div>
-			</header>
-
-			<!-- Header Bienvenida -->
-			<div class="container" th:if="${session.usersession == null}">
-				<div class="row">
-					<div class="col-xs-12 col-lg-6">
-						<div class="banner">
-							<h1>Te damos la bienvenida a granferia.</h1>
-							<div class="col-xs-12 col-lg-6">
-									<div class="homePageWidth">
-										<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
-									</div>
-							</div>
-							<p class="x2">Podés navegar, descubrir y guardar lo que más te gusta, realizá tus pedidos en
-								dos simples pasos.</p>
-							<p class="x2">Además podés crear tu propio stand y mostrar lo que haces a la comunidad
-								emprendedora.</p>
-
-							<div class="hidden-xs">
-								<a class="btn btn-primary" href="/crearcuenta" target="_self">Crear cuenta</a>
-								<a class="underline text--center" href="/ingresar" target="_self">Ingresar</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-lg-6">
-							<div class="homePageWidth1">
-								<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
-							</div>
-					</div>
-				</div>
-
-				<div class="hidden-lg banner x0--top">
-					<a class="btn btn-primary" href="/crearcuenta" target="_self">Crear cuenta</a>
-					<a class="underline text--center" href="/ingresar" target="_self">Ingresar</a>
-				</div>
-			</div>
-
-			<!-- Header crear -->
-			<div class="container banner crear-emp-first" id="main-banner" th:if="${session.usersession != null && session.usersession.crearEmpNotifi != true && session.usersession.mostrarCrearEmp != true}" sec:authorize="hasAnyRole('ROLE_USER')">
-				<div class="row">
-					<div class="col-xs-12 col-lg-6">
-						<div class="banner">
-							<h1>Tu emprendimiento en granferia.</h1>
-							<div class="col-xs-12 col-lg-6">
-								<div class="homePageWidth">
-									<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
-								</div>
-						</div>
-							<p class="x2">Creá y personalizá tu stand para mostrar tus productos en granferia, conocé <a class="underline x0 x0--top x0--left x0--right" style="display: inline-block; width: auto;" href="/emp/elegircuenta" target="_self">nuestros planes</a>.</p>
-
-							<div class="hidden-xs">
-								<span id="iduser" th:text="${session.usersession.id}" hidden></span>
-								<a class="btn btn-large btn-primary" href="/emp/elegircuenta" target="_self">Crear emprendimiento gratis</a>
-								<span class="btnEmpMasTarde underline text--center">Ocultar</span>
-							</div>
-						</div>
-					</div>
-
-					
-					<div class="col-xs-12 col-lg-6">
-						<div class="homePageWidth1">
-							<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
-						</div>
-				</div>
-				</div>
-
-				<div class="hidden-lg x0--top">
-					<a class="btn btn-primary" href="/emp/elegircuenta" target="_self">Crear emprendimiento gratis</a>
-					<span class="btnEmpMasTarde underline text--center">Ocultar</span>
-				</div>
-			</div>
-
-			<!-- Listado de emprendimientos -->
-			<div class="container x5">
-				<div class="row">
-					<div class="col-xs-12">
-						<!-- Seccion emprendimiento -->
-						<div th:replace="fragments :: emprendimiento-home"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div th:replace="fragments :: segment-profile"></div>
-
-		<!-- Redirección al perfil-->
-		<div th:if="${session.volverperfil != null}">
-			<script>
-				$(function () {
-					openProfile();
-				});
-			</script>
-		</div>
-
-	</div>
+	
 	
 	<div th:replace="fragments :: footer"></div>
 </body>

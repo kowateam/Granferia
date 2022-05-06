@@ -10,6 +10,79 @@ $('#btnAcceptCookies').click(function () {
 	$('.cookies').addClass('hidden');
 });
 
+//geolocalizacion
+
+$('.maxx').click(function(){
+	if(navigator.geolocation){
+		
+	}
+let arrEmpCer=[];
+function location(position){
+	var latitud=position.coords.latitude;
+	var longitud=position.coords.longitude;
+	console.log(latitud,longitud)
+	 $.ajax({
+		method: "GET",
+		url: base_url + "/rest/prueba",
+		 success: function(respuesta)
+      { 
+	
+	for(let i =0; i<respuesta.length; i++){
+		lat1=latitud
+	      lon1=longitud
+	      lat2=respuesta[i].longitud
+	      lon2=respuesta[i].latitud
+          rad = function(x) {return x*Math.PI/180;}
+          var R = 6378.137; //Radio de la tierra en km
+          var dLat = rad( lat2 - lat1 );
+          var dLong = rad( lon2 - lon1 );
+          var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong/2) * Math.sin(dLong/2);
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          var d = R * c;
+          if(d.toFixed(3)<=5){
+		        
+	         console.log( respuesta[i].emp)
+	$.ajax({
+		method: "GET",
+		url: base_url + "/rest/todosEmp/"+ respuesta[i].emp,
+		 success: function(res)
+      { 
+	let a={
+		idFotoEmp:res[0],
+		idEmp:res[1],
+		nom:res[2],
+		cate:res[3],
+		idFotoProd:res[4],
+		km:d.toFixed(3)		
+	}
+	arrEmpCer.push(a)
+	console.log(a)
+	}
+	})
+      
+}
+          //Retorna tres decimales
+         
+  
+	     // console.log(respuesta)
+		
+	}
+console.log(arrEmpCer)
+ 
+	      
+}
+		
+	});
+	
+}
+function error(e){
+	console.log(e)
+}
+navigator.geolocation.getCurrentPosition(location,error);
+console.log("array de objetos: "+arrEmpCer)
+})
+
+
 // BUSCAR
 // --------------------------------------------
 $('#emp-results').text($('.emp-container .emp').length);

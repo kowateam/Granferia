@@ -478,5 +478,11 @@ public class EmprendimientoService {
 			};
 	    	timer.schedule(task,6000*60*60*24*30);	
 	    }
+	  
+	  public Emprendimiento todos(String id) {
+	    	
+	    	Emprendimiento a = er.todos(id);
+	    	return a;
+	    }
 
 }

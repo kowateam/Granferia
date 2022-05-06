@@ -251,6 +251,14 @@ public class Emprendimiento {
 	public void setContadorPedidos(Integer contadorPedidos) {
 		this.contadorPedidos = contadorPedidos;
 	}
+	@Override
+	public String toString() {
+		return "{id:" + id + ", "
+				+ "regEmpNombre:" + regEmpNombre + ", "
+				+ "regEmpDescripcion:"+ regEmpDescripcion + "," 
+				+ "regEmpDir:" + regEmpDir + ","
+				+ "categoria:" + categoria + "}";
+	}
 	
 	
 	

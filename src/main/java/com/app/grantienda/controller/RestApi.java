@@ -1,10 +1,12 @@
 package com.app.grantienda.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.grantienda.entidades.CoordenadasEmp;
+import com.app.grantienda.entidades.Emprendimiento;
 import com.app.grantienda.entidades.Foto;
 import com.app.grantienda.entidades.Pedido;
 import com.app.grantienda.entidades.Producto;
 import com.app.grantienda.entidades.User;
+import com.app.grantienda.repositorio.CoordenadasEmpRepository;
 import com.app.grantienda.service.CoordenadasEmpService;
+import com.app.grantienda.service.EmprendimientoService;
 import com.app.grantienda.service.FotoService;
 import com.app.grantienda.service.NotificacionService;
 import com.app.grantienda.service.PedidoService;
@@ -42,8 +48,10 @@ public class RestApi {
 	private NotificacionService ns;
 	@Autowired
 	private CoordenadasEmpService coordenadasEmpService;
-	
-	
+	@Autowired
+	private CoordenadasEmpRepository coordenadasEmpRepository;
+	@Autowired
+	private EmprendimientoService emprendimientoService;
 	@Autowired
 	private PedidoService pedidoService;
 	@GetMapping(path = "/{id}/{celular}")
@@ -149,6 +157,70 @@ public class RestApi {
 
 		coordenadasEmpService.saveCoordenadas(latitud, longitud);
 }
+	@GetMapping("/dist/{latitud}/{longitud}")		
+	public String AgregarLocalizacion(ModelMap modelo,@PathVariable double lat1,@PathVariable double lon1) {
+
+		final double radio_tierra = 6371.01; //kilometro
+		List<CoordenadasEmp> listEmp=coordenadasEmpRepository.todos();
+		List<String> listEmpCer;
+		listEmpCer = new ArrayList<>();
+		List<String> dist;
+		dist = new ArrayList<>();
+		for(int i = 0; i < listEmp.size();i++) {		
+			double lat2=Double.valueOf(listEmp.get(i).getLatitud());
+			double lon2=Double.valueOf(listEmp.get(i).getLongitud());
+			 lat2=Math.toRadians(lat2);
+			 lon2=Math.toRadians(lon2);
+			 lat1=Math.toRadians(lat1);
+             lon1=Math.toRadians(lon1);
+			 double distancia = radio_tierra * Math.acos(
+            		             Math.sin(lat1) * Math.sin(lat2)
+		                       * Math.cos(lat1) * Math.cos(lat2) 
+		                       * Math.cos(lon1 - lon2));
+			 
+			 if(distancia<=5) {
+				 listEmpCer.add(listEmp.get(i).getId());
+				 String dis =String.valueOf(distancia);
+				 dist.add(dis);
+			 }
+			 
+		}
+		String a = "hola";
+		String b = "chau";
+		modelo.addAttribute("dist",a);
+		modelo.addAttribute("listemp",b);
+		return "hola";
+}
+	@GetMapping("/prueba")		
+	public List<CoordenadasEmp> A() {
+		
+		
+		final double radio_tierra = 6371.01; //kilometro
+		List<CoordenadasEmp> listEmp=coordenadasEmpRepository.todos();
+		List<String> listEmpCer;
+		listEmpCer = new ArrayList<>();
+		List<String> dist;
+		dist = new ArrayList<>();
+		 double distancia ;
+		
+		
+		return listEmp;
+}
 	
-	
+	@GetMapping("/todosEmp/{id}")		
+	public List<String> todos(@PathVariable String id) {
+		List<String> emp;
+		emp = new ArrayList<>();	
+	Emprendimiento a = emprendimientoService.todos(id);
+	if(a.getFoto()!= null) {
+		emp.add(a.getFoto().getId());
+	}else {
+		emp.add("null");
+	}
+	emp.add(a.getId());
+	emp.add(a.getRegEmpNombre());
+	emp.add(a.getCategoria().getNombre());
+	emp.add(a.getProductos().get(0).getFoto().get(0).getId());
+		return emp;
+}
 }

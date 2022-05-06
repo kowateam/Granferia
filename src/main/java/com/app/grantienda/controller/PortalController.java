@@ -100,8 +100,15 @@ public class PortalController {
 			
 			List<String> lista2=valoracionService.listaidsemprendimientos(lista);
 			List<String> lista3=valoracionService.listaidsemprendimientosFotos(lista2);
+			List<String> lista4=valoracionService.listaNombreEmp(lista2);
+			
+			
+			
+			
+			
 			modelo.addAttribute("idfotos",lista3);
 			modelo.addAttribute("idEmp",lista2); 
+			modelo.addAttribute("NomEmp",lista4); 
 			modelo.addAttribute("masvalorados",lista);
 			modelo.addAttribute("todosEmprendimientos",todosEmprendimientos);
 			modelo.addAttribute("provincias",Provincias.values());

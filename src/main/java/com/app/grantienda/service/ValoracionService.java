@@ -206,7 +206,16 @@ public class ValoracionService {
 		}
 		return ids;
 	}
-	
+	@Transactional
+	public List<String> listaNombreEmp(List<String> lista) {
+		List<String> ids;
+		ids= new ArrayList<>();
+		for(int i = 0; i<lista.size();i++) {
+			String id = lista.get(i);
+			ids.add(emprendimientoRepository.buscarNombreEmp(id));
+		}
+		return ids;
+	}
 	            
 	}
 	

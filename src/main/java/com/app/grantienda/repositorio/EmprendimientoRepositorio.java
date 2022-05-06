@@ -41,4 +41,11 @@ public interface EmprendimientoRepositorio extends JpaRepository<Emprendimiento,
 
 	@Query(value="SELECT foto_id FROM Emprendimiento where id=:id",nativeQuery = true)
 	public String buscariddefoto(@Param("id") String id);
+	
+	@Query(value="SELECT reg_emp_nombre FROM Emprendimiento where id=:id",nativeQuery = true)
+	public String buscarNombreEmp(@Param("id") String id);
+	
+	@Query(value="SELECT * FROM Emprendimiento where id=:id",nativeQuery = true)
+	public Emprendimiento todos(@Param("id") String id);
+	
 }

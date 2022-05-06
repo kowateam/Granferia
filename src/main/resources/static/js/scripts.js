@@ -16,7 +16,7 @@ $('.maxx').click(function () {
 	if (navigator.geolocation) {
 
 	}
-		let array=[];
+	
 		
 	function location(position) {
 		let templeate=document.querySelector("#templeateCercano")
@@ -47,47 +47,55 @@ $('.maxx').click(function () {
 							method: "GET",
 							url: base_url + "/rest/todosEmp/" + respuesta[i].emp,
 							success: function (res) {
-								console.log(res)
-								let a = {
-									idFotoEmp: res[0],
-									idEmp: res[1],
-									nom: res[2],
-									cate: res[3],
-									idFotoProd: res[4],
-									
-								}
+								
 							
-								arrEmpCer.push(a)
+								let tieneFoto=res[0]
+								if(tieneFoto==null){
+									
 								templeate.innerHTML=`<span id="toco" ><span >
     						<div class="slide-card slide-card2" style="background:url(${base_url}/foto/load/${res[4]}); background-size: auto 100%" >
        
 							<p class="alt"></p>
         					<span class="show-details"></span>
 
-        				<div class="slide-details hidden ">
+        				<div  class="slide-details hidden ">
          
 
             			<span class="icon close">
-                <img "ponright" src="/img/gt/card/close.png" alt="Cerrar">
+                            <img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
             			</span>
 
            				 <!-- Detalles -->
-            			<span class="logoValorado emp-logo emp-logo2" ></span>
-						<p id="ponerNomEmp" class="name name2">Nombre</p>
-						<p class="name name3" th:text="${res[2]}">Nombre</p>
-            			<span >
-               		 <p class="price offer" >$<span class="ammount" >Precio oferta</span></p>
-               		 <p class="price">$<span class="ammount" >Precio</span></p>
-          			  </span>
+            			<a href="${base_url}/${res[2]}" class="logoValorado emp-logo emp-logo2" style="background:url(${base_url}/foto/load/${res[0]}) ></a>
+						<p id="ponerNomEmp"  class="name name2">${res[2]}</p>
+						<p class="name name3" >${res[3]}</p>
+						<p class="name name4" >Se encuentra a ${d.toFixed(1)}km</p>
+         			  </div>
+    			</div></span>
+				</span>`}
+				else{
+					templeate.innerHTML=`<span id="toco" ><span >
+    						<div class="slide-card slide-card2" style="background:url(${base_url}/foto/load/${res[4]}); background-size: auto 100%" >
+       
+							<p class="alt"></p>
+        					<span class="show-details"></span>
 
-         			   <span >
-            		    <button class="btn btn-secondary quote" type="button">A cotizar</button>
-          			  </span>
+        				<div  class="slide-details hidden ">
+         
 
-         			   <a  id="btn-ir class="btn-details btn-details2" target="_self">Ver detalles</a>
-       					 </div>
+            			<span class="icon close">
+                            <img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
+            			</span>
+
+           				 <!-- Detalles -->
+            			<a href="${base_url}/${res[2]}" class="logoValorado emp-logo emp-logo2 default"></a>
+						<p id="ponerNomEmp"  class="name name2">${res[2]}</p>
+						<p class="name name3" >${res[3]}</p>
+						<p class="name name4" >Se encuentra a ${d.toFixed(1)}km</p>
+         			  </div>
     			</div></span>
 				</span>`
+				}
 				$('.slide-card .show-details').click(function () {
 					console.log("toco")
 					$(this).addClass('hidden');
@@ -113,21 +121,10 @@ $('.maxx').click(function () {
 						})
 
 					}
-					//Retorna tres decimales
-
-
-					// console.log(respuesta)
+					
 
 				}
-			/* 	if(arrEmpCer.length>8){
-				for(let i=0;i<8;i++){
-					array.push(arrEmpCer[i])
-				} carruselEmpCercanos(array)
-				}else{ array=arrEmpCer 
-					carruselEmpCercanos(array)
-					}
-				console.log(array[0]) */
-				console.log(arrEmpCer)
+			
 			}
 
 			
@@ -143,53 +140,7 @@ $('.maxx').click(function () {
 })
 
 
-function carruselEmpCercanos(algunArray){
-	
-	console.log(algunArray)
-	let templeate=document.querySelector("#templeateCercano")
-	
-	for(let i=0;i<algunArray.length;i++){
-	templeate.innerHTML=`<span >
-    <div class="slide-card prod" style="background:url(${algunArray[i].idFotoProd}); background-size: auto 100%" >
-       
 
-        <span class="show-details "></span>
-
-        <div class="slide-details  hidden ">
-            <span  class="icon save">
-                <p class="idSaveProducto hidden" ></p>
-                <p class="idSaveUsuario hidden" ></p>
-                
-                <img  class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
-                <img  class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
-            </span>
-
-            <span class="icon close">
-                <img src="/img/gt/card/close.png" alt="Cerrar">
-            </span>
-
-            <!-- Detalles -->
-            <span  class="emp-logo" ></span>
-            <span  class="emp-logo default" ></span>
-
-            <p class="name" >${algunArray[i].nom}</p>
-
-            <span >
-                <p class="price offer" >$<span class="ammount" >Precio oferta</span></p>
-                <p class="price">$<span class="ammount" >Precio</span></p>
-            </span>
-
-            <span >
-                <button class="btn btn-secondary quote" type="button">A cotizar</button>
-            </span>
-
-            <a class="btn-details" target="_self">Ver detalles</a>
-        </div>
-    </div>
-</span>`
-
-	}
-}
 
 // BUSCAR
 // --------------------------------------------

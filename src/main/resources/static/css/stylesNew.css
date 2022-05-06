@@ -242,11 +242,25 @@ font-size: 18px;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     margin: 19px auto 12px auto;
-    font-family: 'Noto Sans';
+    opacity: 0.9;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.5)
+    
+}
+.name4{
+    color: #e1e1e1;
+    opacity: 0.9;
+    font-size: 14px;
+    width: 260px!important;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    margin: auto;
 }
 .ponright{
     position: absolute;

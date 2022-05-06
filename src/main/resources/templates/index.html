@@ -8,7 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>granferia</title>
 
-	<meta name="description" content="Comunidad emprendedora, granferia te brinda la posibilidad de crear tu stand y compartir tu emprendimiento. También vas a poder buscar, guardar y comprar productos o servicios.">
+	<meta name="description"
+		content="Comunidad emprendedora, granferia te brinda la posibilidad de crear tu stand y compartir tu emprendimiento. También vas a poder buscar, guardar y comprar productos o servicios.">
 
 	<!-- Styles -->
 	<link href="/css/styles.css" rel="stylesheet" type="text/css">
@@ -32,21 +33,21 @@
 </script>
 
 <body>
-	
-	<div class ="hidden" th:if=" ${masvalorados} != null">
+
+	<div class="hidden" th:if=" ${masvalorados} != null">
 		<span th:each="proe,i : ${idEmp}">
 			<label id="idEmprendimientoValorado" th:text="${proe}"></label>
 		</span>
-		<span  th:each="proa,i : ${idfotos}">
+		<span th:each="proa,i : ${idfotos}">
 			<label id="idFotoProdValorado" th:text="${proa}"></label>
 		</span>
-		<span  th:each="pro,i : ${masvalorados}">
-		<label id="idProductoValorado" th:text="${pro.id}"></label>
+		<span th:each="pro,i : ${masvalorados}">
+			<label id="idProductoValorado" th:text="${pro.id}"></label>
 		</span>
-		<span  th:each="NomEmp2,i : ${NomEmp}">
+		<span th:each="NomEmp2,i : ${NomEmp}">
 			<label id="NomEmp" th:text="${NomEmp2}"></label>
 		</span>
-	
+
 	</div>
 
 	<span th:if="${cookie != null}">
@@ -65,10 +66,10 @@
 	</span>
 	<!-- Navegación flotante -->
 	<div th:replace="fragments :: floating-menu"></div>
-	
-	
-	
-	
+
+	<div th:replace="fragments :: g-buscar-filtrar"></div>
+
+
 	<div class="main-container">
 		<!-- (IZQUIERDA) -->
 		<div th:replace="fragments :: segment-menu"></div>
@@ -79,8 +80,10 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12">
-							<img class="logo img-b close-search profile-clear" src="/img/gt/logo.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
-							<img class="logo img-w close-search profile-clear" src="/img/gt/logo-w.svg" tabindex="1" alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+							<img class="logo img-b close-search profile-clear" src="/img/gt/logo.svg" tabindex="1"
+								alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
+							<img class="logo img-w close-search profile-clear" src="/img/gt/logo-w.svg" tabindex="1"
+								alt="Te damos la bienvenida a granferia, la plataforma de emprendedores">
 						</div>
 					</div>
 				</div>
@@ -93,9 +96,9 @@
 						<div class="banner">
 							<h1>Te damos la bienvenida a granferia.</h1>
 							<div class="col-xs-12 col-lg-6">
-									<div class="homePageWidth">
-										<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
-									</div>
+								<div class="homePageWidth">
+									<img class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+								</div>
 							</div>
 							<p class="x2">Podés navegar, descubrir y guardar lo que más te gusta, realizá tus pedidos en
 								dos simples pasos.</p>
@@ -110,9 +113,9 @@
 					</div>
 
 					<div class="col-xs-12 col-lg-6">
-							<div class="homePageWidth1">
-								<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
-							</div>
+						<div class="homePageWidth1">
+							<img class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+						</div>
 					</div>
 				</div>
 
@@ -121,40 +124,41 @@
 					<a class="underline text--center" href="/ingresar" target="_self">Ingresar</a>
 				</div>
 			</div>
-					<div class="container column-wrapper x3--top x2">
-			<div class="row">
-				<div class="col-xs-12">
-			<a th:if="${session.usersession}" class="btn btn-highlight " id="btnEmpPedidos" target="_self" >Pedidos
-				pendientes <!-- (<span class="pedidos-count" th:text="${cantidad}">0</span>) --></a>
-				</div></div></div>
+			
 			<!-- Header crear -->
-			<div class="container banner crear-emp-first" id="main-banner" th:if="${session.usersession != null && session.usersession.crearEmpNotifi != true && session.usersession.mostrarCrearEmp != true}" sec:authorize="hasAnyRole('ROLE_USER')">
+			<div class="container banner crear-emp-first" id="main-banner"
+				th:if="${session.usersession != null && session.usersession.crearEmpNotifi != true && session.usersession.mostrarCrearEmp != true}"
+				sec:authorize="hasAnyRole('ROLE_USER')">
 				<div class="row">
 					<div class="col-xs-12 col-lg-6">
 						<div class="banner">
-							
+
 							<h1>Tu emprendimiento en granferia.</h1>
 							<div class="col-xs-12 col-lg-6">
 								<div class="homePageWidth">
-									<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+									<img class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
 								</div>
-						</div>
-							<p class="x2">Creá y personalizá tu stand para mostrar tus productos en granferia, conocé <a class="underline x0 x0--top x0--left x0--right" style="display: inline-block; width: auto;" href="/emp/elegircuenta" target="_self">nuestros planes</a>.</p>
+							</div>
+							<p class="x2">Creá y personalizá tu stand para mostrar tus productos en granferia, conocé <a
+									class="underline x0 x0--top x0--left x0--right"
+									style="display: inline-block; width: auto;" href="/emp/elegircuenta"
+									target="_self">nuestros planes</a>.</p>
 
 							<div class="hidden-xs">
 								<span id="iduser" th:text="${session.usersession.id}" hidden></span>
-								<a class="btn btn-large btn-primary" href="/emp/elegircuenta" target="_self">Crear emprendimiento gratis</a>
+								<a class="btn btn-large btn-primary" href="/emp/elegircuenta" target="_self">Crear
+									emprendimiento gratis</a>
 								<span class="btnEmpMasTarde underline text--center">Ocultar</span>
 							</div>
 						</div>
 					</div>
 
-					
+
 					<div class="col-xs-12 col-lg-6">
 						<div class="homePageWidth1">
-							<img  class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
+							<img class="homePageFullWidth" src="img/shared/home/homePage.png" alt="">
 						</div>
-				</div>
+					</div>
 				</div>
 
 				<div class="hidden-lg x0--top">
@@ -164,122 +168,127 @@
 			</div>
 			<div class="container container33 x5">
 				<div class="row">
-						<div class="col-xs-12">
-							<p class="productosDestacados">Destacados en granferia</p>
+					<div class="col-xs-12">
+						<p class="productosDestacados">Destacados en granferia</p>
 						<p class="productosDestacados2">Descubri los productos destacados de </p>
-							<p class="productosDestacados3">este mes. </p>
+						<p class="productosDestacados3">este mes. </p>
 
-								<div class="emp-container">
+						<div class="emp-container">
 
-						<!-- Slider -->
-						<article class="slide-row">
+							<!-- Slider -->
+							<article class="slide-row">
 								<div class="content">
 
-					<!-- Card de producto o servicio -->
-							<span th:each="prod , e : ${masvalorados}">
-							<span th:each="fot , e : ${prod.foto}">
-							<div th:if="${e.index==0}" class="slide-card slide-card2"
-							th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
-							<p class="alt"></p>
+									<!-- Card de producto o servicio -->
+									<span th:each="prod , e : ${masvalorados}">
+										<span th:each="fot , e : ${prod.foto}">
+											<div th:if="${e.index==0}" class="slide-card slide-card2"
+												th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+												<p class="alt"></p>
 
-							<span  class="show-details"></span>
+												<span class="show-details"></span>
 
-							<div class="slide-details
+												<div class="slide-details
 							 hidden">
-								
-
-								<span class="icon close">
-									<img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
-								</span>
-
-								<!-- Detalles -->
-							
-								<span class="logoValorado emp-logo emp-logo2" ></span>
-								
-								<p id="ponerNomEmp" class="name name2">Nombre</p>
-								<p class="name name3" th:text="${prod.nombreProductoServicio}">Nombre</p>
 
 
-								<a id="btn-ir" class="btn-details btn-details2" target="_self"
-									>Ver detalles</a> 
-							</div>
+													<span class="icon close">
+														<img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
+													</span>
+
+													<!-- Detalles -->
+
+													<span class="logoValorado emp-logo emp-logo2"></span>
+
+													<p id="ponerNomEmp" class="name name2">Nombre</p>
+													<p class="name name3" th:text="${prod.nombreProductoServicio}">
+														Nombre</p>
+
+
+													<a id="btn-ir" class="btn-details btn-details2" target="_self">Ver
+														detalles</a>
+												</div>
+											</div>
+										</span>
+									</span>
+									</span>
+								</div>
+							</article>
 						</div>
-					</span>
-				</span>
-				</span>
-				</div>
-			</article>	   
 					</div>
+
+				</div>
 			</div>
-	 	
-		</div>
-	</div>
-		<div class="container x5">
-				<div class="row">
-	<a th:if="${session.usersession}" class="btn btn-large btn-secondary x2 maxx" target="_self">Activar ubicación</a>
-	<div class="col-xs-12 marginnn">
-		<p class="productosDestacados">Emprendimientos cerca tuyo</p>
-
-
-			<div class="emp-container">
-
-	<!-- Slider -->
-	<article class="slide-row">
-			<div id="templeateCercano" class="content">
-
-<!-- Card de producto o servicio -->
-
-</span>
-</div>
-</article>	   
-</div>
-</div>
-			<!-- Listado de emprendimientos -->
 			<div class="container x5">
 				<div class="row">
-					<div class="col-xs-12">
-						<!-- Seccion emprendimiento -->
-						<div th:replace="fragments :: emprendimiento-home"></div>
+					<a th:if="${session.usersession}" class="btn btn-large btn-secondary x2 maxx" target="_self">Activar
+						ubicación</a>
+					<div class="col-xs-12 marginnn">
+						<p class="productosDestacados">Emprendimientos cerca tuyo</p>
+
+
+						<div class="emp-container">
+
+							<!-- Slider -->
+							<article class="slide-row">
+								<div id="templeateCercano" class="content">
+
+									<!-- Card de producto o servicio -->
+
+									</span>
+								</div>
+							</article>
+						</div>
+					</div>
+					<!-- Listado de emprendimientos -->
+					<div class="container x5">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- Seccion emprendimiento -->
+								<div th:replace="fragments :: emprendimiento-home"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			
 
+		</div>
 		<div th:replace="fragments :: segment-profile"></div>
 
-		<!-- Redirección al perfil-->
-		<div th:if="${session.volverperfil != null}">
-			<script>
-				$(function () {
-					openProfile();
-				});
-			</script>
-		</div>
-
+			<!-- Redirección al perfil-->
+			<div th:if="${session.volverperfil != null}">
+				<script>
+					$(function () {
+						openProfile();
+					});
+				</script>
+			</div>
 	</div>
-	<!-- Buscar / Filtrar -->
-	<div th:replace="fragments :: g-buscar-filtrar"></div>
-	
-
-	
-	<section class="modal-container hidden"  id="modalSeguir">
-
-		<div id="editQuestion" class="modal-content">
-	
-	
-				
-					<button  id="editQuestion2" class="btn right seguirEmprendimiento"  type="button">Seguir emprendimiento</button>
-					<button id="editQuestion2" class="btn right irEmprendimiento"  type="button">Ver emprendimiento</button>
-					<button class="btn close-modal" type="button">Atras</button>
+		<!-- Buscar / Filtrar -->
 		
-			
-			<!-- Preguntas -->
-		
-		</div>
-	
-		<span class="overlay"></span>
-	</section>
-<!-- 	<section class="modal-container" >
+
+
+
+		<section th:if="${session.usersession}" class="modal-container hidden" id="modalSeguir">
+
+			<div id="editQuestion" class="modal-content">
+
+
+
+				<button id="editQuestion2" class="btn right seguirEmprendimiento" type="button">Seguir
+					emprendimiento</button>
+				<button id="editQuestion2" class="btn right irEmprendimiento" type="button">Ver emprendimiento</button>
+				<button class="btn close-modal" type="button">Atras</button>
+
+
+				<!-- Preguntas -->
+
+			</div>
+
+			<span class="overlay"></span>
+		</section>
+		<!-- 	<section class="modal-container" >
 
 		<div  class="modal-content">
 	
@@ -298,10 +307,10 @@
 		<span class="overlay"></span>
 	</section> -->
 
-	
 
-	
-	<div th:replace="fragments :: footer"></div>
+
+
+		<div th:replace="fragments :: footer"></div>
 </body>
 
 <!-- Javascript -->

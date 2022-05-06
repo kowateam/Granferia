@@ -335,5 +335,11 @@ public class PedidoService {
 		return user;
 	}
 	
+	@Transactional
+	public Integer buscarPedidosPendientes(String id) {
+		int ped = pr.cantidadDePedidosPendientes(id);
+		return ped;
+	}
+	
 	
 }

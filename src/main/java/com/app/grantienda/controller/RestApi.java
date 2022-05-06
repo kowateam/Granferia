@@ -152,10 +152,10 @@ public class RestApi {
 		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, prod);
 			return tiempo;
 }
-	@GetMapping("/gps/{latitud}/{longitud}")		
-	public void AgregarLocalizacion(@PathVariable double latitud,@PathVariable double longitud) {
+	@GetMapping("/gps/{latitud}/{longitud}/{id}")		
+	public void AgregarLocalizacion(@PathVariable double latitud,@PathVariable double longitud,@PathVariable String id) {
 
-		coordenadasEmpService.saveCoordenadas(latitud, longitud);
+		coordenadasEmpService.saveCoordenadas(latitud, longitud, id);
 }
 	@GetMapping("/dist/{latitud}/{longitud}")		
 	public String AgregarLocalizacion(ModelMap modelo,@PathVariable double lat1,@PathVariable double lon1) {

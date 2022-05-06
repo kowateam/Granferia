@@ -519,3 +519,27 @@ $('#borrarItem').click(function () {
 
     window.location.replace(base_url);
 });
+
+
+$('#gps').click(function () {
+     var id = $('#idEmprendimiento').val();
+     let latitud
+     let longitud
+function location(position){
+	latitud=position.coords.latitude;
+	longitud=position.coords.longitude;
+	console.log(latitud,longitud)
+	 $.ajax({
+        method: "GET",
+        url: base_url + "/rest/gps/" + latitud + "/" + longitud + "/" + id
+    });
+	
+	}
+	function error(e){
+	console.log(e)
+}
+ navigator.geolocation.getCurrentPosition(location,error);    
+     
+     
+   
+});

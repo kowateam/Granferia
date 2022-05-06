@@ -52,11 +52,11 @@ public class CoordenadasEmpService {
 }
 	
 	@Transactional
-	public void saveCoordenadas(double longitud, double latitud) {
+	public void saveCoordenadas(double longitud, double latitud, String id) {
 		CoordenadasEmp coor = new CoordenadasEmp();
 		coor.setLatitud(String.valueOf(latitud));
 		coor.setLongitud(String.valueOf(longitud));
-		coor.setEmp(null);
+		coor.setEmp(id);
 		coordenadasEmpRepository.save(coor);
 	}
 	

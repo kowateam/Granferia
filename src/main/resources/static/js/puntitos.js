@@ -85,8 +85,13 @@ let idFotoProdValorado= document.querySelectorAll("#idFotoProdValorado")
 let idEmprendimientoValorado=document.querySelectorAll("#idEmprendimientoValorado")
 let idProductoValorado=document.querySelectorAll("#idProductoValorado")
 let btnIr=document.querySelectorAll("#btn-ir")
-
+let nomEmp=document.querySelectorAll("#NomEmp")
+let ponerNomEmp=document.querySelectorAll("#ponerNomEmp")
 let logoValorado=document.querySelectorAll(".logoValorado")
+console.log(nomEmp)
+ponerNomEmp.forEach((element,index)=>{
+    element.innerHTML=nomEmp[index].textContent
+})
 logoValorado.forEach((element,index)=>{
     const base="url("
     const adicional="/foto/load/"
@@ -99,7 +104,10 @@ logoValorado.forEach((element,index)=>{
     else{
         element.classList.add("default")
     }
+
     btnIr[index].setAttribute("href",linkEmp)
 })
+
+
 //<a class="btn-details" target="_self"
 //									th:href="@{/producto/} + ${prod.id} +'/'+ ${empren.id}">Ver detalles</a> 

@@ -11,77 +11,185 @@ $('#btnAcceptCookies').click(function () {
 });
 
 //geolocalizacion
+let arrEmpCer=[{}];
+$('.maxx').click(function () {
+	if (navigator.geolocation) {
 
-$('.maxx').click(function(){
-	if(navigator.geolocation){
+	}
+		let array=[];
 		
-	}
-let arrEmpCer=[];
-function location(position){
-	var latitud=position.coords.latitude;
-	var longitud=position.coords.longitude;
-	console.log(latitud,longitud)
-	 $.ajax({
-		method: "GET",
-		url: base_url + "/rest/prueba",
-		 success: function(respuesta)
-      { 
-	
-	for(let i =0; i<respuesta.length; i++){
-		lat1=latitud
-	      lon1=longitud
-	      lat2=respuesta[i].longitud
-	      lon2=respuesta[i].latitud
-          rad = function(x) {return x*Math.PI/180;}
-          var R = 6378.137; //Radio de la tierra en km
-          var dLat = rad( lat2 - lat1 );
-          var dLong = rad( lon2 - lon1 );
-          var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong/2) * Math.sin(dLong/2);
-          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-          var d = R * c;
-          if(d.toFixed(3)<=5){
-		        
-	         console.log( respuesta[i].emp)
-	$.ajax({
-		method: "GET",
-		url: base_url + "/rest/todosEmp/"+ respuesta[i].emp,
-		 success: function(res)
-      { 
-	let a={
-		idFotoEmp:res[0],
-		idEmp:res[1],
-		nom:res[2],
-		cate:res[3],
-		idFotoProd:res[4],
-		km:d.toFixed(3)		
-	}
-	arrEmpCer.push(a)
-	console.log(a)
-	}
-	})
-      
-}
-          //Retorna tres decimales
+	function location(position) {
+		let templeate=document.querySelector("#templeateCercano")
+		var latitud = position.coords.latitude;
+		var longitud = position.coords.longitude;
+		console.log(latitud, longitud)
+		$.ajax({
+			method: "GET",
+			url: base_url + "/rest/prueba",
+			dataType:"json",
+			success: function (respuesta) {
+				
+				for (let i = 0; i < respuesta.length; i++) {
+					lat1 = latitud
+					lon1 = longitud
+					lat2 = respuesta[i].longitud
+					lon2 = respuesta[i].latitud
+					rad = function (x) { return x * Math.PI / 180; }
+					var R = 6378.137; //Radio de la tierra en km
+					var dLat = rad(lat2 - lat1);
+					var dLong = rad(lon2 - lon1);
+					var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+					var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+					var d = R * c;
+					if (d.toFixed(3) <= 5) {
+
+						$.ajax({
+							method: "GET",
+							url: base_url + "/rest/todosEmp/" + respuesta[i].emp,
+							success: function (res) {
+								console.log(res)
+								let a = {
+									idFotoEmp: res[0],
+									idEmp: res[1],
+									nom: res[2],
+									cate: res[3],
+									idFotoProd: res[4],
+									
+								}
+							
+								arrEmpCer.push(a)
+								templeate.innerHTML=`<span id="toco" ><span >
+    						<div class="slide-card slide-card2" style="background:url(${base_url}/foto/load/${res[4]}); background-size: auto 100%" >
+       
+							<p class="alt"></p>
+        					<span class="show-details"></span>
+
+        				<div class="slide-details hidden ">
          
-  
-	     // console.log(respuesta)
+
+            			<span class="icon close">
+                <img "ponright" src="/img/gt/card/close.png" alt="Cerrar">
+            			</span>
+
+           				 <!-- Detalles -->
+            			<span class="logoValorado emp-logo emp-logo2" ></span>
+						<p id="ponerNomEmp" class="name name2">Nombre</p>
+						<p class="name name3" th:text="${res[2]}">Nombre</p>
+            			<span >
+               		 <p class="price offer" >$<span class="ammount" >Precio oferta</span></p>
+               		 <p class="price">$<span class="ammount" >Precio</span></p>
+          			  </span>
+
+         			   <span >
+            		    <button class="btn btn-secondary quote" type="button">A cotizar</button>
+          			  </span>
+
+         			   <a  id="btn-ir class="btn-details btn-details2" target="_self">Ver detalles</a>
+       					 </div>
+    			</div></span>
+				</span>`
+				$('.slide-card .show-details').click(function () {
+					console.log("toco")
+					$(this).addClass('hidden');
+					$(this).parent('.slide-card').find('.slide-details').removeClass('hidden');
+				}); 
+				$('.slide-card .close').click(function () {
+					$(this).closest('.slide-card').find('.slide-details').addClass('hidden');
+					$(this).closest('.slide-card').find('.show-details').removeClass('hidden');
+				});
+				
+				
+				$('.slide-card .close').click(function () {
+					$(this).closest('.slide-card').find('.slide-details').addClass('hidden');
+					$(this).closest('.slide-card').find('.show-details').removeClass('hidden');
+				});
+
+
+
+
+	 
 		
+							}
+						})
+
+					}
+					//Retorna tres decimales
+
+
+					// console.log(respuesta)
+
+				}
+			/* 	if(arrEmpCer.length>8){
+				for(let i=0;i<8;i++){
+					array.push(arrEmpCer[i])
+				} carruselEmpCercanos(array)
+				}else{ array=arrEmpCer 
+					carruselEmpCercanos(array)
+					}
+				console.log(array[0]) */
+				console.log(arrEmpCer)
+			}
+
+			
+		
+		})
+			
 	}
-console.log(arrEmpCer)
- 
-	      
-}
-		
-	});
-	
-}
-function error(e){
-	console.log(e)
-}
-navigator.geolocation.getCurrentPosition(location,error);
-console.log("array de objetos: "+arrEmpCer)
+	function error(e) {
+		console.log(e)
+	}
+	navigator.geolocation.getCurrentPosition(location, error);
+
 })
 
+
+function carruselEmpCercanos(algunArray){
+	
+	console.log(algunArray)
+	let templeate=document.querySelector("#templeateCercano")
+	
+	for(let i=0;i<algunArray.length;i++){
+	templeate.innerHTML=`<span >
+    <div class="slide-card prod" style="background:url(${algunArray[i].idFotoProd}); background-size: auto 100%" >
+       
+
+        <span class="show-details "></span>
+
+        <div class="slide-details  hidden ">
+            <span  class="icon save">
+                <p class="idSaveProducto hidden" ></p>
+                <p class="idSaveUsuario hidden" ></p>
+                
+                <img  class="saveProducto" src="/img/gt/card/save.svg" alt="Guardar">
+                <img  class="saveProducto hidden" src="/img/gt/card/saved.svg" alt="Guardado">
+            </span>
+
+            <span class="icon close">
+                <img src="/img/gt/card/close.png" alt="Cerrar">
+            </span>
+
+            <!-- Detalles -->
+            <span  class="emp-logo" ></span>
+            <span  class="emp-logo default" ></span>
+
+            <p class="name" >${algunArray[i].nom}</p>
+
+            <span >
+                <p class="price offer" >$<span class="ammount" >Precio oferta</span></p>
+                <p class="price">$<span class="ammount" >Precio</span></p>
+            </span>
+
+            <span >
+                <button class="btn btn-secondary quote" type="button">A cotizar</button>
+            </span>
+
+            <a class="btn-details" target="_self">Ver detalles</a>
+        </div>
+    </div>
+</span>`
+
+	}
+}
 
 // BUSCAR
 // --------------------------------------------
@@ -231,14 +339,17 @@ $('.btnEmpMasTarde').click(function () {
 	});
 });
 
+
 // CARDS
 // --------------------------------------------
 // Mostrar / Ocultar detalles de cards
-$('.slide-card .show-details').click(function () {
+ $('.slide-card .show-details').click(function () {
 	console.log("toco")
 	$(this).addClass('hidden');
 	$(this).parent('.slide-card').find('.slide-details').removeClass('hidden');
-});
+}); 
+
+
 
 $('.slide-card .close').click(function () {
 	$(this).closest('.slide-card').find('.slide-details').addClass('hidden');

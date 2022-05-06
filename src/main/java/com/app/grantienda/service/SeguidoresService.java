@@ -36,14 +36,14 @@ public class SeguidoresService {
 			
 		 if(existe== "true") {
 		
-			 Seguidores seguidor = seguidoresRepository.modificarSeguidor(idUser);
+			 Seguidores seguidor = seguidoresRepository.modificarSeguidor(idUser,idEmprendimiento);
 		          seguidor.setSeguidor(false);
 		          seguidoresRepository.save(seguidor);
 		         
 		}
 		else if(existe == "false") {
 			
-			Seguidores	seguidor =  seguidoresRepository.modificarSeguidor(idUser);
+			Seguidores	seguidor =  seguidoresRepository.modificarSeguidor(idUser,idEmprendimiento);
 			          seguidor.setSeguidor(true);
 			          seguidoresRepository.save(seguidor);
 			         

@@ -43,6 +43,9 @@
 		<span  th:each="pro,i : ${masvalorados}">
 		<label id="idProductoValorado" th:text="${pro.id}"></label>
 		</span>
+		<span  th:each="NomEmp2,i : ${NomEmp}">
+			<label id="NomEmp" th:text="${NomEmp2}"></label>
+		</span>
 	
 	</div>
 
@@ -179,7 +182,7 @@
 							th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
 							<p class="alt"></p>
 
-							<span class="show-details"></span>
+							<span  class="show-details"></span>
 
 							<div class="slide-details
 							 hidden">
@@ -193,8 +196,8 @@
 							
 								<span class="logoValorado emp-logo emp-logo2" ></span>
 								
-
-								<p class="name name2" th:text="${prod.nombreProductoServicio}">Nombre</p>
+								<p id="ponerNomEmp" class="name name2">Nombre</p>
+								<p class="name name3" th:text="${prod.nombreProductoServicio}">Nombre</p>
 
 
 								<a id="btn-ir" class="btn-details btn-details2" target="_self"
@@ -208,56 +211,29 @@
 			</article>	   
 					</div>
 			</div>
-	 	<a th:if="${session.usersession}" class="btn btn-large btn-secondary x2 maxx" target="_self">Activar ubicación</a>
-			<div class="col-xs-12 marginnn">
-				<p class="productosDestacados">Emprendimientos cerca tuyo</p>
-
-
-					<div class="emp-container">
-
-			<!-- Slider -->
-			<article class="slide-row">
-					<div class="content">
-
-		<!-- Card de producto o servicio -->
-				<span th:each="prod , e : ${masvalorados}">
-				<span th:each="fot , e : ${prod.foto}">
-				<div th:if="${e.index==0}" class="slide-card slide-card2"
-				th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
-				<p class="alt"></p>
-
-				<span class="show-details"></span>
-
-				<div class="slide-details
-				 hidden">
-					
-
-					<span class="icon close">
-						<img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
-					</span>
-
-					<!-- Detalles -->
-				
-					<span class="logoValorado emp-logo emp-logo2" ></span>
-					
-
-					<p class="name name2" th:text="${prod.nombreProductoServicio}">Nombre</p>
-
-
-					<a id="btn-ir" class="btn-details btn-details2" target="_self"
-						>Ver detalles</a> 
-				</div>
-			</div>
-		</span>
-	</span>
-	</span>
-	</div>
-</article>	   
+	 	
 		</div>
+	</div>
+		<div class="container x5">
+				<div class="row">
+	<a th:if="${session.usersession}" class="btn btn-large btn-secondary x2 maxx" target="_self">Activar ubicación</a>
+	<div class="col-xs-12 marginnn">
+		<p class="productosDestacados">Emprendimientos cerca tuyo</p>
+
+
+			<div class="emp-container">
+
+	<!-- Slider -->
+	<article class="slide-row">
+			<div id="templeateCercano" class="content">
+
+<!-- Card de producto o servicio -->
+
+</span>
 </div>
-		</div>
-	</div>
-
+</article>	   
+</div>
+</div>
 			<!-- Listado de emprendimientos -->
 			<div class="container x5">
 				<div class="row">
@@ -285,8 +261,7 @@
 	<div th:replace="fragments :: g-buscar-filtrar"></div>
 	
 
-
-
+	
 	<section class="modal-container hidden"  id="modalSeguir">
 
 		<div id="editQuestion" class="modal-content">

@@ -28,7 +28,7 @@ $('.maxx').click(function () {
 			url: base_url + "/rest/prueba",
 			dataType:"json",
 			success: function (respuesta) {
-				
+				let contador=0
 				for (let i = 0; i < respuesta.length; i++) {
 					lat1 = latitud
 					lon1 = longitud
@@ -41,8 +41,8 @@ $('.maxx').click(function () {
 					var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
 					var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 					var d = R * c;
-					if (d.toFixed(3) <= 5) {
-
+					if (d.toFixed(3) <= 5 && contador<8) {
+						contador++
 						$.ajax({
 							method: "GET",
 							url: base_url + "/rest/todosEmp/" + respuesta[i].emp,

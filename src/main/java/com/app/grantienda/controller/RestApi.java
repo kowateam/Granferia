@@ -229,27 +229,30 @@ public class RestApi {
 	public List<Object> todosLosPedidos(@PathVariable String id) {
 	         List<Emprendimiento> emp = emprendimientoService.buscarEmprendimientosPorIdUsuario(id);
 	         List<String> empid;
+	         empid = new ArrayList<>();
+	         
 	         List<Integer> ped;
+	         ped = new ArrayList<>();
 	         List<Object> a;
+	         a = new ArrayList<>();
 	         if(emp.size()>0) {
 	         for(int i=0;i<emp.size();i++ ) {
 	         empid.add(emp.get(i).getId());
 	         ped.add(pedidoService.buscarPedidosPendientes(emp.get(i).getId()));
 	         }
-	         for(int j=0;j<empid.size();j++) {
-	        		        	 
-	         }
+	        
 	         
-	         a.add(1,empid);
-	         a.add(2,ped);
+	         a.add(empid);
+	         a.add(ped);
 	         
 	         
 	         
 	         
 	         
 	         
-		return a ;
+		
 }
-	
+			return a;
+	}
 	
 }

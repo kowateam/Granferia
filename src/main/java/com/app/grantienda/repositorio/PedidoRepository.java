@@ -39,5 +39,5 @@ public interface PedidoRepository extends JpaRepository<Pedido,String>{
 	public String buscarProductoPedidoPorUsuario(@Param("iduser")String iduser, @Param("id")String id);
 	
 	@Query(value ="SELECT count(estado) FROM pedido WHERE estado=pendiente AND emprendimiento_id=:id",nativeQuery= true)
-	public Integer cantidadDePedidosPendientes(@Param("id")String id);
+	public String cantidadDePedidosPendientes(@Param("id")String id);
 }

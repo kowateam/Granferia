@@ -226,33 +226,54 @@ public class RestApi {
 }
 	
 	@GetMapping("/pedidos/{id}")		
-	public List<Object> todosLosPedidos(@PathVariable String id) {
+	public List<String> todosLosPedidos(@PathVariable String id) {
 	         List<Emprendimiento> emp = emprendimientoService.buscarEmprendimientosPorIdUsuario(id);
 	         List<String> empid;
 	         empid = new ArrayList<>();
 	         
-	         List<Integer> ped;
-	         ped = new ArrayList<>();
-	         List<Object> a;
-	         a = new ArrayList<>();
+	        // List<String> ped;
+	        // ped = new ArrayList<>();
+	        // List<String> a;
+	        // a = new ArrayList<>();
 	         if(emp.size()>0) {
 	         for(int i=0;i<emp.size();i++ ) {
 	         empid.add(emp.get(i).getId());
+	         //ped.add(pedidoService.buscarPedidosPendientes(emp.get(i).getId()));
+	         }
+	        
+	         //a.add(empid);
+	         //a.add(ped);		
+}
+			return empid;
+	}
+	
+	
+	@GetMapping("/pedidos/{id}")		
+	public List<String> LosPedidos(@PathVariable String id) {
+	         List<Emprendimiento> emp = emprendimientoService.buscarEmprendimientosPorIdUsuario(id);
+	         //List<String> empid;
+	         //empid = new ArrayList<>();
+	         
+	         List<String> ped;
+	         ped = new ArrayList<>();
+	        // List<String> a;
+	        // a = new ArrayList<>();
+	         if(emp.size()>0) {
+	         for(int i=0;i<emp.size();i++ ) {
+	        // empid.add(emp.get(i).getId());
 	         ped.add(pedidoService.buscarPedidosPendientes(emp.get(i).getId()));
 	         }
 	        
-	         
-	         a.add(empid);
-	         a.add(ped);
-	         
-	         
-	         
-	         
-	         
-	         
-		
+	         //a.add(empid);
+	         //a.add(ped);		
 }
-			return a;
+			return ped;
 	}
 	
+	
 }
+
+
+
+
+

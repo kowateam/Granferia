@@ -72,7 +72,7 @@ public class MercadoPagoController {
 				.setPending("http://granferia.online/mp/pending").setSuccess("http://granferia.online/mp/success"));
 
 		Item item = new Item();
-		item.setTitle("Premium").setQuantity(1).setUnitPrice((float) 10.00);
+		item.setTitle("Premium").setQuantity(1).setUnitPrice((float) 449.00);
 		preference.appendItem(item);
 		Preference result = preference.save();
 		return "redirect:" + result.getInitPoint();

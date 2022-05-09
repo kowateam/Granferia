@@ -336,8 +336,8 @@ public class PedidoService {
 	}
 	
 	@Transactional
-	public Integer buscarPedidosPendientes(String id) {
-		int ped = pr.cantidadDePedidosPendientes(id);
+	public String buscarPedidosPendientes(String id) {
+		String ped = pr.cantidadDePedidosPendientes(id);
 		return ped;
 	}
 	

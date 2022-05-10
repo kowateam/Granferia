@@ -325,3 +325,14 @@ margin-bottom: 20px;
 .marginnn{
     margin-top: 20px;
 }
+#btnEmpPedidos2{
+    max-width: 500px;
+    margin-bottom: 20px;
+    background-color: #304FF1;
+    color: #FFFFFF;
+}
+@media all and (min-width:992px){
+	#btnEmpPedidos2{
+	width:500px !important;
+	}
+}

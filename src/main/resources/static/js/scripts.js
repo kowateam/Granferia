@@ -10,14 +10,43 @@ $('#btnAcceptCookies').click(function () {
 	$('.cookies').addClass('hidden');
 });
 
+	console.log("hola")
+//notificacion pedido
+ var idusuario3= $('#iduser').text()
+ var botonPedido= document.querySelector(".btnEmpPedidos33")
+
+	
+$.ajax({
+	method: "GET",
+	url: base_url + "/rest/pedidos/"+idusuario3,
+	dataType:"json",
+	success: function (respuesta2) {
+		$.ajax({
+			method: "GET",
+			url: base_url + "/rest/pedido/"+idusuario3,
+			dataType:"json",
+			success: function (respuesta) {
+				console.log(respuesta)
+				for(let i=0; i<respuesta.length;i++){
+                         if(respuesta[i]>0){
+						console.log(respuesta[i])
+		
+						botonPedido.innerHTML+=`<a class="btn btn-highlight x3" id="btnEmpPedidos2" target="_self" href=${base_url +"/pedido/lista/"+ respuesta2[i]} >Pedidos
+						pendientes (<span class="pedidos-count" >${respuesta[i]}</span>)</a>`
+					}
+				}
+		
+				 }
+				
+			})
+	}}) 
+
 //geolocalizacion
 let arrEmpCer=[{}];
 $('.maxx').click(function () {
 	if (navigator.geolocation) {
 
 	}
-	
-		
 	function location(position) {
 		let templeate=document.querySelector("#templeateCercano")
 		var latitud = position.coords.latitude;

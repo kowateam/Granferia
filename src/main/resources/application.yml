@@ -36,14 +36,14 @@ spring:
                 starttls:
                     enable: false
   datasource: 
-    url: jdbc:mysql://localhost:3306/granferia?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8
-    username: root
-    password:
-    #2612175626
+   # url: jdbc:mysql://localhost:3306/granferia?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8
+   # username: root
+   # password:
+   #2612175626
 
-#    url: jdbc:mysql://mysql.granferia.online/granferia
-#    username: granferia
-#    password: Granferia_2021
+    url: jdbc:mysql://mysql.granferia.online/granferia
+    username: granferia
+    password: Granferia_2021
     driver-class-name: com.mysql.cj.jdbc.Driver 
 
   jpa:
@@ -56,7 +56,6 @@ spring:
   thymeleaf:
     cache: false 
 server:
-  port: 8070
   error:
     whitelabel:
       enabled: false

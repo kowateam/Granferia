@@ -41,9 +41,9 @@ spring:
     password:
    #2612175626
 
-   # url: jdbc:mysql://mysql.granferia.online/granferia
-   # username: granferia
-   # password: Granferia_2021
+    #url: jdbc:mysql://mysql.granferia.online/granferia
+    #username: granferia
+    #password: Granferia_2021
     driver-class-name: com.mysql.cj.jdbc.Driver 
 
   jpa:

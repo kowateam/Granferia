@@ -101,7 +101,7 @@ public class RestApi {
 		fs.borrarFoto(foto);
 	}
 	
-	@GetMapping(path = "/borrarproducto/{id}/{idEmprendimiento}")
+	@GetMapping("/borrarproducto/{id}/{idEmprendimiento}")
 	public void borrarProducto(@PathVariable String id,@PathVariable String idEmprendimiento) {
 		try {
 			ps.borrarProducto(id,idEmprendimiento);
@@ -150,61 +150,20 @@ public class RestApi {
 	public String valoracion(@PathVariable String tiempo,@PathVariable String producto,@PathVariable String servicio,@PathVariable String comentario,@PathVariable String prod, HttpSession session) {
 		User usuario= (User) session.getAttribute("usersession");
 		String idUser = usuario.getId();
+		if(comentario == null) {
+			comentario = "";
+		}
 		valoracionService.guardarValoracion(tiempo, producto, servicio, comentario, idUser, prod);
 			return tiempo;
 }
 	@GetMapping("/gps/{latitud}/{longitud}/{id}")		
-	public void AgregarLocalizacion(@PathVariable double latitud,@PathVariable double longitud,@PathVariable String id) {
-
-		coordenadasEmpService.saveCoordenadas(latitud, longitud, id);
+	public String AgregarLocalizacion(@PathVariable double latitud,@PathVariable double longitud,@PathVariable String id) {
+		return coordenadasEmpService.saveCoordenadas(latitud, longitud, id);
 }
-	@GetMapping("/dist/{latitud}/{longitud}")		
-	public String AgregarLocalizacion(ModelMap modelo,@PathVariable double lat1,@PathVariable double lon1) {
 
-		final double radio_tierra = 6371.01; //kilometro
-		List<CoordenadasEmp> listEmp=coordenadasEmpRepository.todos();
-		List<String> listEmpCer;
-		listEmpCer = new ArrayList<>();
-		List<String> dist;
-		dist = new ArrayList<>();
-		for(int i = 0; i < listEmp.size();i++) {		
-			double lat2=Double.valueOf(listEmp.get(i).getLatitud());
-			double lon2=Double.valueOf(listEmp.get(i).getLongitud());
-			 lat2=Math.toRadians(lat2);
-			 lon2=Math.toRadians(lon2);
-			 lat1=Math.toRadians(lat1);
-             lon1=Math.toRadians(lon1);
-			 double distancia = radio_tierra * Math.acos(
-            		             Math.sin(lat1) * Math.sin(lat2)
-		                       * Math.cos(lat1) * Math.cos(lat2) 
-		                       * Math.cos(lon1 - lon2));
-			 
-			 if(distancia<=5) {
-				 listEmpCer.add(listEmp.get(i).getId());
-				 String dis =String.valueOf(distancia);
-				 dist.add(dis);
-			 }
-			 
-		}
-		String a = "hola";
-		String b = "chau";
-		modelo.addAttribute("dist",a);
-		modelo.addAttribute("listemp",b);
-		return "hola";
-}
 	@GetMapping("/prueba")		
 	public List<CoordenadasEmp> A() {
-		
-		
-		final double radio_tierra = 6371.01; //kilometro
-		List<CoordenadasEmp> listEmp=coordenadasEmpRepository.todos();
-		List<String> listEmpCer;
-		listEmpCer = new ArrayList<>();
-		List<String> dist;
-		dist = new ArrayList<>();
-		 double distancia ;
-		
-		
+		List<CoordenadasEmp> listEmp=coordenadasEmpRepository.todos();			
 		return listEmp;
 }
 	
@@ -256,6 +215,39 @@ public class RestApi {
 }
 			return ped;
 	}
+	
+	
+	@GetMapping("/masvalorados")		
+	public List<List<String>> masValorados() {
+		List<Producto>  prod = valoracionService.masValorados();		
+		
+		 List<List<String>> mas2;
+        
+         mas2 = new ArrayList<>();
+		for(int i=0; i<prod.size();i++) {
+		 List<String> mas;
+		 mas = new ArrayList<>();
+		   List<Emprendimiento> emp = emprendimientoService.buscarEmprendimientoPorProductoSolo(prod.get(i).getId());
+		   mas.add(emp.get(0).getId());
+		   if(emp.get(0).getFoto()!=null) {
+			    mas.add(emp.get(0).getFoto().getId());
+		   }else {mas.add("null");}		  
+		   mas.add(prod.get(i).getFoto().get(0).getId());
+		   mas.add(prod.get(i).getNombreProductoServicio());
+		   if(prod.get(i).getaCotizar()!=null) {
+			   mas.add(prod.get(i).getaCotizar());
+		   }  else {mas.add("null");}
+		   mas.add(String.valueOf(prod.get(i).getPrecio()));
+		   if(prod.get(i).getPrecioOferta()!=null) {
+			    mas.add(String.valueOf(prod.get(i).getPrecioOferta()));
+		   }else {mas.add("null");}
+		   mas.add(prod.get(i).getId());
+		  mas2.add(mas);
+		}
+		return mas2;
+	}
+	
+	
 	
 	
 }

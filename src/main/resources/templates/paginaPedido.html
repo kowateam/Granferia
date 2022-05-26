@@ -10,6 +10,7 @@
 
 	<!-- Styles -->
 	<link href="/css/styles.css" rel="stylesheet" type="text/css">
+	<link href="/css/stylesNew.css" rel="stylesheet" type="text/css">
 
 	<!-- Icons + App name -->
 	<div th:replace="fragments :: meta-info"></div>
@@ -56,13 +57,13 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="text-content x3">
-								<h1 class="x1">Pedidos recibidos</h1>
+								<h1 class="x1"><strong>Pedidos recibidos</strong></h1>
 								<h2 class="x2">Podés recibir hasta 5 encargos por mes (<span
 										th:text="${cantidadpedido}"></span> disponibles), los cuales se renuevan
 									mensualmente.
 									Conocé más acerca de nuestros <a class="underline inline--block"
 										href="/emp/elegircuenta" target="_self" title="Ver planes">planes</a>.</h2>
-
+								<p>Podes aceptar o rechazar pedidos, una vez aceptado el pedido vas a poder ver los datos para contactar a tu cliente haciendo click en su nombre cuando aparezca subrayado.<p/>
 								<div class="bottom-divider x3"></div>
 
 								<h2 class="x4 italic font-100">Aquellas ordenes que no se acepten luego de <b>24
@@ -207,7 +208,7 @@
 							</div>
 
 							<!-- Historial de pedidos -->
-							<div class="accordion">
+							<div id="margin-bottom" class="accordion">
 								<div class="head-details">
 									<span class="text">Historial <span class="historic-count"></span></span>
 								</div>

@@ -494,9 +494,9 @@
 	</p>
 
 	<div class="emp-container">
-		<section  class="emp" th:each="empren : ${todosEmprendimientos}">
+		<section  class="emp" th:each="empren : ${todosEmprendimientos}" >
 			<!-- Cabecera -->
-			<div id="displayFlexSpaceBet">
+			<div id="displayFlexSpaceBet" th:if="${session.usersession != null}">
 				<a class="emp-head" target="_self" th:if="${session.usersession != null}" th:href="'/' + ${empren.regEmpDir}" title="Ver emprendimiento">
 					<span   class="emp-logo" th:if="${empren.foto != null}"
 						th:style="'background:url(' + @{/foto/load/} + ${empren.foto.id} + '); background-size: cover'"></span>
@@ -535,14 +535,15 @@
 					<span>
 						<div class="slide-card main">
 							<p>"<span th:text="${empren.regEmpDescripcion}"></span>"</p>
+							
 						</div>
 					</span>
 
 					<!-- Card de producto o servicio -->
 					<span th:each="prod , e : ${empren.productos}">
 						<span th:each="fot , i : ${prod.foto}">
-							<div class="slide-card prod" th:if="${i.index == 0 and e.index lt 3}"
-								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+							<div class="slide-card prod lazyload" 		                                                                                                     th:if="${i.index == 0 and e.index lt 3}"
+								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: cover'">
 								<p class="alt">Fotografía</p>
 
 								<span class="show-details"></span>
@@ -591,8 +592,8 @@
 					<!-- Card de producto o servicio -->
 					<span th:each="prod , e : ${empren.productos}">
 						<span th:each="fot , i : ${prod.foto}">
-							<div class="slide-card" th:if="${i.index == 0 and e.index lt 8 and e.index ge 4}"
-								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
+							<div class="slide-card lazyload"  th:if="${i.index == 0 and e.index lt 8 and e.index ge 4}"
+								th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: cover'">
 								<p class="alt">Fotografía</p>
 
 								<span class="show-details"></span>
@@ -976,7 +977,8 @@
 
 						<a class="btn btn-primary crear-emp-first x3" href="/emp/elegircuenta">Crear emprendimiento</a>
 						<p class="emp-max-message crear-no-emp hidden">Solo se permite hasta 2 emprendimientos de manera simultánea.</p>
-
+			
+					
 						<div class="accordion">
 							<div class="head-details">
 								<span class="text">Guardados <span class="saved-count"></span></span>

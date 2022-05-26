@@ -481,7 +481,7 @@ public class EmprendimientoService {
 	  
 	  public Emprendimiento todos(String id) {
 	    	
-	    	Emprendimiento a = er.todos(id);
+	    	Emprendimiento a = er.getById(id);
 	    	return a;
 	    }
 

@@ -34,21 +34,7 @@
 
 <body>
 
-	<div class="hidden" th:if=" ${masvalorados} != null">
-		<span th:each="proe,i : ${idEmp}">
-			<label id="idEmprendimientoValorado" th:text="${proe}"></label>
-		</span>
-		<span th:each="proa,i : ${idfotos}">
-			<label id="idFotoProdValorado" th:text="${proa}"></label>
-		</span>
-		<span th:each="pro,i : ${masvalorados}">
-			<label id="idProductoValorado" th:text="${pro.id}"></label>
-		</span>
-		<span th:each="NomEmp2,i : ${NomEmp}">
-			<label id="NomEmp" th:text="${NomEmp2}"></label>
-		</span>
 
-	</div>
 
 	<span th:if="${cookie != null}">
 		<span class="loading-spinner" id="loading-short">
@@ -127,7 +113,7 @@
 			
 			<!-- Header crear -->
 			<div class="container banner crear-emp-first" id="main-banner"
-				th:if="${session.usersession != null && session.usersession.crearEmpNotifi != true && session.usersession.mostrarCrearEmp != true}"
+				th:if="${session.usersession != null}"
 				sec:authorize="hasAnyRole('ROLE_USER')">
 				<div class="row">
 					<div class="col-xs-12 col-lg-6">
@@ -169,66 +155,31 @@
 					<span class="btnEmpMasTarde underline text--center">Ocultar</span>
 				</div>
 			</div>
-			<div class="container container33 x5">
+				<div id="destacadosGranferia" class="container">
 				<div class="row">
-					<div class="col-xs-12">
-						<p class="productosDestacados">Destacados en granferia</p>
-						<p class="productosDestacados2">Descubri los productos destacados de </p>
-						<p class="productosDestacados3">este mes. </p>
+				<div class="col-xs-12 marginnn">
+					<p class="productosDestacados">Productos Destacados</p>
+				<section  class="emp">
+					<article class="slide-row">
+						<div class="content">
+							
+					<div id="agarraDestacados" class="col-xs-12 marginnn">
+						<img class=spinner22S src=img/shared/spinner.gif>
 
-						<div class="emp-container">
-
-							<!-- Slider -->
-							<article class="slide-row">
-								<div class="content">
-
-									<!-- Card de producto o servicio -->
-									<span th:each="prod , e : ${masvalorados}">
-										<span th:each="fot , e : ${prod.foto}">
-											<div th:if="${e.index==0}" class="slide-card slide-card2"
-												th:style="'background:url(' + @{/foto/load/} + ${fot.id} + '); background-size: auto 100%'">
-												<p class="alt"></p>
-
-												<span class="show-details"></span>
-
-												<div class="slide-details
-							 hidden">
-
-
-													<span class="icon close">
-														<img class="ponright" src="/img/gt/card/close.png" alt="Cerrar">
-													</span>
-
-													<!-- Detalles -->
-
-													<span class="logoValorado emp-logo emp-logo2"></span>
-
-													<p id="ponerNomEmp" class="name name2">Nombre</p>
-													<p class="name name3" th:text="${prod.nombreProductoServicio}">
-														Nombre</p>
-
-
-													<a id="btn-ir" class="btn-details btn-details2" target="_self">Ver
-														detalles</a>
-												</div>
-											</div>
-										</span>
-									</span>
-									</span>
-								</div>
-							</article>
-						</div>
+						</div></div>
+					</article>
+					
+			       </section>
 					</div>
-
-				</div>
+				    </div>
 			</div>
-			<div class="container x5">
+			<div id="cercanos" th:if="${session.usersession}" class="container x5 hidden">
 				<div class="row">
-					<a th:if="${session.usersession}" class="btn btn-large btn-secondary x2 maxx" target="_self">Activar
-						ubicación</a>
+					
 					<div class="col-xs-12 marginnn">
 						<p class="productosDestacados">Emprendimientos cerca tuyo</p>
-
+                       <a  class="btn btn-large btn-primary x2 maxx" target="_self">Activar
+						ubicación</a>
 
 						<div class="emp-container">
 
@@ -238,11 +189,12 @@
 
 									<!-- Card de producto o servicio -->
 
-									</span>
 								</div>
 							</article>
 						</div>
 					</div>
+					</div>
+			</div>
 					<!-- Listado de emprendimientos -->
 					<div class="container x5">
 						<div class="row">
@@ -252,8 +204,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+			
 			
 
 		</div>
@@ -315,6 +266,7 @@
 
 		<div th:replace="fragments :: footer"></div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
 
 <!-- Javascript -->
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>

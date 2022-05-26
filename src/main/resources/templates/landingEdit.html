@@ -282,8 +282,13 @@
 							<span th:if="${emprendimiento.membresia == 'GRATIS' }">
 								<button th:if="${emprendimiento.productos.size() le 3}"class="btn btn-primary x2" id="btnCargarF" type="button">Cargar nuevo</button>
 							</span>
+							<br/><br/><br/>
 							<span >
-								<button id="gps" class="btn btn-primary x2 x2--top" type="button">Activa la ubicación</button>
+								<p><strong>Activar geolocalización</strong></p><br/>
+								<p>¡Podes aparecer cerca de tus potenciales clientes! Activa la geolocalización para guardar la ubicación de tu emprendimiento. 
+</p><br/>
+								<p>Podes actualizar la ubicación de tu emprendimiento en cualquier momento una vez ya la hayas guardado por primera vez.</p><br/>
+								<button id="gps" class="btn btn-primary x2 x2--top" type="button">Activar ubicación</button>
 							</span>
 
 							<span th:if="${emprendimiento.membresia == 'PREMIUM'}">

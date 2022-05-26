@@ -52,12 +52,24 @@ public class CoordenadasEmpService {
 }
 	
 	@Transactional
-	public void saveCoordenadas(double longitud, double latitud, String id) {
+	public String saveCoordenadas(double longitud, double latitud, String id) {
 		CoordenadasEmp coor = new CoordenadasEmp();
-		coor.setLatitud(String.valueOf(latitud));
-		coor.setLongitud(String.valueOf(longitud));
-		coor.setEmp(id);
-		coordenadasEmpRepository.save(coor);
+		if(coordenadasEmpRepository.existe(id)== null) {
+			coor.setLatitud(String.valueOf(latitud));
+		    coor.setLongitud(String.valueOf(longitud));
+		    coor.setEmp(id);
+		    coordenadasEmpRepository.save(coor);
+		    return "false";
+		}else {
+			CoordenadasEmp coor1=coordenadasEmpRepository.existe(id);
+			coor1.setLatitud(String.valueOf(latitud));
+		    coor1.setLongitud(String.valueOf(longitud));
+		    coordenadasEmpRepository.save(coor1);
+		    return "false";
+		}
+		
+		
+		
 	}
 	
 	public List<String> distancia(List<String> lista) {

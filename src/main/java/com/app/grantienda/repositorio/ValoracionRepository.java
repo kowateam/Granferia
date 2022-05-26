@@ -1,6 +1,8 @@
 package com.app.grantienda.repositorio;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,7 +23,7 @@ public interface ValoracionRepository extends JpaRepository<Valoracion,String>{
 	public String buscarValoracionServicio(@Param("id") String id);
 	
 	@Query(value="SELECT productos_id FROM emprendimiento_productos where emprendimiento_productos.emprendimiento_id = :id",nativeQuery = true )
-	public String[] buscarTodosProdDeUnEmp(@Param("id") String id);
+	public List<String> buscarTodosProdDeUnEmp(@Param("id") String id);
 	
 	@Query(value="SELECT id FROM valoracion where user = :idUser and producto = :idProducto",nativeQuery = true )
 	public String buscar(@Param("idUser") String idUser,@Param("idProducto") String idProducto);

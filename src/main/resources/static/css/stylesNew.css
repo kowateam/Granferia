@@ -302,10 +302,18 @@ color: #666666;
     }
     .maxx{
         max-width: 500px;
-        margin-top: 50px;
+        margin-top: 0px;
+        margin-bottom: 25px;
     font-weight: 600;
     font-size: 16px;
-    background-color: rgba(0,0,0,0.055)!important;
+  
+    }
+@media all and  (min-width:600px){
+
+        .maxx{
+            width: 300px;
+        }  
+
     }
 
 .pone{
@@ -335,4 +343,21 @@ margin-bottom: 20px;
 	#btnEmpPedidos2{
 	width:500px !important;
 	}
+}
+
+#toco{
+	margin-top: 25px;
+	margin-bottom:50px;
+}
+@media all and (max-width:1000px){
+#agarraDestacados{
+    display: flex;
+}
+	
+#margin-bottom{
+		 margin-bottom:100px;
+	}
+      
+}
+.spinner22S{margin-left:100px
 }

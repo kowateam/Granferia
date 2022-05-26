@@ -85,41 +85,49 @@ public class ValoracionService {
 		 valoracionS = Double.valueOf(vs); 
 		
 		Double sumP = (valoracionT + valoracionS + valoracionP)/3 ;
-		String valoracion = String.format("%.2f", sumP);
+		String valoracion = String.valueOf(sumP);
 		
 		return valoracion;
 		}
 	}
 	
 	@Transactional
-	public String ValoracionTotal(String id) {
-		
-		double listaProm[];
-		String[] listaIds = valoracionRepository.buscarTodosProdDeUnEmp(id); 
-		double sum = 0;
-		if(listaIds == null) {
-			return "0,0";
-		}
-		
-		if(listaIds.length == 1) {
-			return this.ValoracionT(listaIds[0]);
-		}
-		listaProm= new double[listaIds.length];
-		for(int i=0;i<listaIds.length;i++) {
-			double a=Double.valueOf(this.ValoracionT(listaIds[i]));
-			listaProm[i] = a;
-		}
-		
-		for(int i=0;i<listaProm.length;i++) {
-		
-			sum+=listaProm[i];
-		}
-		sum=sum/3;
-		String sumS= String.valueOf(sum);
-		return sumS;
-		
-		
-		}
+    public String ValoracionTotal(String id) {
+
+        List<Double> listaProm;
+        listaProm= new ArrayList<>();
+
+        List<String>listaIds;
+        listaIds= new ArrayList<>();
+        listaIds=valoracionRepository.buscarTodosProdDeUnEmp(id); 
+
+
+        double sum = 0;
+        if(listaIds == null) {
+            return "0.0";
+        }
+
+
+
+        for(int i=0;i<listaIds.size();i++) {
+            if(this.ValoracionT(listaIds.get(i)) == null || this.ValoracionT(listaIds.get(i))=="") {
+                listaProm.add(0.0);
+            }else{
+            String b=this.ValoracionT(listaIds.get(i));
+            double a=Double.valueOf(b);
+            listaProm.add(a);}
+        }
+
+        for(int i=0;i<listaProm.size();i++) {
+
+            sum+=listaProm.get(i);
+        }
+        sum=sum/listaProm.size();
+        String sumS= String.format("%.2f", sum);
+        return sumS;
+
+
+        }
 		
 	
 	@Transactional

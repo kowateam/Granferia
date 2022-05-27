@@ -20,4 +20,7 @@ public interface SeguidoresRepository extends JpaRepository<Seguidores, String>{
 	@Query(value="SELECT count(seguidor) FROM seguidores WHERE emprendimiento_id = :id AND seguidor=true",nativeQuery = true )
 	public String contadorDeSeguidores(@Param("id") String id);
 	
+	@Query(value="SELECT * FROM seguidores WHERE emprendimiento_id = :id",nativeQuery = true )
+	public Seguidores delete(@Param("id") String id);
+	
 }

@@ -72,6 +72,16 @@ public class SeguidoresService {
 	    	 return seguidores;	
 	    
 	}
+	@Transactional
+	public void eliminar(String idEmprendimiento) {
+		Seguidores seg = seguidoresRepository.delete(idEmprendimiento);
+		
+	      String segid = seg.getId();
+	      
+	      seguidoresRepository.deleteById(segid);
+	    
+	}
+
 	
 	
 }

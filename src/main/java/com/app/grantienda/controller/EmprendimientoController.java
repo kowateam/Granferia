@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ import com.app.grantienda.service.EmprendimientoService;
 import com.app.grantienda.service.FotoService;
 import com.app.grantienda.service.PedidoService;
 import com.app.grantienda.service.ProductoService;
+import com.app.grantienda.service.SeguidoresService;
 import com.mercadopago.resources.datastructures.advancedpayment.Payment;
 
 @Controller
@@ -40,6 +42,8 @@ import com.mercadopago.resources.datastructures.advancedpayment.Payment;
 public class EmprendimientoController {
 	@Autowired
 	private EmprendimientoService es;
+	@Autowired
+	private SeguidoresService seguidoresService;
 	@Autowired
 	private ProductoService ps;
 	@Autowired
@@ -229,10 +233,12 @@ public class EmprendimientoController {
 		
 		return "redirect:/emp/landingedit/"+id;
 	}
+	
 	@PreAuthorize("hasAnyRole('ROLE_USER')|| hasRole('ROLE_SUPERADMIN')")
-	@PostMapping("/eliminar/{id}")
+	@GetMapping("/eliminar/{id}")
 	public String eliminarEmprendimiento(@PathVariable String id) {
 		try {
+			seguidoresService.eliminar(id);
 			es.eliminarEmp(id);
 		} catch (Exception e) {
 			throw new Error("No se encontro el emprendimiento");

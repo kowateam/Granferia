@@ -38,7 +38,6 @@ public class RestApi {
 	private UsuarioService us;
 	@Autowired
 	private FotoService fs;
-	
 	@Autowired
 	private SeguidoresService seguidoresService;
 	@Autowired
@@ -104,6 +103,7 @@ public class RestApi {
 	@GetMapping("/borrarproducto/{id}/{idEmprendimiento}")
 	public void borrarProducto(@PathVariable String id,@PathVariable String idEmprendimiento) {
 		try {
+			
 			ps.borrarProducto(id,idEmprendimiento);
 			
 		} catch (Exception e) {

@@ -39,7 +39,7 @@ public interface CategoriaProductoRepository extends JpaRepository<CategoriaProd
 	@Query(value ="SELECT * FROM granferia.categoria_producto where  primero = true and granferia.categoria_producto.emprendimiento_id like :idEmprendimiento ", nativeQuery = true)
 	public CategoriaProducto buscarPrincipal(@Param("idEmprendimiento")String idEmprendimiento);
 
-	@Query(value ="SELECT * FROM granferia.categoria_producto LEFT OUTER JOIN granferia.categoria_producto_productos on categoria_producto.id = granferia.categoria_producto_productos.categoria_producto_id where granferia.categoria_producto_productos.productos_id like :idProducto" , nativeQuery = true)
+	@Query(value ="SELECT * FROM granferia.categoria_producto LEFT OUTER JOIN categoria_producto on categoria_producto.id = granferia.categoria_producto_productos.categoria_producto_id where granferia.categoria_producto_productos.productos_id like :idProducto" , nativeQuery = true)
 	public CategoriaProducto buscarCategoriaDelProducto(@Param("idProducto") String idProducto);
 
 

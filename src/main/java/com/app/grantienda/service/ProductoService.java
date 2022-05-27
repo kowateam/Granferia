@@ -127,7 +127,7 @@ public class ProductoService {
 		
 		
 		es.modificarProductosEmprendimiento(idEmprendimiento,idProducto);
-		cps.modificarCategoriaProductos(idProducto);
+		//cps.modificarCategoriaProductos(idProducto);
 		pr.delete(producto);
 	
 	}

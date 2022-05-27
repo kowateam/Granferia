@@ -32,7 +32,7 @@
 
 	<!-- Modales: Eliminar emprendimiento -->
 	<section class="modal-container hidden" id="eliminar-emprendimiento">
-		<form class="modal-content" th:action="@{/emp/eliminar/}+${emprendimiento.id}" method="POST">
+		<form class="modal-content" th:action="@{/emp/eliminar/}+${emprendimiento.id}" method="GET">
 			<h2 class="question text--left x0--left x0--right x3">Advertencia</h2>
 
 			<span th:if="${emprendimiento.membresia == 'PREMIUM'}">
